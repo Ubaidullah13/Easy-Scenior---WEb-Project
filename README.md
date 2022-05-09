@@ -1,1 +1,1 @@
-# Easy-Scenior---WEb-Project
+# Easy-Scenior---Web-Project
