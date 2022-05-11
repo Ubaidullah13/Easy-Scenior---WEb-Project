@@ -1,0 +1,102 @@
+
+
+div {
+  padding: 3px;
+}
+.abc {
+  border-style: solid;
+  border-color: #1C4A4A;
+  opacity:50%;
+  border-radius: 12px;
+  width: 100% !important;
+}
+
+.textClass {
+  border: 0px !important;
+  margin-left: 3px !important;
+}
+
+.icon {
+  margin-left: 6px;
+}
+.contactleft {
+  background-color: #9EC5C5;
+  opacity: .8;
+  padding-left: 50px;
+  padding-top: 6rem;
+  padding-right: 2rem;
+  margin-top: 6rem;
+  border-radius: 6px;
+  padding-bottom: 11rem;
+
+}
+
+.Contactdetails{
+  padding-top: 4rem;
+  padding-left: 5rem;
+ 
+
+}
+
+.contactright {
+  padding-top: 3rem !important;
+  padding: 3rem;
+  margin: 4rem;
+  margin-right: 5rem;
+ 
+}
+
+.button {
+  color: white;
+  transition-duration: 0.4s;
+  width: 200px;
+  height: 40px;
+  border: 0px;
+  background-color: #1C4A4A;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25px;
+ 
+}
+
+.button:hover {
+  background-color: rgb(188, 96, 166);
+  color: white;
+}
+
+/* Login */
+.buttonLogin {
+  color: white;
+  transition-duration: 0.4s;
+  width: 310px;
+  height: 40px;
+  border: 0px;
+  background-color: #1C4A4A;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+  margin-left: 2rem;
+ 
+}
+
+.signupLink{
+  color: #1C4A4A;
+  opacity: 70%;
+  margin-left: 9rem;
+}
+
+.imgLogin{
+  margin-left: 6rem;
+  margin-top: 6rem;
+  width:30vw;
+  height:60vh;
+}
+
+.Logincontactright {
+  padding-top: 3rem !important;
+  padding: 3rem;
+  margin-top: 4rem;
+  margin-right: 5rem;
+  margin-left: 2rem;
+ 
+}
+
+
