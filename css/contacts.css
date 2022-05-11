@@ -54,17 +54,17 @@ div {
   border: 0px;
   background-color: #1C4A4A;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 25px;
+  border-radius: 15px;
  
 }
 
 .button:hover {
-  background-color: rgb(188, 96, 166);
-  color: white;
+  background-color: #F6A2BC;
+  color: #1C4A4A;
 }
 
 /* Login */
-.buttonLogin {
+/* .buttonLogin {
   color: white;
   transition-duration: 0.4s;
   width: 310px;
@@ -75,12 +75,12 @@ div {
   border-radius: 15px;
   margin-left: 2rem;
  
-}
+} */
 
 .signupLink{
   color: #1C4A4A;
   opacity: 70%;
-  margin-left: 9rem;
+  margin-left: 1rem;
 }
 
 .imgLogin{
@@ -95,7 +95,6 @@ div {
   padding: 3rem;
   margin-top: 4rem;
   margin-right: 5rem;
-  margin-left: 2rem;
  
 }
 
