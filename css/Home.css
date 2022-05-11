@@ -1,3 +1,29 @@
 #hero_section{
-    background-color:red;
+    background-color:#F4F4F9;
+}
+
+#hero_img{
+    text-align: end;
+}
+#hero_img img{
+    width:50%;
+}
+
+.st-enrolled img{
+    width: 45%;
+    height: auto;
+}
+
+.category_card{
+    border: none;
+    border-radius: 15px;
+    background-color: #71C0C0;
+}
+.category_card img{
+    padding: 2rem 1rem 2rem 1rem;
+    height: 200px;
+}
+.category_card p.label{
+    text-align: end;
+    padding-top: 2rem;
 }

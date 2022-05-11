@@ -20,15 +20,148 @@
     />
 
     <!-- Link CSS here-->
-    <link rel="stylesheet" href="css/Global (Typography).css" />
     <link rel="stylesheet" href="css/Home.css" />
+    <link rel="stylesheet" href="css/Global (Typography).css" />
 
     <title>Easy Scenior - Home</title>
   </head>
   <body>
+    <!--  Hero Section  -->
     <div class="container-fluid" id="hero_section">
-      <div class="Ourcontainer">sad</div>
+      <!--  INSIDE HERO  -->
+      <section class="OurContainer">
+        <!--  TEXT AND IMAGE  -->
+        <div class="row">
+          <!--  Col 1  -->
+          <div class="col my-auto">
+            <h5 class="my-2">#EASY SCENE HAI</h5>
+            <h1 class="my-2">A learning experience like never before</h1>
+            <p class="my-3">
+              Want help in university or need to prepare for an exam or entry
+              test? Book sessions as per your time and availability, we make
+              education easier, accessible and affordable!
+            </p>
+            <div class="my-3">
+              <button type="button" class="btn btnPrimary btn-lg btnFont">
+                Find Tutors
+              </button>
+              <button type="button" class="btn btnSecond btn-lg btnFont">
+                How it Works
+              </button>
+            </div>
+
+            <!--  Students Enrolled  -->
+            <div class="row st-enrolled my-5">
+              <div class="col-5 my-2">
+                <p class="label">1,345 students enrolled</p>
+              </div>
+              <div class="col">
+                <img src="res/home students enrolled.png" />
+              </div>
+            </div>
+          </div>
+          <!--  Col 2  -->
+          <div class="col my-auto" id="hero_img">
+            <img src="res/home hreo section image.png" />
+          </div>
+        </div>
+      </section>
     </div>
+
+    <!--  Categories  -->
+    <section class="OurContainer pt-5">
+      <h2>Categories</h2>
+      <!--  Text and Search  -->
+      <div class="row py-2">
+        <div class="col">
+          <p>
+            Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
+            feugiat lacus vitae neque ornare, vitae libero!
+          </p>
+        </div>
+        <div class="col offset-2">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control label"
+              id="searchForm"
+              placeholder="Search Category"
+              aria-label="Search Category"
+              aria-describedby="search_category"
+            />
+            <button class="btn" type="button" id="search_category">
+              <img src="res/search.svg" alt="search" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--  Secondary Button  -->
+      <button type="button" class="btn btnSecond btn-lg btnFont">
+        View All
+      </button>
+      <div class="row my-5">
+        <!--  Card 1 -->
+        <div class="col">
+          <div class="card category_card">
+            <img
+              src="res/Computer Science - category.svg"
+              class="card-img-top"
+              alt="computer science"
+            />
+            <div class="card-body">
+              <h4 class="card-title">Computer Science</h4>
+              <p class="label">4 Instructors</p>
+            </div>
+          </div>
+        </div>
+
+        <!--  Card 2 -->
+        <div class="col">
+          <div class="card category_card">
+            <img
+              src="res/Software Engineering - category.svg"
+              class="card-img-top"
+              alt="computer science"
+            />
+            <div class="card-body">
+              <h4 class="card-title">Software Engineering</h4>
+              <p class="label">4 Instructors</p>
+            </div>
+          </div>
+        </div>
+
+        <!--  Card 3 -->
+        <div class="col">
+          <div class="card category_card">
+            <img
+              src="res/Electrical Engineering - category.svg"
+              class="card-img-top"
+              alt="computer science"
+            />
+            <div class="card-body">
+              <h4 class="card-title">Electrical Engineering</h4>
+              <p class="label">4 Instructors</p>
+            </div>
+          </div>
+        </div>
+
+        <!--  Card 4 -->
+        <div class="col">
+          <div class="card category_card">
+            <img
+              src="res/business Analytics - category.svg"
+              class="card-img-top"
+              alt="computer science"
+            />
+            <div class="card-body">
+              <h4 class="card-title">Business Analytics</h4>
+              <p class="label">4 Instructors</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="my-5">END</div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
