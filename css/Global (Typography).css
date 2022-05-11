@@ -7,8 +7,8 @@ font-family: 'Lato', sans-serif; -> Extra
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0%;
 }
 
 /*  Default Font size = 1rem  */
@@ -17,9 +17,8 @@ html{
 }
 
 .Ourcontainer{
-    min-width: 80vw;
-    margin-bottom: 4rem;
-    margin-top: 4rem;
+    max-width: 85vw;
+    margin: auto ;
 }
 
 /* For Navigation and other not so important texts*/
