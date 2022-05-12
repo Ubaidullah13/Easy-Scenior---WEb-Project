@@ -21,6 +21,14 @@ html{
     margin: auto;
 }
 
+.bg{
+    background-color: #1C4A4A;
+}
+.whiteBg{
+    max-width: 98vw;
+    margin: auto;
+    background-color: white;
+}
 /* For Navigation and other not so important texts*/
 .label{
     font-size: 0.8889rem;
@@ -68,7 +76,7 @@ h1{
     font-size: 3.056rem;
     font-family: 'Playfair Display', serif;
     font-weight: bold;
-    color: #1C4A4A;
+    color: white;
     text-transform: capitalize;
 }
 
