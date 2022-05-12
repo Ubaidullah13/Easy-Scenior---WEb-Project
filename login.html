@@ -20,7 +20,7 @@
     />
 
     <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link rel="stylesheet" href="css/contacts.css" />
+    <link rel="stylesheet" href="css/ContactsLoginSignup.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -30,45 +30,76 @@
     <title>Login</title>
   </head>
 
-  <body>
-    <!-- Login -->
+  <body class="bg">
+    <div class="OurContainer">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item label">
+            <a href="Home.html" style="color: #f6a2bc">Home</a>
+          </li>
+          <li
+            class="breadcrumb-item active label"
+            aria-current="page"
+            style="color: #f6a2bc"
+          >
+            Login
+          </li>
+        </ol>
+      </nav>
 
-    <div class="row OurContainer">
-      <div class="col-md-6 col-sm-12 col-12">
-        <img src="res/Login.png" class="imgLogin" />
-      </div>
-      <div class="col-md-6 col-sm-12 col-12">
-        <form class="Logincontactright" action="">
-          <h4 style="padding-left: 6rem">Login Now</h4>
-          <div class="mb-4 mt-4">
-            <div class="abc">
-              <input
-                type="text"
-                class="form-control textClass"
-                id="name"
-                placeholder="Username or Email"
-                name="name"
-              />
-            </div>
+      <h1>Login Form</h1>
+    </div>
+
+    <div class="whiteBg">
+      <div class="OurContainer">
+        <!-- Login -->
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-12">
+            <img src="res/Login.png" class="imgLogin" />
           </div>
+          <div class="col-md-6 col-sm-12 col-12">
+            <form class="Logincontactright" action="">
+              <h4 style="padding-left: 6rem">Login Now</h4>
+              <div class="mb-4 mt-4">
+                <div class="abc">
+                  <input
+                    type="text"
+                    class="form-control textClass"
+                    id="name"
+                    placeholder="Username or Email"
+                    name="name"
+                  />
+                </div>
+              </div>
 
-          <div class="mb-4">
-            <div class="abc">
-              <input
+              <div class="mb-4">
+                <div class="abc">
+                  <input
+                    type="password"
+                    class="form-control textClass"
+                    id="password"
+                    placeholder="Password"
+                    name="password"
+                  />
+                  <!-- <input
                 type="password"
                 class="form-control textClass"
                 id="email"
                 placeholder="Password"
                 name="email"
-              />
-            </div>
-          </div>
-
-          <br />
-          <button type="submit" class="button">Login</button>
+              /> -->
+                </div>
+              </div>
+              <br />
+              <!-- <button type="submit" class="buttonLoginSignup">Login</button>
           <br /><br />
-          <a href="" class="signupLink"> Sign Up </a>
-        </form>
+          <a href="register.html" class="LoginsignupLink"> Sign Up </a> -->
+              <button type="submit" class="button">Login</button>
+              <br /><br />
+              <a href="" class="signupLink"> Sign Up </a>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>

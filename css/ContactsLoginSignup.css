@@ -54,17 +54,17 @@ div {
   border: 0px;
   background-color: #1C4A4A;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 15px;
+  border-radius: 25px;
  
 }
 
 .button:hover {
-  background-color: #F6A2BC;
-  color: #1C4A4A;
+  background-color: rgb(188, 96, 166);
+  color: white;
 }
 
-/* Login */
-/* .buttonLogin {
+/* Signup & Login */
+.buttonLoginSignup {
   color: white;
   transition-duration: 0.4s;
   width: 310px;
@@ -75,12 +75,12 @@ div {
   border-radius: 15px;
   margin-left: 2rem;
  
-} */
+}
 
-.signupLink{
+.LoginsignupLink{
   color: #1C4A4A;
   opacity: 70%;
-  margin-left: 1rem;
+  margin-left: 9rem;
 }
 
 .imgLogin{
@@ -95,7 +95,32 @@ div {
   padding: 3rem;
   margin-top: 4rem;
   margin-right: 5rem;
+  margin-left: 2rem;
  
 }
+
+
+.RegImg1
+{
+  /* margin-top: 10rem;
+  margin-left: 1rem; */
+  width:100%;
+  height:auto;
+}
+
+.RegImg2{
+ /* margin-left: 2rem; 
+  margin-top: 7rem; */
+  width:100%;
+  height:auto;
+}
+
+.RegImg3
+{
+  /* margin-left: 6rem; */
+  width:100%;
+  height:auto;
+}
+
 
 

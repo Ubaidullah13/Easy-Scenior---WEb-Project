@@ -25,56 +25,56 @@ html{
     background-color: #1C4A4A;
 }
 .whiteBg{
-    max-width: 98vw;
+    max-width: 97vw;
     margin: auto;
     background-color: white;
 }
 /* For Navigation and other not so important texts*/
 .label{
     font-size: 0.8889rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: regular;
     color: #1b1c1e;
 }
 
 p{
     font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: regular;
     color: #1b1c1e;
 }
 
 h5{
     font-size: 1.25rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: 600;
     color: #F6A2BC;
 }
 
 h4{
     font-size: 1.556rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: #1b1c1e;
 }
 
 h3{
     font-size: 1.944rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: #1b1c1e;
 }
 
 h2{
     font-size: 2.444rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: #1C4A4A;
 }
 
 h1{
     font-size: 3.056rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: white;
     text-transform: capitalize;
@@ -82,7 +82,7 @@ h1{
 
 .btnFont{
     font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: 500;
 }
 
