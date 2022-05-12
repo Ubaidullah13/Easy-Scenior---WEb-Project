@@ -1,3 +1,12 @@
+.TopSection{
+    margin: 0;
+    padding-top: 0.9rem;
+}
+#TopLabel{
+    padding-top: 0.9rem;
+    margin-bottom: -0.5rem;
+}
+
 #hero_section{
     background-color:#F4F4F9;
 }
@@ -13,6 +22,7 @@
     width: 45%;
     height: auto;
 }
+
 
 .category_card{
     border: none;
