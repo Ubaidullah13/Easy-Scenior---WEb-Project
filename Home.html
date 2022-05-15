@@ -35,11 +35,11 @@
     <!--  Hero Section  -->
     <div class="container-fluid" id="hero_section">
       <!--  INSIDE HERO  -->
-      <section class="OurContainer">
+      <section class="OurContainer Main-Section">
         <!--  TEXT AND IMAGE  -->
         <div class="row">
           <!--  Col 1  -->
-          <div class="col my-auto">
+          <div class="col-xxl col-xl col-md col-sm-12 my-auto">
             <h5 id="TopLabel">#EASY SCENE HAI</h5>
             <h1 class="TopSection" style="color: #1c4a4a">
               A learning experience like never before
@@ -59,17 +59,24 @@
             </div>
 
             <!--  Students Enrolled  -->
-            <div class="row st-enrolled my-5">
-              <div class="col-5 my-2">
+            <div class="st-enrolled">
+              <span class="label">1,345 students enrolled</span>
+              <span class="st-dp">
+                <img src="res/st (3).png" />
+                <img src="res/st (4).png" />
+                <img src="res/st (2).png" />
+                <img src="res/st (1).png" />
+              </span>
+              <!-- <div class="col-5 my-2" style="border: 1px solid red">
                 <p class="label">1,345 students enrolled</p>
               </div>
-              <div class="col">
+              <div class="col" style="border: 1px solid blue">
                 <img src="res/home students enrolled.png" />
-              </div>
+              </div> -->
             </div>
           </div>
           <!--  Col 2  -->
-          <div class="col my-auto" id="hero_img">
+          <div class="col-xxl col-xl col-md my-auto" id="hero_img">
             <img src="res/home hreo section image.png" />
           </div>
         </div>
@@ -77,17 +84,19 @@
     </div>
 
     <!--  Categories  -->
-    <section class="OurContainer pt-5">
+    <section class="OurContainer Category-Section">
       <h2>Categories</h2>
       <!--  Text and Search  -->
       <div class="row">
-        <div class="col">
+        <div class="col-xxl-5 col-xl-5 col-md col-sm-12">
           <p>
             Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
             feugiat lacus vitae neque ornare, vitae libero!
           </p>
         </div>
-        <div class="col offset-2">
+        <div
+          class="col-xxl col-xl col-lg-4 col-md-4 offset-lg-2 offset-md-1 col-sm-4 offset-sm-8 cat_search"
+        >
           <div class="input-group">
             <input
               type="text"
@@ -105,13 +114,15 @@
       </div>
       <!--  Secondary Button  -->
 
-      <button type="button" class="btn btnSecond btn-lg btnFont">
-        View All
-      </button>
+      <div class="SC">
+        <button type="button" class="btn btnSecond btn-lg btnFont">
+          View All
+        </button>
+      </div>
 
-      <div class="row my-5">
+      <div class="row">
         <!--  Card 1 -->
-        <div class="col">
+        <div class="col-xxl col-xl-3 col-md-6 col">
           <div class="card category_card">
             <img
               src="res/Computer Science - category.svg"
@@ -126,7 +137,7 @@
         </div>
 
         <!--  Card 2 -->
-        <div class="col">
+        <div class="col-xxl col-xl-3 col-md-6 col">
           <div class="card category_card">
             <img
               src="res/Software Engineering - category.svg"
@@ -141,7 +152,7 @@
         </div>
 
         <!--  Card 3 -->
-        <div class="col">
+        <div class="col-xxl col-xl-3 col-md-6 col">
           <div class="card category_card">
             <img
               src="res/Electrical Engineering - category.svg"
@@ -156,7 +167,7 @@
         </div>
 
         <!--  Card 4 -->
-        <div class="col">
+        <div class="col-xxl col-xl-3 col-md-6 col">
           <div class="card category_card">
             <img
               src="res/business Analytics - category.svg"
@@ -172,8 +183,169 @@
       </div>
     </section>
 
-    <section class="OurContainer"></section>
-    <div class="my-5">END</div>
+    <!--  Join As a Instructor-->
+    <section class="OurContainer Tutor-Section">
+      <div class="row">
+        <div class="col-xxl-6 col-xl-7 col-md">
+          <h5>#BECOME A INSTRUCTOR</h5>
+          <h2>Join With Easy Scenior as a Instructor</h2>
+          <p>
+            Join us to help others excel in their student life and earn some
+            extra cash.
+          </p>
+          <button type="button" class="btn btnPrimary btn-lg btnFont BT">
+            Become Tutor
+          </button>
+        </div>
+        <div class="col-xxl-3 my-auto" id="Tutor-arrow">
+          <img src="res/Home become Tutor.svg" />
+        </div>
+        <!-- Perks -->
+        <div class="col-xxl col-xl col-md my-auto" id="offer">
+          <div class="end">
+            <!-- <h5 class="vertical">You Can Offer</h5> -->
+            <img src="res/Home mentor.svg" /><span>One to one mentorship</span
+            ><br />
+            <img src="res/Home Test prep.svg" /><span
+              >Entry Test preparation</span
+            ><br />
+            <img src="res/Home Online course.svg" /><span>Online course</span
+            ><br />
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btnPrimary btn-lg btnFont BT-md">
+        Become Tutor
+      </button>
+    </section>
+
+    <!-- How it works -->
+    <section class="OurContainer TextCenter Works-Section">
+      <h5>WORKS</h5>
+      <h2>How it Works?</h2>
+      <div class="row work-card">
+        <div class="col-xxl col-xl col-lg col-md col-12 neumorphism">
+          <img src="res/Home Find tutor.svg" />
+          <h4>Find Your Tutor</h4>
+          <p>search and find best tutor that suits you</p>
+        </div>
+        <div class="col-xxl col-xl-2 col-lg-1 col-md col-12 work-arr my-auto">
+          <img src="res/home work arrow.svg" />
+        </div>
+        <div class="col-xxl col-xl col-lg col-md col-12 neumorphism">
+          <img src="res/home book session.svg" />
+          <h4>Book A Session</h4>
+          <p>book a session with flexible timings</p>
+        </div>
+        <div class="col-xxl col-xl-2 col-lg-1 col-md col-12 work-arr my-auto">
+          <img src="res/home work arrow.svg" />
+        </div>
+        <div class="col-xxl col-xl col-lg col-md col col-12 neumorphism">
+          <img src="res/home enjoy.svg" />
+          <h4>Gain Experience</h4>
+          <p>learn from experts and become better self</p>
+        </div>
+      </div>
+    </section>
+
+    <!--  Testimonials  -->
+    <section class="OurContainer Testimonials-Section">
+      <h5 class="TextCenter">TESTIMONIALS</h5>
+      <h2 class="TextCenter">Customer Know The Best</h2>
+      <div class="row Testimonial-cards">
+        <div class="col-xxl col-xl col-md col-12 reviewCard FirstRC">
+          <img class="dp" src="res/st (1).png" />
+          <h4 class="TextCenter">Mr Jones</h4>
+          <img class="quote" src="res/Quote Left.svg" />
+          <p class="TextCenter">
+            Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
+            feugiat lacus vitae neque ornare, vitae libero!
+          </p>
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+        </div>
+        <div class="col-xxl col-xl col-md col-12 reviewCard SecondRC">
+          <img class="dp" src="res/st (3).png" />
+          <h4 class="TextCenter">Alina Ali</h4>
+          <img class="quote" src="res/Quote Left.svg" />
+          <p class="TextCenter">
+            Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
+            feugiat lacus vitae neque ornare, vitae libero!
+          </p>
+          <img class="star end" src="res/outline star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+        </div>
+        <div class="col-xxl col-xl col-md col-12 reviewCard ThirdRC">
+          <img class="dp" src="res/st (4).png" />
+          <h4 class="TextCenter">Mr. Ahmed</h4>
+          <img class="quote" src="res/Quote Left.svg" />
+          <p class="TextCenter">
+            Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
+            feugiat lacus vitae neque ornare, vitae libero!
+          </p>
+          <img class="star end" src="res/outline star.svg" />
+          <img class="star end" src="res/outline star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+          <img class="star end" src="res/Full Star.svg" />
+        </div>
+      </div>
+    </section>
+
+    <!--  BLOG  -->
+    <section class="OurContainer Blog-Section">
+      <h5 class="TextCenter">LATEST NEWS</h5>
+      <h2 class="TextCenter">Educational Tips</h2>
+      <p class="TextCenter"><a href="">View All</a></p>
+      <div class="row">
+        <div class="col-xxl col-xl col-md reviewCard FirstRC blog">
+          <img
+            class="mx-auto d-block"
+            src="res/Home Blog 1.png"
+            height="auto"
+            width="100%"
+          />
+          <h5 style="color: #1c4a4a">
+            Data Science and Machine Learning with Python - Hands On!
+          </h5>
+          <button type="button" class="btn btnPrimary btn-sm btnFont btnThird">
+            Read More
+          </button>
+        </div>
+        <div class="col-xxl col-xl col-md reviewCard SecondRC blog">
+          <img
+            class="mx-auto d-block"
+            src="res/Home Blog 2.png"
+            height="auto"
+            width="100%"
+          />
+          <h5 style="color: #1c4a4a">Strategies for a Successful Business</h5>
+          <button type="button" class="btn btnPrimary btn-sm btnFont btnThird">
+            Read More
+          </button>
+        </div>
+        <div class="col-xxl col-xl col-md reviewCard ThirdRC blog">
+          <img
+            class="mx-auto d-block"
+            src="res/Home Blog 3.png"
+            height="auto"
+            width="100%"
+          />
+          <h5 style="color: #1c4a4a">
+            Entry Test Tips and Tricks - Easy Hacks
+          </h5>
+          <button type="button" class="btn btnPrimary btn-sm btnFont btnThird">
+            Read More
+          </button>
+        </div>
+      </div>
+    </section>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
