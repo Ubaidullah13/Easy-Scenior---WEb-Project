@@ -54,49 +54,48 @@
       <div class="OurContainer">
         <!-- Login -->
         <div class="row">
-          <div class="col-md-6 col-sm-12 col-12">
-            <img src="res/Login.png" class="imgLogin" />
+          <div class="my-auto col-md-12 col-sm-12 col-lg-5 offset-lg-1">
+            <img src="res/Login.png" class="imgLogin RImgMed RImgSm" />
           </div>
-          <div class="col-md-6 col-sm-12 col-12">
+          <div class="col-md col-sm-12 col-lg ">
             <form class="Logincontactright" action="">
-              <h4 style="padding-left: 6rem">Login Now</h4>
+              <h3 style="text-align:center">Login Now</h3>
               <div class="mb-4 mt-4">
-                <div class="abc">
+                <div class="input-group input-grp">
                   <input
                     type="text"
-                    class="form-control textClass"
+                    class="input"
                     id="name"
-                    placeholder="Username or Email"
+                    required="" 
+                    autocomplete="off" 
                     name="name"
                   />
+                  <label class="user-label">Username/Email</label>
                 </div>
               </div>
 
               <div class="mb-4">
-                <div class="abc">
+                <div class="input-group input-grp ">
                   <input
                     type="password"
-                    class="form-control textClass"
+                    class="input"
                     id="password"
-                    placeholder="Password"
+                    required="" 
+                    autocomplete="off" 
                     name="password"
                   />
-                  <!-- <input
-                type="password"
-                class="form-control textClass"
-                id="email"
-                placeholder="Password"
-                name="email"
-              /> -->
+                  <label class="user-label">Password</label>
+                  
                 </div>
               </div>
               <br />
               <!-- <button type="submit" class="buttonLoginSignup">Login</button>
           <br /><br />
           <a href="register.html" class="LoginsignupLink"> Sign Up </a> -->
-              <button type="submit" class="button">Login</button>
-              <br /><br />
-              <a href="" class="signupLink"> Sign Up </a>
+              <button type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup" >Login </button>
+              <div class="signup"><a href="register.html" class="LoginsignupLink" > Sign Up </a></div>
+        
+              
             </form>
           </div>
         </div>
