@@ -1,0 +1,8 @@
+To Insert in Category (use to insert 'OTHER MAJOR' in category table):
+INSERT INTO `category` (`cat_ID`, `cat_name`) VALUES (NULL, 'Computer Science');
+
+To insert in About
+INSERT INTO `about` (`Heading`, `Paragraph`, `Image`) VALUES ('Join Easy Scenior, upgrade your skills, and learn from experts', 'Lorem Ipsum has been the industries standard dummy text ever since unknown printer took galley type and scmbled make type specimen book. It has survived not only five centuries.', 'res/About\\ welcome\\ background.png');
+
+To insert into BLOG table
+INSERT INTO `blogs` (`blogid`, `title`, `titleImage`, `desc1`, `img1`, `desc2`, `img2`, `likes`) VALUES (NULL, 'Strategies for a Successful Business', 'res/Home Blog 2.png', '', '', '', '', '100');
