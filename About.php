@@ -23,9 +23,9 @@ include('connection.php');?>
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="Global (Typography).css" />
+    <link rel="stylesheet" href="css/Global (Typography).css" />
 
-    <link rel="stylesheet" href="About.css" />
+    <link rel="stylesheet" href="css/About.css" />
     <!-- Link CSS here-->
 
     <title>About</title>

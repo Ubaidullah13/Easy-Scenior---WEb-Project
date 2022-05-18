@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password ="";
-$dbname = "easy scenior";
+$dbname = "easy_scenior";
 
 $conn = mysqli_connect($servername,$username,$password,$dbname);
 

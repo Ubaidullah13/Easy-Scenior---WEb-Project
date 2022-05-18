@@ -29,8 +29,8 @@ include('connection.php');
     />
 
     <!-- Link CSS here-->
-    <link rel="stylesheet" href="Home.css" />
-    <link rel="stylesheet" href="Global (Typography).css" />
+    <link rel="stylesheet" href="css/Home.css" />
+    <link rel="stylesheet" href="css/Global (Typography).css" />
 
     <title>Easy Scenior - Home</title>
   </head>
