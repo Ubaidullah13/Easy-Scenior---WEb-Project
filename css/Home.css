@@ -10,6 +10,7 @@
 
 #hero_section {
   background-color: #f4f4f9;
+  padding-top: 50px;
 }
 
 #hero_img {
@@ -73,6 +74,7 @@
 }
 .Blog-Section {
   padding-top: 7em;
+  margin-bottom: 50px;
 }
 
 #offer img {
@@ -225,11 +227,6 @@
   #hero_img {
     display: none;
   }
-  .st-enrolled img {
-    width: 6%;
-    height: 6%;
-    margin-left: -0.9rem;
-  }
   .SC {
     display: flex;
     justify-content: center;
@@ -269,5 +266,12 @@
   }
   .reviewCard {
     margin: 1em 0em;
+  }
+}
+
+@media (max-width: 568px) {
+  .st-enrolled img {
+    width: 15%;
+    height: 15%;
   }
 }
