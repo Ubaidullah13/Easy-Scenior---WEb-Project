@@ -24,9 +24,9 @@ include('connection.php');?>
 
     <link rel="stylesheet" href="css/Global (Typography).css" />
 
-    <link rel="stylesheet" href="" />
     <!-- Link CSS here-->
     <link rel="stylesheet" href="css/Home.css" />
+    <link rel="stylesheet" href="css/testimonial.css" />
 
     <title>Testimonials</title>
   </head>
@@ -58,53 +58,34 @@ include('connection.php');?>
 
 
 
-
+            <div class="row Testimonial-cards">
             <?php
-$querytest = "SELECT fullname, userpfp, content from user,testimonials where testimonials.user=user.username;
-";
+$querytest = "SELECT * from testimonials";
 $datatest = mysqli_query($conn,$querytest);
-$resultWelcome = mysqli_fetch_assoc($datatest);
+// $resultWelcome = mysqli_fetch_assoc($datatest);
 ?>
 
 
                           
      <?php
-                                 
+                  while($resultWelcome = mysqli_fetch_assoc($datatest)){               
 
-        if(mysqli_num_rows($datatest) > 0) //Atleast 1 record is there or not
-              {
-               foreach($datatest as $row)
-                {
-                   ?>
-                                
-                                                
-               <div class="row Testimonial-cards">
-                 <div class="col-xxl col-xl col-md col-12 reviewCard FirstRC" >
+        
+               echo '<div class="col-xxl-6 col-xl-6 col-md-6 col-12 reviewCard FirstRC size" >
 
-                   <img class="dp" src=url('<php? $row['userpfp'] />')
-                   <h4 class="TextCenter"><?= $row['fullname'] ?></h4>
+                   <img class="dp" src="'.$resultWelcome['Image'].'"/>
+                   <h4 class="TextCenter">'.$resultWelcome['user'].'</h4>
                    <img class="quote" src="res/Quote Left.svg" />
-                   <p class="TextCenter">
-                   <?= $row['content'] ?>
-                   </p>
+                   <p class="TextCenter">'.$resultWelcome['content'].'?></p>
                    <img class="star end" src="res/Full Star.svg" />
                    <img class="star end" src="res/Full Star.svg" />
                 <img class="star end" src="res/Full Star.svg" />
                 <img class="star end" src="res/Full Star.svg" />
                 <img class="star end" src="res/Full Star.svg" />
-              </div>
-                                            <?php
-                 }
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                            <tr>
-                                                <td colspan="4">No Record Found</td>
-                                            </tr>
-                                        <?php
-                                    }
-                                ?>
+              </div>';
+                  }
+
+ ?>
                           
 
             

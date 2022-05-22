@@ -1,3 +1,7 @@
+<?php  
+
+    include('connection.php');
+?>
 <!--  STARTER  -->
 
 <!DOCTYPE html>
@@ -92,8 +96,12 @@
         </li>
       </ol>
     </nav>
-
-    <h1>FAQs</h1>
+<?php
+    $FAQtext = "SELECT * FROM faq";
+    $FAQdata = mysqli_query($conn,$FAQtext);
+    $FAQresult = mysqli_fetch_assoc($FAQdata);
+?>
+    <h1><?php echo $FAQresult['Heading']?></h1>
   </div>
 
   <div class="whiteBg">
@@ -101,13 +109,11 @@
 
   
     <div class="row">
-        <img src="res\FAQ.svg" class="img">
+        <img src="<?php echo $FAQresult['Image']?>" class="img">
     </div>
 
   
   <?php  
-
-    include('connection.php');
 
     $counter=1;
     $query = "select * from faqs";

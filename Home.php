@@ -301,9 +301,9 @@ $resTutor = mysqli_fetch_assoc($dataHero);
   </section>
 
   <?php
-$queryTestimonial = "SELECT * FROM testimonial ORDER BY RAND() LIMIT 3";
-$dataTestimonial = mysqli_query($conn,$queryTestimonial);
-$resTestimonial = mysqli_fetch_assoc($dataTestimonial);
+// $queryTestimonial = "SELECT * FROM testimonial ORDER BY RAND() LIMIT 3";
+// $dataTestimonial = mysqli_query($conn,$queryTestimonial);
+// $resTestimonial = mysqli_fetch_assoc($dataTestimonial);
 ?>
   <!--  Testimonials  -->
   <section class="OurContainer Testimonials-Section">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2022 at 05:59 PM
+-- Generation Time: May 22, 2022 at 04:48 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -177,9 +177,40 @@ CREATE TABLE IF NOT EXISTS `cust_review_to_tutor` (
 
 DROP TABLE IF EXISTS `faq`;
 CREATE TABLE IF NOT EXISTS `faq` (
-  `quest` text NOT NULL,
-  `ans` text NOT NULL
+  `Heading` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`Heading`, `Image`) VALUES
+('FAQs', 'res/FAQ.svg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faqs`
+--
+
+DROP TABLE IF EXISTS `faqs`;
+CREATE TABLE IF NOT EXISTS `faqs` (
+  `question` varchar(300) NOT NULL,
+  `answer` varchar(300) NOT NULL,
+  PRIMARY KEY (`question`,`answer`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`question`, `answer`) VALUES
+('Can I choose my own tutor?', 'Yes, if you yourself find a tutor on our website from your field, you can book it right away by book session at the bottom of every tutor\'s profile.'),
+('How do i sign up as a tutor?', 'You can sign up as a tutor by \"Become a tutor\" option on our Home page and fill in the required details.'),
+('How long is one session, or is it adjusted according to our requirement.', 'Session details and duration are mentioned on our site, you have to select according to that.'),
+('Is it online or in person?', 'Easy Scenior is an online learning platform.'),
+('What time are the sessionn held once we book a tutor?', 'Time slot is decided as per your and tutor\'s mutual coordination and availability.');
 
 -- --------------------------------------------------------
 
@@ -246,6 +277,29 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `student_fk` (`student`),
   KEY `package_fk` (`pckg`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+DROP TABLE IF EXISTS `testimonials`;
+CREATE TABLE IF NOT EXISTS `testimonials` (
+  `user` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL,
+  PRIMARY KEY (`user`,`content`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`user`, `content`, `Image`) VALUES
+('Mr. Jones', 'I like courses, online classes more and more each day because it makes my life a lot easier.', 'res/st (1).png'),
+('Alina Ali', 'Definitely worth the investment. I\'d be lost without mentor.', 'res/st (3).png'),
+('Ahmed', 'Wow what great service, I love it! This is simply unbelievable! It fits my needs perfectly.', 'res/st (4).png');
 
 -- --------------------------------------------------------
 
