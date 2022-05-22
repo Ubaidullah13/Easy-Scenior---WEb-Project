@@ -76,28 +76,25 @@ $resultWelcome = mysqli_fetch_assoc($datatest);
                foreach($datatest as $row)
                 {
                    ?>
-                                                <tr>
-                                                    <td><?= $row['fullname'] ?></td>
-                                                    <td><?= $row['content'] ?></td>
-                                                   
-                                                </tr>
+                                
                                                 
-            <div class="row Testimonial-cards">
-              <div class="col-xxl col-xl col-md col-12 reviewCard FirstRC" >
-                <img class="dp" src="res/st (1).png" />
-                <h4 class="TextCenter"><?= $row['fullname'] ?></h4>
-                <img class="quote" src="res/Quote Left.svg" />
-                <p class="TextCenter">
-                <?= $row['content'] ?>
-                </p>
-                <img class="star end" src="res/Full Star.svg" />
-                <img class="star end" src="res/Full Star.svg" />
+               <div class="row Testimonial-cards">
+                 <div class="col-xxl col-xl col-md col-12 reviewCard FirstRC" >
+
+                   <img class="dp" src=url('<php? $row['userpfp'] />')
+                   <h4 class="TextCenter"><?= $row['fullname'] ?></h4>
+                   <img class="quote" src="res/Quote Left.svg" />
+                   <p class="TextCenter">
+                   <?= $row['content'] ?>
+                   </p>
+                   <img class="star end" src="res/Full Star.svg" />
+                   <img class="star end" src="res/Full Star.svg" />
                 <img class="star end" src="res/Full Star.svg" />
                 <img class="star end" src="res/Full Star.svg" />
                 <img class="star end" src="res/Full Star.svg" />
               </div>
                                             <?php
-                                        }
+                 }
                                     }
                                     else
                                     {
