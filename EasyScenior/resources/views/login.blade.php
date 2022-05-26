@@ -84,20 +84,32 @@
 
         <div class="whiteBg">
             <div class="OurContainer">
+                @if (Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ Session::get('error') }}
+                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>X
+                        </button> --}}
+                    </div>
+                @endif
                 <!-- Login -->
                 <div class="row">
                     <div class="my-auto col-md-12 col-sm-12 col-lg-5 offset-lg-1">
                         <img src="Images/Login.png" class="imgLogin RImgMed RImgSm" />
                     </div>
                     <div class="col-md col-sm-12 col-lg">
-                        <form class="Logincontactright" action="">
+                        <form class="Logincontactright" action="loginUser" method="post">
+                            @csrf
                             <h3 style="text-align: center">Login Now</h3>
                             <div class="mb-4 mt-4">
                                 <div class="input-group input-grp">
-                                    <input type="text" class="input" id="name" required="" autocomplete="off"
-                                        name="name" />
-                                    <label class="user-label">Username/Email</label>
+                                    <input type="email" class="input" id="email" required="" autocomplete="off"
+                                        name="email" value="{{ old('email') }}" />
+                                    <label class="user-label">Email</label>
                                 </div>
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-4">
@@ -106,8 +118,10 @@
                                         autocomplete="off" name="password" />
                                     <label class="user-label">Password</label>
                                 </div>
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <br />
                             <!-- <button type="submit" class="buttonLoginSignup">Login</button>
           <br /><br />
           <a href="register" class="LoginsignupLink"> Sign Up </a> -->

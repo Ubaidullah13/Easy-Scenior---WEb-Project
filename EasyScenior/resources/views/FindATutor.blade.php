@@ -84,8 +84,7 @@
 
         <div class="whiteBg">
             <div class="OurContainer">
-                <br />
-                <div class="row">
+                <div class="row" style=" padding-top:4em">
                     <div class="col-8">
                         <a href="Find Tutor"><button class="btn btnPrimary btn-sm btnFont">
                                 <span>
@@ -100,12 +99,12 @@
                                 <span id="RSmall">Courses</span>
                             </button></a>
 
-                        <button class="btn btnSecond btn-sm btnFont">
+                        {{-- <button class="btn btnSecond btn-sm btnFont">
                             <span>
                                 <img src="Images/FT_Btn3.svg" />
                             </span>
                             <span id="RSmall">Saved</span>
-                        </button>
+                        </button> --}}
                     </div>
 
                     <div class="col-4">
@@ -119,111 +118,61 @@
                     </div>
                 </div>
 
-                <h3 style="text-align: center" id="RHeadSmall">All Tutors</h3>
-
+                <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Online Tutors for private
+                    lessons</h3>
+                @php
+                    use App\Models\Users;
+                    use App\Models\Categories;
+                @endphp
                 <div class="row">
                     <!-- First Row -->
-                    <div class="row">
+                    @for ($i = 0; $i < count($findTutor); $i++)
+                        @php
+                            // Select Full name from user
+                            $img = Users::SELECT('userImage')
+                                ->WHERE('username', $findTutor[$i]->tutorusername)
+                                ->get();
+                            $fullName = Users::SELECT('fullname')
+                                ->WHERE('username', $findTutor[$i]->tutorusername)
+                                ->get();
+                            
+                            // Select Categories
+                            $major = Categories::SELECT('cat_name')
+                                ->WHERE('cat_ID', $findTutor[$i]->major)
+                                ->get();
+                            
+                        @endphp
                         <div class="col-xl-6 col-md-12 col-sm-12">
                             <div class="row TutorBorder">
                                 <!--here-->
 
-                                <div class="col-5 col-sm-5 my-auto text-center">
-                                    <img src="Images/FT_Tutor1.png" class="TutorImage" />
+                                <div class="col-12 col-sm-5 my-auto text-center">
+                                    <img src="Images/users/{{ $img[0]->userImage }}" class="TutorImage" />
                                 </div>
-                                <div class="col-7 col-sm-7">
+                                <div class="col-12 col-sm-7 cen">
                                     <br />
-                                    <h4>Emma Olivia</h4>
-                                    <h5>Computer Science</h5>
-                                    <p>National University of Science & Technology</p>
+                                    <h4>{{ $fullName[0]->fullname }}</h4>
+                                    <h5>{{ $major[0]->cat_name }}</h5>
+                                    <p>{{ $findTutor[$i]->institute }}</p>
                                     <span class="label" style="color: #f6a2bc">Rating: 5 stars</span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-xl-6 col-md-12 col-sm-12">
-                            <div class="row TutorBorder">
-                                <div class="col-5 col-sm-5 my-auto text-center">
-                                    <img src="Images/FT_Tutor2.png" class="TutorImage" />
-                                </div>
-                                <div class="col-7 col-sm-7">
-                                    <br />
-                                    <h4>Noah James</h4>
-                                    <h5>Software Engineering</h5>
-                                    <p>National University of Science & Technology</p>
-                                    <span class="label" style="color: #f6a2bc">Rating: 4 stars</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Second Row -->
-                    <div class="row">
-                        <div class="col-xl-6 col-md-12 col-sm-12">
-                            <div class="row TutorBorder">
-                                <div class="col-5 col-sm-5 my-auto text-center">
-                                    <img src="Images/FT_Tutor3.png" class="TutorImage" />
-                                </div>
-                                <div class="col-7 col-sm-7">
-                                    <br />
-                                    <h4>Elijah Liam</h4>
-                                    <h5>Electrical Engineer</h5>
-                                    <p>Nescom</p>
-                                    <span class="label" style="color: #f6a2bc">Rating: 4 stars</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6 col-md-12 col-sm-12">
-                            <div class="row TutorBorder">
-                                <div class="col-5 col-sm-5 my-auto text-center">
-                                    <img src="Images/FT_Tutor4.png" class="TutorImage" />
-                                </div>
-                                <div class="col-7 col-sm-7">
-                                    <br />
-                                    <h4>Charlotte Ava</h4>
-                                    <h5>Business Analytics</h5>
-                                    <p>National University of Science & Technology</p>
-                                    <span class="label" style="color: #f6a2bc">Rating: 5 stars</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Third Row -->
-                    <div class="row">
-                        <div class="col-xl-6 col-md-12 col-sm-12">
-                            <div class="row TutorBorder">
-                                <div class="col-5 col-sm-5 my-auto text-center">
-                                    <img src="Images/FT_Tutor5.png" class="TutorImage" />
-                                </div>
-                                <div class="col-7 col-sm-7">
-                                    <br />
-                                    <h4>Lucas Mare</h4>
-                                    <h5>Mechanical Engineering</h5>
-                                    <p>University of Engineering & Technology</p>
-                                    <span class="label" style="color: #f6a2bc">Rating: 3 stars</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endfor
+                    <!-- Row End -->
                 </div>
-                <br /><br />
 
-                <div class="col text-center">
-                    <button class="btn btnSecond btn-lg btnFont">Load More</button>
-                </div>
-                <br />
+
             </div>
         </div>
         <my-footer></my-footer>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
 
-    <script src="Js/main.js"></script>
-    <!-- Link JS Here-->
+        <script src="Js/main.js"></script>
+        <!-- Link JS Here-->
 </body>
 
 </html>

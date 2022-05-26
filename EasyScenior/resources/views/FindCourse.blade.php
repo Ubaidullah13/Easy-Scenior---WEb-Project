@@ -87,8 +87,7 @@
 
         <div class="whiteBg">
             <div class="OurContainer">
-                <br />
-                <div class="row">
+                <div class="row" style="padding-top:4em">
                     <div class="col-8">
                         <a href="Find Tutor"><button class="btn btnSecond btn-sm btnFont">
                                 <span>
@@ -103,12 +102,12 @@
                                 <span id="RSmall">Courses</span>
                             </button></a>
 
-                        <button class="btn btnSecond btn-sm btnFont">
+                        {{-- <button class="btn btnSecond btn-sm btnFont">
                             <span>
                                 <img src="Images/FT_Btn3.svg" />
                             </span>
                             <span id="RSmall">Saved</span>
-                        </button>
+                        </button> --}}
                     </div>
 
                     <div class="col-4">
@@ -122,7 +121,7 @@
                     </div>
                 </div>
 
-                <h3 style="text-align: center" id="RHeadSmall">All Courses</h3>
+                <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Best Courses</h3>
 
                 <div class="row">
                     <!-- First Row -->

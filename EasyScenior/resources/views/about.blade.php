@@ -99,7 +99,7 @@
                 <div class="row">
                     <div class="col-md col-sm-12 order-2 order-md-1 my-auto">
                         <div id="QuoteImage" style="
-                background-image: url('Images/About welcome background.png');
+                background-image: url('Images/{{ $about[0]->Image }}');
               ">
                             <h4>
                                 Learning is the only thing the mind never exhausts, never fears,
@@ -110,11 +110,10 @@
                     <div class="col-md col-sm-12 offset-md-1 order-1 order-md-2 my-auto">
                         <h5>#WELCOME</h5>
                         <h2>
-                            Join Easy Scenior, upgrade your skills, and learn from experts
+                            {{ $about[0]->Heading }}
                         </h2>
                         <p>
-                            Lorem Ipsum has been the industries standard dummy text ever since unknown printer took
-                            galley type and scmbled make type specimen book. It has survived not only five centuries.
+                            {{ $about[0]->Paragraph }}
                         </p>
                         <button type="button" class="btn btnPrimary btn-lg btnFont">
                             Start Exploring
@@ -128,14 +127,9 @@
                 <div class="row">
                     <div class="col-lg col-sm-12 my-auto">
                         <h5>#HISTORY</h5>
-                        <h2>Our Story</h2>
+                        <h2>{{ $about[1]->Heading }}</h2>
                         <p>
-                            Lorem Ipsum has been the industries standard dummy text ever since unknown printer took
-                            galley type and scmbled make type specimen book. It has survived not only five
-                            centuries.Lorem Ipsum has been the industries standard dummy text ever.
-                            Lorem Ipsum has been the industries standard dummy text ever since unknown printer took
-                            galley type and scmbled make type specimen book. It has survived not only five
-                            centuries.Lorem Ipsum has been the industries standard dummy text ever.
+                            {{ $about[1]->Paragraph }}
                         </p>
                         <button type="button" class="btn btnPrimary btn-lg btnFont">
                             Contact Us
@@ -146,28 +140,28 @@
                         <!--  1  -->
                         <div class="row">
                             <div class="col-lg col-sm col-xl offset-md order-lg-1 order-md-2">
-                                <img src="Images/About owner (1).png" />
+                                <img src="Images/{{ $about[5]->Image }}" />
                             </div>
                             <div class="col-lg col-sm col-xxl col-xl my-auto order-lg-2 order-md-1`">
-                                <h4 style="text-align: start">Layla El-Faouly</h4>
+                                <h4 style="text-align: start">{{ $about[5]->Heading }}</h4>
                             </div>
                         </div>
                         <!--  2  -->
                         <div class="row">
                             <div class="col-lg col-sm col-xl offset-md my-auto order-lg-1 order-md-2">
-                                <h4 style="text-align: end">Marc Specter</h4>
+                                <h4 style="text-align: end">{{ $about[6]->Heading }}</h4>
                             </div>
                             <div class="col-lg col-sm col-xl order-lg-2 order-md-1">
-                                <img src="Images/About owner (3).png" />
+                                <img src="Images/{{ $about[6]->Image }}" />
                             </div>
                         </div>
                         <!--  3  -->
                         <div class="row">
                             <div class="col-lg col-sm col-xl offset-md order-lg-1 order-md-2">
-                                <img src="Images/About owner (2).png" />
+                                <img src="Images/{{ $about[7]->Image }}" />
                             </div>
                             <div class="col-lg col-sm col-xl my-auto order-lg-2 order-md-1">
-                                <h4 style="text-align: start">Yelena Belova</h4>
+                                <h4 style="text-align: start">{{ $about[7]->Heading }}</h4>
                             </div>
                         </div>
                     </div>
@@ -180,29 +174,26 @@
                     <!-- 1  -->
 
                     <div class="col-xxl col-xl col-md reviewCard FirstRC f">
-                        <img src="Images/About Top Instructor.svg" class="mx-auto d-block" />
-                        <h4 class="TextCenter">Top Instructors</h4>
+                        <img src="Images/{{ $about[2]->Image }}" class="mx-auto d-block" />
+                        <h4 class="TextCenter">{{ $about[2]->Heading }}</h4>
                         <p>
-                            Lorem Ipsum has been the industries standard dummy text ever since unknown printer took
-                            galley type and scmbled make type specimen book. It has survived not only five centuries.
+                            {{ $about[2]->Paragraph }}
                         </p>
                     </div>
                     <!-- 2  -->
                     <div class="col-xxl col-xl col-md reviewCard FirstRC f">
-                        <img src="Images/About Portable Program.svg" class="mx-auto d-block" />
-                        <h4 class="TextCenter">Portable Program</h4>
+                        <img src="Images/{{ $about[3]->Image }}" class="mx-auto d-block" />
+                        <h4 class="TextCenter">{{ $about[3]->Heading }}</h4>
                         <p>
-                            Lorem Ipsum has been the industries standard dummy text ever since unknown printer took
-                            galley type and scmbled make type specimen book. It has survived not only five centuries.
+                            {{ $about[3]->Paragraph }}
                         </p>
                     </div>
                     <!-- 3  -->
                     <div class="col-xxl col-xl col-md reviewCard FirstRC f">
-                        <img src="Images/About Improve Quickly.svg" class="mx-auto d-block" />
-                        <h4 class="TextCenter">Improve Quickly</h4>
+                        <img src="Images/{{ $about[4]->Image }}" class="mx-auto d-block" />
+                        <h4 class="TextCenter">{{ $about[4]->Heading }}</h4>
                         <p>
-                            Lorem Ipsum has been the industries standard dummy text ever since unknown printer took
-                            galley type and scmbled make type specimen book. It has survived not only five centuries.
+                            {{ $about[4]->Paragraph }}
                         </p>
                     </div>
                 </div>

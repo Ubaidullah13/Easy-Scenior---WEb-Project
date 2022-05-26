@@ -29,7 +29,7 @@
     <title>Easy Scenior - Home</title>
 </head>
 
-<body>
+<body onload="animateValue(0, {{ count($home) + 1 }}, 1000)">
     <!-- Navigation -->
     <nav class="navigation">
         <div class="logo"><a href="Home"><img src="Images/logo.png" /></a></div>
@@ -73,14 +73,13 @@
                 <!--  Col 1  -->
                 <div class="col-xxl col-xl col-md col-sm-12 my-auto">
                     <h5 id="TopLabel">#
-                        Easy Scene Hai
+                        {{ $home[0]->SubHeading }}
                     </h5>
                     <h1 class="TopSection" style="color: #1c4a4a">
-                        A learning experience like never before
+                        {{ $home[0]->Heading }}
                     </h1>
                     <p class="TopSection">
-                        Want help in university or need to prepare for an exam or entry test? Book sessions as per your
-                        time and availability, we make education easier, accessible and affordable!
+                        {{ $home[0]->Paragraph }}
                     </p>
                     <div class="TopSection">
                         <a href="Find Tutor"><button type="button" class="btn btnPrimary btn-lg btnFont">
@@ -94,13 +93,14 @@
                     <!--  Students Enrolled  -->
                     <div class="st-enrolled">
                         <span class="label">
-                            1325 students enrolled
+                            <span id="value"></span> students enrolled
                         </span>
                         <span class="st-dp">
-                            <img src="Images/st (3).png" />
-                            <img src="Images/st (4).png" />
-                            <img src="Images/st (2).png" />
-                            <img src="Images/st (1).png" />
+
+                            <img src="Images/users/{{ $user[0]->userImage }}" />
+                            <img src="Images/users/{{ $user[1]->userImage }}" />
+                            <img src="Images/users/{{ $user[2]->userImage }}" />
+                            <img src="Images/users/{{ $user[3]->userImage }}" />
                         </span>
                         <!-- <div class="col-5 my-2" style="border: 1px solid red">
                 <p class="label">1,345 students enrolled</p>
@@ -121,13 +121,13 @@
     <!--  Categories  -->
     <section class="OurContainer Category-Section">
         <h2>
-            Categories
+            {{ $home[1]->Heading }}
         </h2>
         <!--  Text and Search  -->
         <div class="row">
             <div class="col-xxl-5 col-xl-5 col-md col-sm-12">
                 <p>
-                    Skills that take you months to learn buy our courses and learn them with in weeks.
+                    {{ $home[1]->Paragraph }}
                 </p>
             </div>
             <div class="col-xxl col-xl col-lg-4 col-md-4 offset-lg-2 offset-md-1 col-sm-4 offset-sm-8 cat_search">
@@ -151,12 +151,13 @@
             <!--  Card 1 -->
             <div class="col-xxl col-xl-3 col-md-6 col">
                 <div class="card category_card">
-                    <img src="Images/Computer Science - category.svg" class="card-img-top" alt="computer science" />
+                    <img src="Images/{{ $categories[0]->Image }}" class="card-img-top"
+                        alt="{{ $categories[0]->cat_name }}" />
                     <div class="card-body">
                         <h4 class="card-title">
-                            Computer Science
+                            {{ $categories[0]->cat_name }}
                         </h4>
-                        <p class="label">4 Instructors</p>
+                        <p class="label">4 Courses</p>
                     </div>
                 </div>
             </div>
@@ -164,13 +165,13 @@
             <!--  Card 2 -->
             <div class="col-xxl col-xl-3 col-md-6 col">
                 <div class="card category_card">
-                    <img src="Images/Software Engineering - category.svg" class="card-img-top"
-                        alt="computer science" />
+                    <img src="Images/{{ $categories[1]->Image }}" class="card-img-top"
+                        alt="{{ $categories[1]->cat_name }}" />
                     <div class="card-body">
                         <h4 class="card-title">
-                            Software Engineering
+                            {{ $categories[1]->cat_name }}
                         </h4>
-                        <p class="label">4 Instructors</p>
+                        <p class="label">4 Courses</p>
                     </div>
                 </div>
             </div>
@@ -178,13 +179,13 @@
             <!--  Card 3 -->
             <div class="col-xxl col-xl-3 col-md-6 col">
                 <div class="card category_card">
-                    <img src="Images/Electrical Engineering - category.svg" class="card-img-top"
-                        alt="computer science" />
+                    <img src="Images/{{ $categories[2]->Image }}" class="card-img-top"
+                        alt="{{ $categories[2]->cat_name }}" />
                     <div class="card-body">
                         <h4 class="card-title">
-                            Electrical Engineering
+                            {{ $categories[2]->cat_name }}
                         </h4>
-                        <p class="label">4 Instructors</p>
+                        <p class="label">4 Courses</p>
                     </div>
                 </div>
             </div>
@@ -192,12 +193,13 @@
             <!--  Card 4 -->
             <div class="col-xxl col-xl-3 col-md-6 col">
                 <div class="card category_card">
-                    <img src="Images/business Analytics - category.svg" class="card-img-top" alt="computer science" />
+                    <img src="Images/{{ $categories[3]->Image }}" class="card-img-top"
+                        alt="{{ $categories[3]->cat_name }}" />
                     <div class="card-body">
                         <h4 class="card-title">
-                            Business Analytics
+                            {{ $categories[3]->cat_name }}
                         </h4>
-                        <p class="label">4 Instructors</p>
+                        <p class="label">4 Courses</p>
                     </div>
                 </div>
             </div>
@@ -209,13 +211,13 @@
     <section class="OurContainer Tutor-Section">
         <div class="row">
             <div class="col-xxl-6 col-xl-7 col-md">
-                <h5># Become a Tutor
+                <h5># {{ $home[2]->SubHeading }}
                 </h5>
                 <h2>
-                    Join With Easy Scenior as an Instructor
+                    {{ $home[2]->Heading }}
                 </h2>
                 <p>
-                    Join us to help others excel in their student life and earn some extra cash.
+                    {{ $home[2]->Paragraph }}
                 </p>
                 <button type="button" class="btn btnPrimary btn-lg btnFont BT">
                     Become Tutor
@@ -269,52 +271,76 @@
     </section>
 
     <!--  Testimonials  -->
+    @php
+        use App\Models\Users;
+        $img0 = Users::SELECT('userImage')
+            ->WHERE('username', $testimonial[0]->username)
+            ->get();
+        $img1 = Users::SELECT('userImage')
+            ->WHERE('username', $testimonial[1]->username)
+            ->get();
+        $img2 = Users::SELECT('userImage')
+            ->WHERE('username', $testimonial[2]->username)
+            ->get();
+    @endphp
     <section class="OurContainer Testimonials-Section">
         <h5 class="TextCenter">TESTIMONIALS</h5>
         <h2 class="TextCenter">Customer Know The Best</h2>
         <p class="TextCenter"><a href="">View All</a></p>
         <div class="row Testimonial-cards">
             <div class="col-xxl col-xl col-md col-12 reviewCard FirstRC">
-                <img class="dp" src="Images/st (1).png" />
-                <h4 class="TextCenter">Mr Jones</h4>
+                <img class="dp" src="Images/users/{{ $img0[0]->userImage }}" />
+                <h4 class="TextCenter">{{ $testimonial[0]->username }}</h4>
                 <img class="quote" src="Images/Quote Left.svg" />
                 <p class="TextCenter">
-                    Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
-                    feugiat lacus vitae neque ornare, vitae libero!
+                    {{ $testimonial[0]->content }}
                 </p>
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
+                @php
+                    $FS = $testimonial[0]->ratings;
+                    $NF = 5 - $FS;
+                @endphp
+                @for ($i = 0; $i < $NF; $i++)
+                    <img class="star end" src="Images/outline star.svg" />
+                @endfor
+                @for ($i = 0; $i < $FS; $i++)
+                    <img class="star end" src="Images/Full Star.svg" />
+                @endfor
             </div>
             <div class="col-xxl col-xl col-md col-12 reviewCard SecondRC">
-                <img class="dp" src="Images/st (3).png" />
-                <h4 class="TextCenter">Alina Ali</h4>
+                <img class="dp" src="Images/users/{{ $img1[0]->userImage }}" />
+                <h4 class="TextCenter">{{ $testimonial[1]->username }}</h4>
                 <img class="quote" src="Images/Quote Left.svg" />
                 <p class="TextCenter">
-                    Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
-                    feugiat lacus vitae neque ornare, vitae libero!
+                    {{ $testimonial[1]->content }}
                 </p>
-                <img class="star end" src="Images/outline star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
+                @php
+                    $FS = $testimonial[1]->ratings;
+                    $NF = 5 - $FS;
+                @endphp
+                @for ($i = 0; $i < $NF; $i++)
+                    <img class="star end" src="Images/outline star.svg" />
+                @endfor
+                @for ($i = 0; $i < $FS; $i++)
+                    <img class="star end" src="Images/Full Star.svg" />
+                @endfor
             </div>
             <div class="col-xxl col-xl col-md col-12 reviewCard ThirdRC">
-                <img class="dp" src="Images/st (4).png" />
-                <h4 class="TextCenter">Mr. Ahmed</h4>
+                <img class="dp" src="Images/users/{{ $img2[0]->userImage }}" />
+                <h4 class="TextCenter">{{ $testimonial[2]->username }}</h4>
                 <img class="quote" src="Images/Quote Left.svg" />
                 <p class="TextCenter">
-                    Lorem ipsum dolor sit amet, consectet adipiscing elit. Phasellus
-                    feugiat lacus vitae neque ornare, vitae libero!
+                    {{ $testimonial[2]->content }}
                 </p>
-                <img class="star end" src="Images/outline star.svg" />
-                <img class="star end" src="Images/outline star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
-                <img class="star end" src="Images/Full Star.svg" />
+                @php
+                    $FS = $testimonial[2]->ratings;
+                    $NF = 5 - $FS;
+                @endphp
+                @for ($i = 0; $i < $NF; $i++)
+                    <img class="star end" src="Images/outline star.svg" />
+                @endfor
+                @for ($i = 0; $i < $FS; $i++)
+                    <img class="star end" src="Images/Full Star.svg" />
+                @endfor
             </div>
         </div>
     </section>
@@ -327,11 +353,11 @@
         <div class="row">
             <!--  1  -->
             <div class="col-xxl col-xl col-md reviewCard FirstRC blog">
-                <img class="mx-auto d-block" src="Images/Home Blog 1.png" height="auto" width="100%" />
+                <img class="mx-auto d-block" src="Images/{{ $blog[0]->titleImage }}" height="auto" width="100%" />
                 <h5 style="color: #1c4a4a">
-                    Data Science and Machine Learning with Python
+                    {{ $blog[0]->title }}
                 </h5>
-                <button type="button" class="btn btnPrimary btn-sm btnFont btnThird">
+                <button type="button" class="btn btn-sm btnFont btnThird">
                     Read More
                 </button>
                 <div class="row" style="float: right;">
@@ -340,18 +366,18 @@
                     </div>
                     <div class="col my-auto">
                         <p style="display: inline">
-                            22
+                            {{ $blog[0]->likes }}
                         </p>
                     </div>
                 </div>
             </div>
             <!--  2  -->
             <div class="col-xxl col-xl col-md reviewCard SecondRC blog">
-                <img class="mx-auto d-block" src="Images/Home Blog 2.png" height="auto" width="100%" />
+                <img class="mx-auto d-block" src="Images/{{ $blog[1]->titleImage }}" height="auto" width="100%" />
                 <h5 style="color: #1c4a4a">
-                    Entry Test Tips and Tricks - Easy Hacks
+                    {{ $blog[1]->title }}
                 </h5>
-                <button type="button" class="btn btnPrimary btn-sm btnFont btnThird">
+                <button type="button" class="btn btn-sm btnFont btnThird">
                     Read More
                 </button>
                 <div class="row" style="float: right;">
@@ -360,18 +386,18 @@
                     </div>
                     <div class="col my-auto">
                         <p style="display: inline">
-                            53
+                            {{ $blog[1]->likes }}
                         </p>
                     </div>
                 </div>
             </div>
             <!--  3  -->
             <div class="col-xxl col-xl col-md reviewCard ThirdRC blog">
-                <img class="mx-auto d-block" src="Images/Home Blog 3.png" height="auto" width="100%" />
+                <img class="mx-auto d-block" src="Images/{{ $blog[2]->titleImage }}" height="auto" width="100%" />
                 <h5 style="color: #1c4a4a">
-                    Strategies for a Successful Business
+                    {{ $blog[2]->title }}
                 </h5>
-                <button type="button" class="btn btnPrimary btn-sm btnFont btnThird">
+                <button type="button" class="btn btn-sm btnFont btnThird">
                     Read More
                 </button>
                 <div class="row" style="float: right;">
@@ -380,7 +406,7 @@
                     </div>
                     <div class="col my-auto">
                         <p style="display: inline">
-                            100
+                            {{ $blog[2]->likes }}
                         </p>
                     </div>
                 </div>
@@ -394,6 +420,7 @@
     </script>
 
     <script src="Js/main.js"></script>
+    <script src="Js/home.js"></script>
     <!-- Link JS Here-->
 </body>
 

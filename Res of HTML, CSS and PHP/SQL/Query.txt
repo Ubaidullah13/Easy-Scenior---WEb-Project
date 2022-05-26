@@ -6,3 +6,6 @@ INSERT INTO `about` (`Heading`, `Paragraph`, `Image`) VALUES ('Join Easy Scenior
 
 To insert into BLOG table
 INSERT INTO `blogs` (`blogid`, `title`, `titleImage`, `desc1`, `img1`, `desc2`, `img2`, `likes`) VALUES (NULL, 'Strategies for a Successful Business', 'res/Home Blog 2.png', '', '', '', '', '100');
+
+TO insert into User
+INSERT INTO `user` (`username`, `fullname`, `email`, `password`, `userpfp`) VALUES ('Ubaiid', 'UbaidUllah', 'ubaid.99es@gamil.com', 'ubaiid', '');

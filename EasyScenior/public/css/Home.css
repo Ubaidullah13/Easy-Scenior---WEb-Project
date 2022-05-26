@@ -26,6 +26,9 @@
 .st-enrolled span {
     margin-right: 1.5rem;
 }
+#value {
+    margin-right: 0rem;
+}
 .st-enrolled img {
     width: 9%;
     height: 9%;
@@ -226,6 +229,11 @@
 }
 
 @media (max-width: 767.98px) {
+    .st-enrolled img {
+        width: 9%;
+        height: 9%;
+        margin-left: -0.7rem;
+    }
     #hero_img {
         display: none;
     }
@@ -273,7 +281,7 @@
 
 @media (max-width: 568px) {
     .st-enrolled img {
-        width: 15%;
-        height: 15%;
+        width: 13%;
+        height: 13%;
     }
 }

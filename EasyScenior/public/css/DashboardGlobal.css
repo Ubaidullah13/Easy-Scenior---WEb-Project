@@ -1,0 +1,30 @@
+body {
+    background-color: #1c4a4a;
+}
+.main {
+    margin: 0.8em auto;
+    max-width: 96%;
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+}
+.sideBar {
+    background-color: #f4f4f9;
+    border-radius: 10px;
+}
+
+.DashContainer {
+    max-width: 80%;
+    margin: auto;
+}
+
+h1 {
+    color: #1c4a4a;
+}
+
+#logo {
+    height: auto;
+    width: 80%;
+    margin: auto;
+    display: block;
+}

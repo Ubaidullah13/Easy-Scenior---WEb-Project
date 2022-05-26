@@ -94,38 +94,51 @@ h1 {
 
 .btnPrimary {
     background-color: #1c4a4a;
+    padding-right: 2em;
+    padding-left: 2em;
     color: white;
     border-radius: 10px;
     transition: 800ms;
 }
 .btnPrimary:hover {
-    color: #1c4a4a;
-    background-color: #f6a2bc;
-    transition: 800ms;
+    border-radius: 5px;
+    box-shadow: 0px 10px 15px -7px #1c4a4a;
+    color: white;
+    transition: 500ms;
 }
 
 .btnSecond {
     border-color: #1c4a4a;
     color: #1c4a4a;
     border-radius: 10px;
-    transition: 800ms;
+    transition: 500ms;
 }
 .btnSecond:hover {
-    color: #f6a2bc;
-    border-color: #f6a2bc;
-    transition: 800ms;
+    border-radius: 5px;
+    box-shadow: 0px 10px 10px -7px #1c4a4a;
+    transition: 500ms;
 }
 .btnThird {
-    background-color: #9ec5c5;
+    border-color: #1c4a4a;
     color: #1c4a4a;
+    padding: 0.5em 1em;
     border-radius: 10px;
-    transition: 800ms;
+    transition: 500ms;
 }
 .btnThird:hover {
-    background-color: #1c4a4a;
-    color: #9ec5c5;
+    border: 0;
+    border-top: 1px solid #f6a2bc;
+    border-bottom: 1px solid #f6a2bc;
+    color: #1c4a4a;
     border-radius: 10px;
-    transition: 800ms;
+    transition: 500ms;
+}
+.btnThird:hover:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f1d8";
+    margin: auto;
+    padding-left: 2px;
+    transition: 500ms;
 }
 
 #searchForm {
@@ -330,3 +343,142 @@ input[type="checkbox"] {
 }
 
 /* /////////////////////////////////////// Navigation  //////////////////////////////////////////////*/
+
+/*  Secondary */
+.btn-4 {
+    position: relative;
+    color: #000;
+    z-index: 2;
+    line-height: 40px;
+    padding: 0;
+}
+.btn-4:hover {
+    border: none;
+}
+.btn-4:before,
+.btn-4:after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 0%;
+    border: 2px solid;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+.btn-4:before {
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: #000;
+    border-left-color: #000;
+}
+.btn-4:after {
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: #000;
+    border-right-color: #000;
+}
+.btn-4:hover:before,
+.btn-4:hover:after {
+    border-color: #000;
+    height: 100%;
+    width: 100%;
+}
+
+/*  Scroll Down */
+/* <div
+    class="scrolldown mx-auto d-block"
+    > <div
+    class="chevrons"
+    > <div
+    class="chevrondown"
+    > </div
+    > <div
+    class="chevrondown"
+    > </div
+    > </div
+    > </div
+    > .scrolldown {
+    --color: #1c4a4a;
+    --sizeX: 30px;
+    --sizeY: 50px;
+    position: relative;
+    width: var(--sizeX);
+    height: var(--sizeY);
+    margin-left: var(sizeX / 2);
+    border: calc(var(--sizeX) / 10) solid var(--color);
+    border-radius: 50px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.scrolldown::before {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--color);
+    border-radius: 100%;
+    animation: scrolldown-anim 2s infinite;
+    box-sizing: border-box;
+    box-shadow: 0px -5px 3px 1px #ffffff66;
+}
+
+@keyframes scrolldown-anim {
+    0% {
+        opacity: 0;
+        height: 6px;
+    }
+    40% {
+        opacity: 1;
+        height: 10px;
+    }
+    80% {
+        transform: translate(0, 20px);
+        height: 10px;
+        opacity: 0;
+    }
+    100% {
+        height: 3px;
+        opacity: 0;
+    }
+}
+.chevrons {
+    padding: 6px 0 0 0;
+    margin-left: -3px;
+    margin-top: 48px;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.chevrondown {
+    margin-top: -6px;
+    position: relative;
+    border: solid var(--color);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+}
+.chevrondown:nth-child(odd) {
+    animation: pulse 500ms ease infinite alternate;
+}
+.chevrondown:nth-child(even) {
+    animation: pulse 500ms ease infinite alternate 250ms;
+}
+@keyframes pulse {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.5;
+    }
+} */

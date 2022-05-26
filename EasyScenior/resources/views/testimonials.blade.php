@@ -76,52 +76,47 @@
             </ol>
         </nav>
 
-        <h1>Hear from our Students</h1>
+        <h1>Testimonials</h1>
     </div>
-
+    @php
+        use App\Models\Users;
+    @endphp
     <div class="whiteBg">
         <div class="OurContainer">
             <section class="OurContainer Testimonials-Section">
-                <h5 class="TextCenter">TESTIMONIALS</h5>
                 <h2 class="TextCenter">Customer Know The Best</h2>
+                <div class="row Testimonial-cards">
+                    @for ($j = 0; $j < count($testimonial); $j++)
+                        @php
+                            $img = Users::SELECT('userImage')
+                                ->WHERE('username', $testimonial[$j]->username)
+                                ->get();
+                            $fullName = Users::SELECT('fullname')
+                                ->WHERE('username', $testimonial[$j]->username)
+                                ->get();
+                        @endphp
+                        <div class="col-xxl-5 col-xl-5 col-md-5 col-12 reviewCard FirstRC mx-auto d-block">
+                            <img class="dp" src="Images/users/{{ $img[0]->userImage }}" />
+                            <h4 class="TextCenter">{{ $fullName[0]->fullname }}</h4>
+                            <img class="quote" src="Images/Quote Left.svg" />
+                            <p class="TextCenter">
+                                {{ $testimonial[$j]->content }}
+                            </p>
+                            @php
+                                $FS = $testimonial[$j]->ratings;
+                                $NF = 5 - $FS;
+                            @endphp
+                            @for ($i = 0; $i < $NF; $i++)
+                                <img class="star end" src="Images/outline star.svg" />
+                            @endfor
+                            @for ($i = 0; $i < $FS; $i++)
+                                <img class="star end" src="Images/Full Star.svg" />
+                            @endfor
+                        </div>
+                    @endfor
 
-
-
-                {{-- <div class="row Testimonial-cards">
-                    <?php
-                    $querytest = 'SELECT * from testimonials';
-                    $datatest = mysqli_query($conn, $querytest);
-                    // $resultWelcome = mysqli_fetch_assoc($datatest);
-                    ?>
-
-
-
-                    <?php
-                  while($resultWelcome = mysqli_fetch_assoc($datatest)){               
-
-        
-               echo '<div class="col-xxl-6 col-xl-6 col-md-6 col-12 reviewCard FirstRC size" >
-
-                   <img class="dp" src="'.$resultWelcome['Image'].'"/>
-                   <h4 class="TextCenter">'.$resultWelcome['user'].'</h4>
-                   <img class="quote" src="res/Quote Left.svg" />
-                   <p class="TextCenter">'.$resultWelcome['content'].'?></p>
-                    <img class="star end" src="res/Full Star.svg" />
-                    <img class="star end" src="res/Full Star.svg" />
-                    <img class="star end" src="res/Full Star.svg" />
-                    <img class="star end" src="res/Full Star.svg" />
-                    <img class="star end" src="res/Full Star.svg" />
-                </div>';
-                }
-
-                ?>
-
-
-
-
-
-
-        </div> --}}
+                </div>
+            </section>
         </div>
     </div>
     <my-footer></my-footer>

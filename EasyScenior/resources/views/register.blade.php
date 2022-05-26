@@ -84,6 +84,14 @@
 
         <div class="whiteBg">
             <div class="OurContainer">
+                @if (Session::get('register_status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ Session::get('register_status') }}
+                        {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button> --}}
+                    </div>
+                @endif
                 <!-- Register -->
 
                 <div class="row">
@@ -96,40 +104,49 @@
                                 <img src="Images/RegisterImg1.png" class="RegImg1 RImgMed" />
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-6 col-8 offset-4 col-sm-6 RImgHid">
                                 <img src="Images/RegisterImg3.png" class="RegImg3 RImgMed" />
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md col-sm-12 col-lg-6 my-auto">
-                        <form class="contactright" action="">
+                        <form class="contactright" action="registerUser" method="post" return="false"
+                            enctype="multipart/form-data">
                             <h4 style="text-align: center">Register Now</h4>
 
                             <div class="mb-4 mt-4">
                                 <div class="input-group input-grp">
                                     <input type="text" class="input" id="name" required="" autocomplete="off"
-                                        name="name" />
-                                    <label class="user-label">Name</label>
+                                        name="name" value="{{ old('name') }}" />
+                                    <label class="user-label">Full Name</label>
                                 </div>
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @csrf
                             </div>
 
                             <div class="mb-4 mt-4">
                                 <div class="input-group input-grp">
                                     <input type="text" class="input" required="" autocomplete="off"
-                                        id="username" name="username" />
+                                        id="username" name="username" value="{{ old('username') }}" />
                                     <label class="user-label">Username</label>
                                 </div>
+                                @error('username')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-4 mt-4">
                                 <div class="input-group input-grp">
-                                    <input type="email" class="input" id="name" required="" autocomplete="off"
-                                        id="email" name="email" />
+                                    <input type="email" class="input" required="" autocomplete="off" id="email"
+                                        name="email" value="{{ old('email') }}" />
                                     <label class="user-label">Email</label>
                                 </div>
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-4">
@@ -138,13 +155,27 @@
                                         id="password" name="password" />
                                     <label class="user-label">Password</label>
                                 </div>
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-4">
                                 <div class="input-group input-grp">
-                                    <input type="Cpassword" class="input" id="name" required=""
-                                        autocomplete="off" id="Cpassword" name="Cpassword" />
+                                    <input type="password" class="input" required="" autocomplete="off"
+                                        id="confirm_password" name="confirm_password"
+                                        value="{{ old('confirm_password') }}" />
                                     <label class="user-label">Confirm Password</label>
+                                </div>
+                                @error('confirm_password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
+                                <div class="input-group input-grp">
+                                    <input type="file" class="input" autocomplete="off" id="image"
+                                        name="image" />
+                                    <label class="user-label">Upload Image</label>
                                 </div>
                             </div>
 

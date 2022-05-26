@@ -81,34 +81,31 @@
                 </ol>
             </nav>
 
-            <h1>Thank You</h1>
+            <h1>FAQs</h1>
         </div>
 
         <div class="whiteBg">
             <div class="OurContainer">
-
-
                 <div class="row">
                     <img src="Images/FAQ.svg" class="img">
                 </div>
+                @for ($counter = 1; $counter <= count($FAQ); $counter++)
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-heading{{ $counter }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse{{ $counter }}" aria-expanded="false"
+                                    aria-controls="flush-collapse{{ $counter }}">{{ $FAQ[$counter - 1]->question }}</button>
+                            </h2>
+                            <div id="flush-collapse{{ $counter }}" class="accordion-collapse collapse"
+                                aria-labelledby="flush-heading{{ $counter }}"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">{{ $FAQ[$counter - 1]->answer }}</div>
+                            </div>
+                        </div>
 
-
-                {{-- <?php
-                
-                $counter = 1;
-                $query = 'select * from faqs';
-                $data = mysqli_query($conn, $query);
-                $total = mysqli_num_rows($data);
-                
-                if ($total != 0) {
-                    while ($Imagesult = mysqli_fetch_assoc($data)) {
-                        echo '<div class="accordion accordion-flush" id="accordionFlushExample">' . '<div class="accordion-item">' . '<h2 class="accordion-header" id="flush-heading' . $counter . '">' . '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $counter . '" aria-expanded="false" aria-controls="flush-collapse' . $counter . '">' . $Imagesult['question'] . '</button>' . '</h2>' . '<div id="flush-collapse' . $counter . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $counter . '" data-bs-parent="#accordionFlushExample">' . ' <div class="accordion-body"> ' . $Imagesult['answer'] . '</div>' . '</div>' . '</div>' . '</div>';
-                
-                        $counter++;
-                    }
-                }
-                
-                ?> --}}
+                    </div>
+                @endfor
                 <div class="padding">
                 </div>
 
