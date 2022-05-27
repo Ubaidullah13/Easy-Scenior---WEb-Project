@@ -109,12 +109,20 @@
 
                     <div class="col-4">
                         <div class="input-group">
-                            <input type="text" class="form-control label" id="searchForm" placeholder="Search "
+                            <input type="text"name ="search" class="form-control label" id="searchForm" placeholder="Search "
                                 aria-label="Search Tutor" aria-describedby="search_category" />
                             <button class="btn" type="button" id="search_category">
                                 <img src="Images/search.svg" alt="search" id="SearchImgSmall" />
                             </button>
                         </div>
+                        <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        
+       <tbody>
+
+       </tbody>
+      </table>
+     </div>
                     </div>
                 </div>
 
@@ -176,3 +184,30 @@
 </body>
 
 </html>
+
+<script>
+$(document).ready(function(){
+
+ fetch_customer_data();
+
+ function fetch_customer_data(query = '')
+ {
+  $.ajax({
+   url:"{{ route('FindATutor.action') }}",
+   method:'GET',
+   data:{query:query},
+   dataType:'json',
+   success:function(data)
+   {
+    $('tbody').html(data.table_data);
+   }
+  })
+ }
+
+ $(document).on('keyup', '#search', function(){
+  var query = $(this).val();
+  fetch_customer_data(query);
+ });
+});
+</script>
+

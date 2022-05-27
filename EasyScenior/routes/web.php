@@ -69,3 +69,9 @@ Route::get('/user',function(){
 Route::get('/st',function(){
     return view('stDashboard');
 });
+
+//Live search
+Route::get('/FindATutor', 'FindATutor@index');
+Route::get('/FindATutor/action', 'FindATutor@action')->name('FindATutor.action');
+
+
