@@ -127,3 +127,8 @@ Route::get('/StudentDashboard',function(){
 Route::get('/AdminDashboard',function(){
                 return view('Admin-Dash-Home');
                 });
+//Live search
+Route::get('/FindATutor', 'FindATutor@index');
+Route::get('/FindATutor/action', 'FindATutor@action')->name('FindATutor.action');
+
+
