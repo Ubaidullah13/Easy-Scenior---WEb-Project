@@ -29,7 +29,7 @@
     <title>Easy Scenior - Home</title>
 </head>
 
-<body onload="animateValue(0, {{ count($home) + 1 }}, 500)">
+<body onload="animateValue(0, {{ count($total) }}, 500)">
     <!-- Navigation -->
     <nav class="navigation">
         <div class="logo"><a href="Home"><img src="Images/logo.png" /></a></div>
@@ -112,7 +112,7 @@
                 </div>
                 <!--  Col 2  -->
                 <div class="col-xxl col-xl col-md my-auto" id="hero_img">
-                    <img src="Images/home hreo section image.png" />
+                    <img src="Images/mentor.png" />
                 </div>
             </div>
         </section>
@@ -120,33 +120,36 @@
 
     <!--  Categories  -->
     <section class="OurContainer Category-Section">
-        <h2>
-            {{ $home[1]->Heading }}
-        </h2>
-        <!--  Text and Search  -->
-        <div class="row">
-            <div class="col-xxl-5 col-xl-5 col-md col-sm-12">
-                <p>
-                    {{ $home[1]->Paragraph }}
-                </p>
-            </div>
-            <div class="col-xxl col-xl col-lg-4 col-md-4 offset-lg-2 offset-md-1 col-sm-4 offset-sm-8 cat_search">
-                <div class="input-group">
+        <div class="text-center">
+            <h2>
+                {{ $home[2]->Heading }}
+            </h2>
+            <!--  Text and Search  -->
+            {{-- <div class="row"> --}}
+            {{-- <div class="col-xxl-5 col-xl-5 col-md col-sm-12"> --}}
+            <p>
+                {{ $home[2]->Paragraph }}
+            </p>
+            {{-- </div> --}}
+            {{-- <div class="col-xxl col-xl col-lg-4 col-md-4 offset-lg-2 offset-md-1 col-sm-4 offset-sm-8 cat_search"> --}}
+            {{-- <div class="input-group">
                     <input type="text" class="form-control label" id="searchForm" placeholder="Search Category"
                         aria-label="Search Category" aria-describedby="search_category" />
                     <button class="btn" type="button" id="search_category">
                         <img src="Images/search.svg" alt="search" />
                     </button>
-                </div>
+                </div> --}}
+            <div class="SC">
+                <button type="button" class="btn btnSecond btn-lg btnFont">
+                    View All
+                </button>
             </div>
         </div>
+        {{-- </div> --}}
+        {{-- </div> --}}
         <!--  Secondary Button  -->
 
-        <div class="SC">
-            <button type="button" class="btn btnSecond btn-lg btnFont">
-                View All
-            </button>
-        </div>
+
         <div class="row">
             <!--  Card 1 -->
             <div class="col-xxl col-xl-3 col-md-6 col">
@@ -211,13 +214,13 @@
     <section class="OurContainer Tutor-Section">
         <div class="row">
             <div class="col-xxl-6 col-xl-7 col-md">
-                <h5># {{ $home[2]->SubHeading }}
+                <h5># {{ $home[1]->SubHeading }}
                 </h5>
                 <h2>
-                    {{ $home[2]->Heading }}
+                    {{ $home[1]->Heading }}
                 </h2>
                 <p>
-                    {{ $home[2]->Paragraph }}
+                    {{ $home[1]->Paragraph }}
                 </p>
                 <button type="button" class="btn btnPrimary btn-lg btnFont BT">
                     Become Tutor

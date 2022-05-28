@@ -46,6 +46,7 @@
             use App\Models\Users;
             use App\Models\Categories;
             use App\Models\TutorRatings;
+            use App\Models\Packages;
             $user = $TutorDetails[0]->tutorusername;
             $img = Users::SELECT('userImage')
                 ->WHERE('username', $TutorDetails[0]->tutorusername)
@@ -59,7 +60,7 @@
             $rating = TutorRatings::SELECT('rating')
                 ->WHERE('tutor', $TutorDetails[0]->tutorusername)
                 ->get();
-            
+            $pkg = Packages::all();
         @endphp
         {{-- <div class="col"> --}}
         <div class="DashContainer">
@@ -119,14 +120,22 @@
                 <div class="col-xl col-lg-12 py-4">
                     <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="Timg mx-auto d-block" />
                     <div class="card">
-                        <h4 class="text-center">Rs 1000</h4>
+                        <h4 class="text-center">Rs <span id="price">-</span></h4>
                         <hr>
                         <div><b>Instructor</b>
                             <span style="float: right;">{{ $fullname[0]->fullname }}</span>
                         </div>
                         <hr>
                         <div><b>Package</b>
-                            <span style="float: right;">{{ $fullname[0]->fullname }}</span>
+                            <div style="float:right">
+                                <select style="background-color:
+                                #F4F4F9; color:#1c4a4a" name="PK" id="package">
+                                    <option onclick="pkg('1')">{{ $pkg[0]->duration }}
+                                    </option>
+                                    <option onclick="pkg('2')">{{ $pkg[1]->duration }}</option>
+                                    <option onclick="pkg('3')">{{ $pkg[2]->duration }}</option>
+                                </select>
+                            </div>
                         </div>
                         <hr>
                         <div><b>Language</b>
@@ -146,7 +155,16 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <script type='text/javascript' src="{{ asset('Js/sidebar.js') }}"></script>
-
+    <script type='text/javascript' src="{{ asset('Js/package.js') }}"></script>
+    <script>
+        function toggleField(hideObj, showObj) {
+            hideObj.disabled = true;
+            hideObj.style.display = 'none';
+            showObj.disabled = false;
+            showObj.style.display = 'inline';
+            showObj.focus();
+        }
+    </script>
     <script>
         $.ajaxSetup({
             headers: {

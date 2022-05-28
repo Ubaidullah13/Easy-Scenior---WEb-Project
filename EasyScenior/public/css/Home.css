@@ -17,7 +17,8 @@
     text-align: end;
 }
 #hero_img img {
-    width: 50%;
+    width: 100%;
+    height: auto;
 }
 
 .st-enrolled {
@@ -46,7 +47,6 @@
     border: none;
     border-radius: 15px;
     background-color: #71c0c0;
-    cursor: pointer;
 }
 .category_card img {
     padding: 2em;
@@ -242,6 +242,7 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 0.5em;
+        text-align: center;
     }
     .cat_search {
         display: none;

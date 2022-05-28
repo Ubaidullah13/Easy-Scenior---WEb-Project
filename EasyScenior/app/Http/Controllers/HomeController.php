@@ -12,12 +12,13 @@ class HomeController extends Controller
 {
     public function view(){
         $home = Home::all();
+        $total = Users::all();
         $user = Users::inRandomOrder()->limit(4)->get();
         $categories = Categories::inRandomOrder()->limit(4)->get();
         $testimonial = Testimonials::inRandomOrder()->limit(3)->get();
         $blog = Blog::inRandomOrder()->limit(3)->get();
 
-        $data = compact('home','categories','user','testimonial','blog');
+        $data = compact('home','categories','user','testimonial','blog','total');
         return view('home')->with($data);
     }
 
