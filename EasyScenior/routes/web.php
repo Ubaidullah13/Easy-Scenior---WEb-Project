@@ -11,6 +11,10 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FindTutorController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\FindATutor;
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +40,7 @@ Route::get('/testimonials', [HomeController::class,'Testimonial']);
 Route::get('/About', [AboutController::class,'view']);
 
 Route::get('/Find Tutor', [FindTutorController::class,'view']);
+Route::get('/FindCourse', [CoursesController::class,'view']);
 
 Route::get('/faqs', [FaqController::class,'view']);
 
@@ -46,9 +51,7 @@ Route::get('/contactThanks', function () {
     return view('contactThanks');
 });
 
-Route::get('/FindCourse', function () {
-    return view('FindCourse');
-});
+
 
 // Route::get('/testimonials', function () {
 //     return view('testimonials');
@@ -76,9 +79,7 @@ Route::get('/user',function(){
 
 
 //protected -- user can't access it without login
-Route::get('/st',function(){
-    return view('stDashboard');
-});
+
 
 
 Route::get('/no-access', function()
@@ -104,31 +105,42 @@ Route::get('/sDash', function()
 })->middleware('customAuth');
 
 Route::get('/logout',function(){
-    session()->forget('username');
+    session()->forget('user');
     return redirect('/');
 });
 
 
 Route::get('/DashTutors', [FindTutorController::class,'DashView']);
+Route::get('/DashTutorsDetails/{name}', [FindTutorController::class,'TutorDetails']);
+// Route::get('/DashTutorsDetails/{name}',function($name){
+//     return view('IndividualTutorD');
+//     });
 
-Route::get('/DashCourses',function(){
-return view('Dash-courses');
-});
+Route::get('/DashCourses', [CoursesController::class,'DashView']);
+Route::get('/DashCourseDetails/{id}', [CoursesController::class,'CourseDetails']);
+
 Route::get('/DashSessions',function(){
     return view('UpSession');
     });
 
 Route::get('/TutorDashboard',function(){
         return view('Tutor-Dash-Home');
-        });
+        })->middleware('customAuth');;
 Route::get('/StudentDashboard',function(){
             return view('St-Dash-Home');
-            });
-Route::get('/AdminDashboard',function(){
-                return view('Admin-Dash-Home');
-                });
+            })->middleware('customAuth');;
+// Route::get('/AdminDashboard',function(){
+//             return view('Admin-Dash-Home');
+//                 })->middleware('customAuth');
+
+
+
 //Live search
-Route::get('/FindATutor', 'FindATutor@index');
-Route::get('/FindATutor/action', 'FindATutor@action')->name('FindATutor.action');
+Route::get('/FindATutor', [FindATutor::class, 'index']);
+Route::get('/FindATutor/action', [FindATutor::class, 'action']);
 
+Route::post('/getmsg/{name}',[AjaxController::class, 'view']);
 
+Route::get('/AdminDashboard', [AdminController::class,'Mailview'])->middleware('customAuth');
+
+Route::get('/AdminDashboard/user', [AdminController::class,'Userview'])->middleware('customAuth');

@@ -1,7 +1,7 @@
 
        
 // Function to toggle the bar
-function geeksforgeeks() {
+function side() {
     var x = document.getElementById("menus");
     if (x.style.display === "block") {
         x.style.display = "none";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 26, 2022 at 06:32 PM
+-- Generation Time: May 28, 2022 at 06:43 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -34,20 +34,20 @@ CREATE TABLE IF NOT EXISTS `about` (
   `Paragraph` varchar(744) NOT NULL,
   `Image` text NOT NULL,
   PRIMARY KEY (`Heading`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `about`
 --
 
 INSERT INTO `about` (`Heading`, `Paragraph`, `Image`) VALUES
-('Join Easy Scenior, upgrade your skills, and learn from experts', 'Easy Senior is a platform for online coaching, where students come together not only to find someone who can tutor them and help with the concepts they\'re stuck on but also to sign up as a tutor themselves!', 'About welcome background.png'),
-('Our Story', 'Our motivation behind pursuing this project lies in our belief in the fact that every student has his or her own pace of learning. In Pakistan especially, there is a common trend of going to tuition centers and academies in college, to cover the topics which their school/college couldn’t cover, and for extra studying. This leaves the students in the habit of always having a backup plan But after transitioning to universities, these students face trouble while adjusting, and thus resort to seeking help from seniors. So this is where Easy Senior comes in, connecting these students to their peers and seniors, who can guide them in the right direction.', ''),
-('Top Instructors', 'Our platform provides highly qualified instructors and tutors. They are prepared, set clear and fair expectations, have a positive attitude, are patient with students, and assess their teaching on a regular basis.', 'About Top Instructor.svg'),
-('Portable Program', 'We are providing a portable learning platform to students where they can take sessions whenever and from anywhere in the world.', 'About Portable Program.svg'),
 ('Improve Quickly', 'Easy Senior provides quality-based learning with engagement and motivation to students. Moreover, we maintain students’ attention by perking courses with interesting activities, So that they can excel in their careers.', 'About Improve Quickly.svg'),
+('Join Easy Scenior, upgrade your skills, and learn from experts', 'Easy Senior is a platform for online coaching, where students come together not only to find someone who can tutor them and help with the concepts they\'re stuck on but also to sign up as a tutor themselves!', 'About welcome background.png'),
 ('Layla El-Faouly', '', 'About owner (1).png'),
 ('Marc Specter', '', 'About owner (3).png'),
+('Our Story', 'Our motivation behind pursuing this project lies in our belief in the fact that every student has his or her own pace of learning. In Pakistan especially, there is a common trend of going to tuition centers and academies in college, to cover the topics which their school/college couldn’t cover, and for extra studying. This leaves the students in the habit of always having a backup plan But after transitioning to universities, these students face trouble while adjusting, and thus resort to seeking help from seniors. So this is where Easy Senior comes in, connecting these students to their peers and seniors, who can guide them in the right direction.', ''),
+('Portable Program', 'We are providing a portable learning platform to students where they can take sessions whenever and from anywhere in the world.', 'About Portable Program.svg'),
+('Top Instructors', 'Our platform provides highly qualified instructors and tutors. They are prepared, set clear and fair expectations, have a positive attitude, are patient with students, and assess their teaching on a regular basis.', 'About Top Instructor.svg'),
 ('Yelena Belova', '', 'About owner (2).png');
 
 -- --------------------------------------------------------
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `contact_details` (
   `email` varchar(30) NOT NULL,
   `address` varchar(50) NOT NULL,
   PRIMARY KEY (`phone_no`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contact_details`
@@ -135,11 +135,11 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `coursename` varchar(100) NOT NULL,
   `desc` text NOT NULL,
   `price` int(11) NOT NULL,
-  `tutorname` int(11) NOT NULL,
-  `coverpic` blob NOT NULL,
+  `tutorname` varchar(20) NOT NULL,
+  `coverpic` varchar(255) NOT NULL,
   PRIMARY KEY (`course_ID`),
-  KEY `fk_courses` (`tutorname`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  KEY `fk_Course_TutorName` (`tutorname`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `course_ratings` (
   `course_id` int(11) NOT NULL AUTO_INCREMENT,
   `ratings` int(11) NOT NULL,
   PRIMARY KEY (`course_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -168,9 +168,9 @@ CREATE TABLE IF NOT EXISTS `cust_review_to_tutor` (
   `content` text NOT NULL,
   `rating` int(11) NOT NULL,
   PRIMARY KEY (`rvw_id`),
-  KEY `stud_fk` (`student`),
-  KEY `tutor_fk` (`tutor`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  KEY `fk_rev_Username` (`student`),
+  KEY `fk_rev_tutor` (`tutor`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `faqs` (
   `question` varchar(300) NOT NULL,
   `answer` varchar(300) NOT NULL,
   PRIMARY KEY (`question`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `faqs`
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `home` (
   `Heading` varchar(300) NOT NULL,
   `Paragraph` varchar(740) NOT NULL,
   PRIMARY KEY (`Heading`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `home`
@@ -268,10 +268,20 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 DROP TABLE IF EXISTS `packages`;
 CREATE TABLE IF NOT EXISTS `packages` (
+  `pkg_ID` int(11) NOT NULL AUTO_INCREMENT,
   `duration` varchar(50) NOT NULL,
   `price` int(50) NOT NULL,
-  PRIMARY KEY (`duration`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`pkg_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`pkg_ID`, `duration`, `price`) VALUES
+(1, '1 Hour', 500),
+(2, '5 Hours', 2000),
+(3, '20 Hours', 8000);
 
 -- --------------------------------------------------------
 
@@ -315,15 +325,17 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_ID` int(11) NOT NULL AUTO_INCREMENT,
   `tutor` varchar(20) NOT NULL,
   `student` varchar(20) NOT NULL,
-  `pckg` varchar(50) NOT NULL,
+  `pckg` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  KEY `tutor_fk` (`tutor`),
-  KEY `student_fk` (`student`),
-  KEY `package_fk` (`pckg`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`session_ID`),
+  KEY `fk_session_tutor` (`tutor`),
+  KEY `fk_session_student` (`student`),
+  KEY `fk_session_pkg` (`pckg`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -333,11 +345,13 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 
 DROP TABLE IF EXISTS `student_enrolled_in_course`;
 CREATE TABLE IF NOT EXISTS `student_enrolled_in_course` (
+  `enrolledID` int(11) NOT NULL AUTO_INCREMENT,
   `st_username` varchar(20) NOT NULL,
   `course_id` int(11) NOT NULL,
-  KEY `st_fk` (`st_username`),
-  KEY `course_fk` (`course_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`enrolledID`),
+  KEY `fk_enroll_st` (`st_username`),
+  KEY `fk_enroll_Course` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -378,6 +392,7 @@ CREATE TABLE IF NOT EXISTS `tutor` (
   `expertise` varchar(400) NOT NULL,
   `major` int(11) NOT NULL,
   `institute` varchar(100) NOT NULL,
+  `video` varchar(255) NOT NULL,
   PRIMARY KEY (`tutorusername`),
   KEY `tutor_fk` (`tutorusername`),
   KEY `fk_category` (`major`)
@@ -387,12 +402,12 @@ CREATE TABLE IF NOT EXISTS `tutor` (
 -- Dumping data for table `tutor`
 --
 
-INSERT INTO `tutor` (`tutorusername`, `introduction`, `expertise`, `major`, `institute`) VALUES
-('Ava', '', '', 4, 'National University of Science & Technology'),
-('Elijah13', '', '', 2, 'Nescom'),
-('Emma_Olivia', '', '', 1, 'National University of Science & Technology'),
-('Noah', '', '', 3, 'National University of Science & Technology'),
-('Sara_Ali', '', '', 2, 'National University of Science & Technology');
+INSERT INTO `tutor` (`tutorusername`, `introduction`, `expertise`, `major`, `institute`, `video`) VALUES
+('Ava', '', '', 4, 'National University of Science & Technology', 'MOON KNIGHT.mp4'),
+('Elijah13', '', '', 2, 'Nescom', ''),
+('Emma_Olivia', '', '', 1, 'National University of Science & Technology', ''),
+('Noah', '', '', 3, 'National University of Science & Technology', ''),
+('Sara_Ali', '', '', 2, 'National University of Science & Technology', '');
 
 -- --------------------------------------------------------
 
@@ -438,26 +453,68 @@ INSERT INTO `user` (`username`, `fullname`, `email`, `password`, `userImage`, `s
 
 DROP TABLE IF EXISTS `user_contactus`;
 CREATE TABLE IF NOT EXISTS `user_contactus` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `email` varchar(30) NOT NULL,
   `subject` varchar(50) NOT NULL,
   `message` varchar(300) NOT NULL,
-  PRIMARY KEY (`name`,`subject`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_contactus`
 --
 
-INSERT INTO `user_contactus` (`name`, `email`, `subject`, `message`) VALUES
-('Shifa Imran', 'shifaimran309@gmail.com', 'jbfJK', 'kbgkjb'),
-('Shifa Imran', 'shifaimran309@gmail.com', 'Time for session', 'bkbjbk'),
-('Shifa Imran', 'shifaimran309@gmail.com', 'Time', 'bjwvfqhjfv'),
-('Shifa Imran', 'shifaimran309@gmail.com', 'kwv ', 'kjv ');
+INSERT INTO `user_contactus` (`id`, `name`, `email`, `subject`, `message`, `updated_at`, `created_at`) VALUES
+(1, 'Shifa Imran', 'shifaimran309@gmail.com', 'jbfJK', 'kbgkjb', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Shifa Imran', 'shifaimran309@gmail.com', 'Time for session', 'bkbjbk', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Shifa Imran', 'shifaimran309@gmail.com', 'Time', 'bjwvfqhjfv', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Shifa Imran', 'shifaimran309@gmail.com', 'kwv ', 'kjv ', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Shifa Imran', 'shifaimran309@gmail.com', 'efg', 'fwf3', '2022-05-27 07:02:16', '2022-05-27 07:02:16'),
+(6, 'Shifa Imran', 'shifaimran309@gmail.com', 'wejg', 'hbvjh', '2022-05-27 07:04:01', '2022-05-27 07:04:01'),
+(7, 'Shifa Imran', 'shifaimran309@gmail.com', 'wejg', 'hbvjh', '2022-05-27 07:04:29', '2022-05-27 07:04:29'),
+(8, 'a', 'a@gmail.com', 'time', 'hfqjg', '2022-05-27 07:06:08', '2022-05-27 07:06:08'),
+(9, 'ubaid', 'U@gmail.com', 'test', 'test', '2022-05-27 07:17:55', '2022-05-27 07:17:55');
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `courses`
+--
+ALTER TABLE `courses`
+  ADD CONSTRAINT `fk_Course_TutorName` FOREIGN KEY (`tutorname`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `course_ratings`
+--
+ALTER TABLE `course_ratings`
+  ADD CONSTRAINT `fk_courseID` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `cust_review_to_tutor`
+--
+ALTER TABLE `cust_review_to_tutor`
+  ADD CONSTRAINT `fk_rev_Username` FOREIGN KEY (`student`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_rev_tutor` FOREIGN KEY (`tutor`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `fk_session_pkg` FOREIGN KEY (`pckg`) REFERENCES `packages` (`pkg_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_session_student` FOREIGN KEY (`student`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_session_tutor` FOREIGN KEY (`tutor`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `student_enrolled_in_course`
+--
+ALTER TABLE `student_enrolled_in_course`
+  ADD CONSTRAINT `fk_enroll_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_enroll_st` FOREIGN KEY (`st_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `testimonials`

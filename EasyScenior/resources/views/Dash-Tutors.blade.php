@@ -47,7 +47,7 @@
                     <div class="profile_info text-center">
                         <img src="Images/users/st (3).png" class="profile_image" alt="">
                         <h4>Maria David</h4>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>
@@ -101,7 +101,8 @@
                                     </div>
                                     <div class="col-12 col-sm-7 cen">
                                         <br />
-                                        <a href="" class="click">
+                                        <a href="/DashTutorsDetails/{{ $findTutor[$i]->tutorusername }}"
+                                            class="click">
                                             <h4>{{ $fullName[0]->fullname }}</h4>
                                         </a>
                                         <h5>{{ $major[0]->cat_name }}</h5>

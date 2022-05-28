@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\FindTutor;
 use Illuminate\Http\Request;
-use App\Models\tutor;
+
+
 class FindATutor extends Controller
 {
     function index()
     {
-        return view ('FindATutor');
+      $findTutor = FindTutor::inRandomOrder()->get();
+      $FT = compact('findTutor');
+      return view('FindATutor')->with($FT);
+    
     }
+
     function action(Request $request)
     {
      if($request->ajax())
@@ -18,29 +23,37 @@ class FindATutor extends Controller
       $query = $request->get('query');
       if($query != '')
       {
-       $data = tutor::all()
+       $data = FindTutor::all()
          ->where('tutorusername', 'like', '%'.$query.'%')
          ->get();
          
       }
       else
       {
-       $data = tutor::all()
+       $data = FindTutor::all()
          ->get();
       }
       $total_row = $data->count();
       if($total_row > 0)
       {
-       foreach($data as $row)
-       {
-        $output .= '
-        <tr>
-         <td>'.$row->tutorusername'</td>
-         <td>'.$row->institute'</td>
-        
-        </tr>
-        ';
-       }
+      //  foreach($data as $row)
+      //  {
+      //   $output .= '
+      //   <tr>
+      //    <td>'.$row->tutorusername.'</td>
+      //    <td>'.$row->institute.'</td>
+      //   </tr>
+      //   ';
+      //  }
+      for ($i=0; $i<$total_row; $i++)
+      {
+        $output = '
+          <tr>
+           <td>'.$data[$i]->tutorusername.'</td>
+           <td>'.$data[$i]->institute.'</td>
+          </tr>
+          ';
+      }
       }
       else
       {
@@ -50,9 +63,8 @@ class FindATutor extends Controller
        </tr>
        ';
       }
-      $data = array(
-       'table_data'  => $output,
-      );
+      $data = array('table_data'  => $output,
+);
 
       echo json_encode($data);
      }

@@ -35,7 +35,7 @@
                     <img src=" Images/logo.png" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="#" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
@@ -48,8 +48,12 @@
                     <div class="profile_info text-center">
                         <img src="Images/users/st (3).png" class="profile_image" alt="">
                         <h4>
-                            Student
+                        {{Session::get('user')['fullname']}}
                         </h4>
+                        <p>
+                        {{ Str::upper(Session::get('user')['status']) }}
+                        </p>
+
                         <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu

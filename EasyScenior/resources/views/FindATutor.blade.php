@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
@@ -21,9 +21,16 @@
     <link rel="stylesheet" href="css/Global (Typography).css" />
 
     <link rel="stylesheet" href="css/FindATutor.css" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
     <title>Find Tutor</title>
+
+  
+
 </head>
+
+
 
 <body class="bg">
     <!-- Navigation -->
@@ -109,20 +116,13 @@
 
                     <div class="col-4">
                         <div class="input-group">
-                            <input type="text"name ="search" class="form-control label" id="searchForm" placeholder="Search "
+                            <input type="text"name ="searchForm" class="form-control label" id="searchForm" placeholder="Search "
                                 aria-label="Search Tutor" aria-describedby="search_category" />
                             <button class="btn" type="button" id="search_category">
                                 <img src="Images/search.svg" alt="search" id="SearchImgSmall" />
                             </button>
                         </div>
-                        <div class="table-responsive">
-      <table class="table table-striped table-bordered">
-        
-       <tbody>
-
-       </tbody>
-      </table>
-     </div>
+                    
                     </div>
                 </div>
 
@@ -178,36 +178,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
-
+        
         <script src="Js/main.js"></script>
         <!-- Link JS Here-->
 </body>
 
 </html>
 
-<script>
-$(document).ready(function(){
 
- fetch_customer_data();
-
- function fetch_customer_data(query = '')
- {
-  $.ajax({
-   url:"{{ route('FindATutor.action') }}",
-   method:'GET',
-   data:{query:query},
-   dataType:'json',
-   success:function(data)
-   {
-    $('tbody').html(data.table_data);
-   }
-  })
- }
-
- $(document).on('keyup', '#search', function(){
-  var query = $(this).val();
-  fetch_customer_data(query);
- });
-});
-</script>
 

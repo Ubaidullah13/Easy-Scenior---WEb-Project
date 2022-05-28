@@ -26,16 +26,22 @@ class customAuth
         // }
         //return $next($request);
 
-        if (session()->has('username') && $path!='login')  // session has username
+        if (session()->has('user') && $path!='login')  // session has username
             {
             //echo $next($request);
             //echo $path;
             return $next($request);   // only then serve next request
-            }    
-        else if($path=='login')  
-             return redirect('/sDash');
-         else 
-            return redirect('/');
+            }   
+        else if($path=='login' && ( !session()->has('user')))
+             return $next($request);
+        else if(($path=='login') && ( Session::get('user')['status']=="student"))
+             return redirect('/StudentDashboard');
+        else if(($path=='login') && ( Session::get('user')['status']=="tutor"))
+             return redirect('/TutorDashboard');
+        else if(($path=='login') && ( Session::get('user')['status']=="admin"))
+         return redirect('/AdminDashboard');
+        else 
+         return redirect('/');
 
 
 

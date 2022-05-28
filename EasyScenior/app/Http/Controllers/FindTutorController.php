@@ -19,4 +19,10 @@ class FindTutorController extends Controller
         $FT = compact('findTutor');
         return view('Dash-Tutors')->with($FT);
     }
+
+    public function TutorDetails($name){
+        $TutorDetails = FindTutor::where('tutorusername',$name)->get();
+        $FT = compact('TutorDetails');
+        return view('IndividualTutorD')->with($FT);
+    }
 }

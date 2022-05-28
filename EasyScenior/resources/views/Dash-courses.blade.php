@@ -72,48 +72,77 @@
                 <div class="DashContainer">
                     <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Find Courses</h3>
 
+                    @php
+                        use App\Models\Users;
+                        use App\Models\St_Enrolled_Courses;
+                    @endphp
+
+
                     <div class="row">
                         <div class="row">
 
-                            <!--  Query   -->
-                            <div class="col-xl-4 col-lg-6 col-md-6">
-                                <div class="row CourseBorder">
-                                    <div class="row">
-                                        <img src="Images/FC_Course1.png" class="mx-auto d-block courseImg1" />
-                                    </div>
+                            @for ($i = 0; $i < count($findCourse); $i++)
+                                @php
+                                    
+                                    $img = Users::SELECT('userImage')
+                                        ->WHERE('username', $findCourse[$i]->tutorname)
+                                        ->get();
+                                    
+                                    $fullName = Users::SELECT('fullname')
+                                        ->WHERE('username', $findCourse[$i]->tutorname)
+                                        ->get();
+                                    
+                                    $StEnrolled = St_Enrolled_Courses::SELECT('st_username')
+                                        ->WHERE('course_id', $findCourse[$i]->course_ID)
+                                        ->get();
+                                    
+                                    $St_count = count($StEnrolled);
+                                    
+                                @endphp
 
-                                    <div class="row" style="margin-top: 2rem">
-                                        <div class="col-5 my-auto">
-                                            <img src="Images/users/Emma_Olivia.png" class="FC_TtrImg" />
+                                <div class="col-xl-4 col-lg-6 col-md-6">
+                                    <div class="row CourseBorder">
+                                        <div class="row">
+                                            <img src="Images/{{ $findCourse[$i]->coverpic }}"
+                                                class="mx-auto d-block courseImg1" />
                                         </div>
-                                        <div class="col my-auto">
-                                            <h5 class="TutorNames">Emma Olivia</h5>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <a href="" class="click">
-                                            <h4 style="margin-top: 2rem">
-                                                Web Development Full Course
-                                            </h4>
-                                        </a>
-                                    </div>
+                                        <div class="row" style="margin-top: 2rem">
+                                            <div class="col-5 my-auto">
+                                                <img src="Images/users/{{ $img[0]->userImage }}"
+                                                    class="FC_TtrImg" />
+                                            </div>
+                                            <div class="col my-auto">
+                                                <h5 class="TutorNames">{{ $fullName[0]->fullname }}</h5>
+                                            </div>
+                                        </div>
 
-                                    <div class="row" style="margin-top: 2rem">
-                                        <div class="col-6">
-                                            <button class="btn btnSecond btn-sm btnFont">
-                                                <span>Enroll Now</span>
-                                            </button>
+                                        <div class="row">
+                                            <a href="" class="click">
+                                                <a href="/DashCourseDetails/{{ $findCourse[$i]->course_ID }}"
+                                                    class="click">
+                                                    <h4 style="margin-top: 2rem">
+                                                        {{ $findCourse[$i]->coursename }}
+                                                    </h4>
+                                                </a>
+                                            </a>
                                         </div>
-                                        <div class="col-6">
-                                            <span>2,500+ enrolled</span>
+
+                                        <div class="row" style="margin-top: 2rem">
+                                            <div class="col-6">
+                                                <button class="btn btnSecond btn-sm btnFont">
+                                                    <span>See Details</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-6">
+                                                <span>{{ $St_count }} Enrolled</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <p class="CourseLevel">Difficulty: Advance</p>
+
                                     </div>
                                 </div>
-                            </div>
+                            @endfor
+
                         </div>
                     </div>
 

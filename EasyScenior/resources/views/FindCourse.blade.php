@@ -123,199 +123,72 @@
 
                 <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Best Courses</h3>
 
+                @php
+                    use App\Models\Users;
+                    use App\Models\St_Enrolled_Courses;
+                @endphp
+
                 <div class="row">
                     <!-- First Row -->
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-6 col-md-6">
-                            <div class="row CourseBorder">
-                                <div class="row">
-                                    <img src="Images/FC_Course1.png" class="mx-auto d-block courseImg1" />
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-5 my-auto">
-                                        <img src="Images/FT_Tutor1.png" class="FC_TtrImg" />
-                                    </div>
-                                    <div class="col my-auto">
-                                        <h5 class="TutorNames">Emma Olivia</h5>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <h4 style="margin-top: 2rem">
-                                        Web Development Full Course
-                                    </h4>
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-6">
-                                        <button class="btn btnSecond btn-sm btnFont">
-                                            <span>Enroll Now</span>
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <span>2,500+ enrolled</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <p class="CourseLevel">Difficulty: Advance</p>
-                                </div>
-                            </div>
-                        </div>
+                    @for ($i = 0; $i < count($findCourse); $i++)
+                        @php
+                            
+                            $img = Users::SELECT('userImage')
+                                ->WHERE('username', $findCourse[$i]->tutorname)
+                                ->get();
+                            
+                            $fullName = Users::SELECT('fullname')
+                                ->WHERE('username', $findCourse[$i]->tutorname)
+                                ->get();
+                            
+                            $StEnrolled = St_Enrolled_Courses::SELECT('st_username')
+                                ->WHERE('course_id', $findCourse[$i]->course_ID)
+                                ->get();
+                            
+                            $St_count = count($StEnrolled);
+                            
+                        @endphp
 
                         <div class="col-xl-4 col-lg-6 col-md-6">
                             <div class="row CourseBorder">
                                 <div class="row">
-                                    <img src="Images/FC_Course2.png" class="mx-auto d-block courseImg1" />
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-5 my-auto">
-                                        <img src="Images/FT_Tutor1.png" class="FC_TtrImg" />
-                                    </div>
-                                    <div class="col-7 my-auto">
-                                        <h5 class="TutorNames">Emma Olivia</h5>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <h4 style="margin-top: 2rem">
-                                        Web Development for Beginners
-                                    </h4>
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-6">
-                                        <button class="btn btnSecond btn-sm btnFont">
-                                            <span>Enroll Now</span>
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <span>1,000+ enrolled</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <p class="CourseLevel">Difficulty: Basic</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-lg-6 col-md-6">
-                            <div class="row CourseBorder">
-                                <div class="row">
-                                    <img src="Images/FC_Course3.png" id="courseImg2"
+                                    <img src="Images/{{ $findCourse[$i]->coverpic }}"
                                         class="mx-auto d-block courseImg1" />
                                 </div>
 
                                 <div class="row" style="margin-top: 2rem">
                                     <div class="col-5 my-auto">
-                                        <img src="Images/FT_Tutor2.png" class="FC_TtrImg" />
+                                        <img src="Images/users/{{ $img[0]->userImage }}" class="FC_TtrImg" />
                                     </div>
-                                    <div class="col-7 my-auto">
-                                        <h5 class="TutorNames">Noah James</h5>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <h4 style="margin-top: 2rem">Flutter Development</h4>
-                                </div>
-
-                                <div class="row" style="margin-top: 4rem">
-                                    <div class="col-6">
-                                        <button class="btn btnSecond btn-sm btnFont">
-                                            <span>Enroll Now</span>
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <span>3,000+ enrolled</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <p class="CourseLevel">Difficulty: Intermediate</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6 col-md-6">
-                            <div class="row CourseBorder">
-                                <div class="row">
-                                    <img src="Images/FC_Course4.png" class="mx-auto d-block courseImg1" />
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-5 my-auto">
-                                        <img src="Images/FT_Tutor3.png" class="FC_TtrImg" />
-                                    </div>
-                                    <div class="col-7 my-auto">
-                                        <h5 class="TutorNames">Elijah Liam</h5>
+                                    <div class="col my-auto">
+                                        <h5 class="TutorNames">{{ $fullName[0]->fullname }} </h5>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <h4 style="margin-top: 2rem">
-                                        Learn Nuxt Js land on your dream job
+                                        {{ $findCourse[$i]->coursename }}
                                     </h4>
                                 </div>
 
                                 <div class="row" style="margin-top: 2rem">
                                     <div class="col-6">
                                         <button class="btn btnSecond btn-sm btnFont">
-                                            <span>Enroll Now</span>
+                                            <span>See Details</span>
                                         </button>
                                     </div>
                                     <div class="col-6">
-                                        <span>500+ enrolled</span>
+                                        <span>{{ $St_count }} Enrolled</span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <p class="CourseLevel">Difficulty: Basic</p>
-                                </div>
+
+
                             </div>
                         </div>
-
-                        <div class="col-xl-4 col-lg-6 col-md-6">
-                            <div class="row CourseBorder">
-                                <div class="row">
-                                    <img src="Images/FC_Course5.png" class="mx-auto d-block courseImg1" />
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-5 my-auto">
-                                        <img src="Images/FT_Tutor6.png" class="FC_TtrImg" />
-                                    </div>
-                                    <div class="col-7 my-auto">
-                                        <h5 class="TutorNames">Charlotte Ava</h5>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <h4 style="margin-top: 2rem">
-                                        How to do Business Location
-                                    </h4>
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-6">
-                                        <button class="btn btnSecond btn-sm btnFont">
-                                            <span>Enroll Now</span>
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <span>4,500+ enrolled</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <p class="CourseLevel">Difficulty: Intermediate</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endfor
                 </div>
-                <br /><br />
 
-                <div class="col text-center">
-                    <button class="btn btnSecond btn-lg btnFont">Load More</button>
-                </div>
-                <br />
+
             </div>
         </div>
         <my-footer></my-footer>

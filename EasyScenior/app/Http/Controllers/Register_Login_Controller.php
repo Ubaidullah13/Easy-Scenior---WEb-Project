@@ -94,17 +94,24 @@ class Register_Login_Controller extends Controller
             //echo "You are logged in Successfully";
 
             //storing data in session
-            $req->session()->put('username',$result[0]->username);
+            $req->session()->put('user',['username' => $result[0]->username, 'status'=> $result[0]->status , 'fullname'=> $result[0]->fullname ]);
 
-
-            //checking student status
+            $path = $req->path();
+            //echo $path;
+            //checking user status
             if($result[0]->status=="student"){ 
-                return view('starter Dashboard');
+               
+                return redirect('/StudentDashboard');
             }
-            else{ 
-                return redirect('/');
+            else if($result[0]->status=="tutor"){
+
+                return redirect('/TutorDashboard');
+            }
+            else if($result[0]->status=="admin"){ 
+                return redirect('/AdminDashboard');
             }
             }
+
             else{
             $req->session()->flash('error','Password Incorrect!!!');
             echo "Email Does not Exist.";

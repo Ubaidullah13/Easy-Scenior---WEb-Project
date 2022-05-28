@@ -69,6 +69,11 @@ header {
 #hide {
     display: none;
 }
+a.hide:hover {
+    background-color: #f4f4f9;
+    cursor: default;
+}
+
 @media (max-width: 768px) {
     #menus {
         display: none;
@@ -95,6 +100,10 @@ header {
     #logout {
         height: 50px;
         width: 50px;
+    }
+    a.hide:hover {
+        background-color: #f4f4f9;
+        cursor: pointer;
     }
 }
 
@@ -195,5 +204,37 @@ header {
     }
 }
 
-/*////////////////////// Session  ///////////////////////*/
+/*////////////////////// Tutor details  ///////////////////////*/
+.Timg {
+    border-radius: 50%;
+    width: 100px;
+    height: auto;
+    z-index: 5;
+    position: relative;
+    margin-top: 3em;
+}
+.card {
+    background-color: #9ec5c5;
+    margin: 2em 1em;
+    margin-top: -1em;
+    padding: 2em;
+}
+a {
+    text-decoration: none;
+}
 
+.Cimg {
+    width: 200px;
+    height: auto;
+    z-index: 5;
+    position: relative;
+    margin-top: 3em;
+}
+.quote {
+    margin-top: 1em;
+    width: 30px;
+    height: auto;
+}
+#R {
+    display: none;
+}
