@@ -25,4 +25,11 @@ class FindTutorController extends Controller
         $FT = compact('TutorDetails');
         return view('IndividualTutorD')->with($FT);
     }
+
+    public function singleTutor($name){
+        $TutorDetails = FindTutor::where('tutorusername',$name)->get();
+        $FT = compact('TutorDetails');
+        return view('SingleTutor')->with($FT);
+    }
+    
 }

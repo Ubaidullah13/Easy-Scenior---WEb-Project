@@ -37,6 +37,7 @@ class Register_Login_Controller extends Controller
         $users->username = $data['username'];
         $users->email = $data['email'];
         $encrypted_password = crypt::encrypt($data['password']);
+        $users->wallet = $data['balance'];
         $users->password = $encrypted_password;
         $users->status = "student";
 
@@ -94,7 +95,7 @@ class Register_Login_Controller extends Controller
             //echo "You are logged in Successfully";
 
             //storing data in session
-            $req->session()->put('user',['username' => $result[0]->username, 'status'=> $result[0]->status , 'fullname'=> $result[0]->fullname ]);
+            $req->session()->put('user',['username' => $result[0]->username]);
 
             $path = $req->path();
             //echo $path;

@@ -26,4 +26,10 @@ public function CourseDetails($id){
     return view('IndividualCoursesD')->with($CD);
 }
 
+public function singleCourse($id){
+    $CourseDetails = Courses::where('course_id',$id)->get();
+    $CD = compact('CourseDetails');
+    return view('SingleCourse')->with($CD);
+}
+
 }

@@ -42,16 +42,27 @@
             </div>
         </header>
 
+
+        @php
+            use App\Models\Users;
+            $fullname = Users::SELECT('fullname')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+            $status = Users::SELECT('status')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+        @endphp
+
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
                         <img src="Images/users/st (3).png" class="profile_image" alt="">
                         <h4>
-                        {{Session::get('user')['fullname']}}
+                            {{ $fullname[0]->fullname }}
                         </h4>
                         <p>
-                        {{ Str::upper(Session::get('user')['status']) }}
+                            {{ Str::upper($status[0]->status) }}
                         </p>
 
                         <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
@@ -65,7 +76,7 @@
                         <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
                         <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
                         <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
+                        <a href="/BecomeTutor"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
                         <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>

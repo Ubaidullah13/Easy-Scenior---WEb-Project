@@ -23,10 +23,11 @@
     <link rel="stylesheet" href="css/FindATutor.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
     <title>Find Tutor</title>
 
-  
 
 </head>
 
@@ -113,26 +114,30 @@
                             <span id="RSmall">Saved</span>
                         </button> --}}
                     </div>
-
+                    @php
+                        $len = count($findTutor);
+                    @endphp
                     <div class="col-4">
                         <div class="input-group">
-                            <input type="text"name ="searchForm" class="form-control label" id="searchForm" placeholder="Search "
-                                aria-label="Search Tutor" aria-describedby="search_category" />
+                            <input type="text" name="searchForm" class="form-control label" id="searchForm"
+                                placeholder="Search " aria-label="Search Tutor" aria-describedby="search_category"
+                                onkeyup="myFunction('{{ $len }}')" />
                             <button class="btn" type="button" id="search_category">
                                 <img src="Images/search.svg" alt="search" id="SearchImgSmall" />
                             </button>
                         </div>
-                    
+
                     </div>
                 </div>
 
-                <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Online Tutors for private
+                <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Online Tutors for
+                    private
                     lessons</h3>
                 @php
                     use App\Models\Users;
                     use App\Models\Categories;
                 @endphp
-                <div class="row">
+                <div class="row" id="myUL">
                     <!-- First Row -->
                     @for ($i = 0; $i < count($findTutor); $i++)
                         @php
@@ -150,23 +155,29 @@
                                 ->get();
                             
                         @endphp
-                        <div class="col-xl-6 col-md-12 col-sm-12">
-                            <div class="row TutorBorder">
-                                <!--here-->
+                        <div class="col-xl-6 col-md-12 col-sm-12" id="{{ $i }}">
+                            <span class="li">
+                                <div class="row TutorBorder">
+                                    <!--here-->
 
-                                <div class="col-12 col-sm-5 my-auto text-center">
-                                    <img src="Images/users/{{ $img[0]->userImage }}" class="TutorImage" />
+                                    <div class="col-12 col-sm-5 my-auto text-center">
+                                        <img src="Images/users/{{ $img[0]->userImage }}" class="TutorImage" />
+                                    </div>
+                                    <div class="col-12 col-sm-7 cen">
+                                        <br />
+                                        <a href="/singleTutor/{{ $findTutor[$i]->tutorusername }}"
+                                            class="click">
+                                            <h4>{{ $fullName[0]->fullname }}</h4>
+                                        </a>
+                                        <h5 class="SingleCard">{{ $major[0]->cat_name }}</h5>
+                                        <p>{{ $findTutor[$i]->institute }}</p>
+                                        <span class="label" style="color: #f6a2bc">Rating: 5 stars</span>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-7 cen">
-                                    <br />
-                                    <a href="" class="click"><h4>{{ $fullName[0]->fullname }}</h4></a>
-                                    <h5>{{ $major[0]->cat_name }}</h5>
-                                    <p>{{ $findTutor[$i]->institute }}</p>
-                                    <span class="label" style="color: #f6a2bc">Rating: 5 stars</span>
-                                </div>
-                            </div>
+                            </span>
                         </div>
                     @endfor
+
                     <!-- Row End -->
                 </div>
 
@@ -178,12 +189,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
-        
+
         <script src="Js/main.js"></script>
+        <script src="Js/search.js"></script>
         <!-- Link JS Here-->
 </body>
 
 </html>
-
-
-

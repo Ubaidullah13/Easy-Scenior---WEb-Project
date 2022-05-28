@@ -109,11 +109,14 @@
                             <span id="RSmall">Saved</span>
                         </button> --}}
                     </div>
-
+                    @php
+                        $len = count($findCourse);
+                    @endphp
                     <div class="col-4">
                         <div class="input-group">
                             <input type="text" class="form-control label" id="searchForm" placeholder="Search "
-                                aria-label="Search Tutor" aria-describedby="search_category" />
+                                aria-label="Search Tutor" aria-describedby="search_category"
+                                onkeyup="myFunction('{{ $len }}')" />
                             <button class="btn" type="button" id="search_category">
                                 <img src="Images/search.svg" alt="search" id="SearchImgSmall" />
                             </button>
@@ -128,7 +131,7 @@
                     use App\Models\St_Enrolled_Courses;
                 @endphp
 
-                <div class="row">
+                <div class="row" id="myUL">
                     <!-- First Row -->
                     @for ($i = 0; $i < count($findCourse); $i++)
                         @php
@@ -149,41 +152,46 @@
                             
                         @endphp
 
-                        <div class="col-xl-4 col-lg-6 col-md-6">
-                            <div class="row CourseBorder">
-                                <div class="row">
-                                    <img src="Images/{{ $findCourse[$i]->coverpic }}"
-                                        class="mx-auto d-block courseImg1" />
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-5 my-auto">
-                                        <img src="Images/users/{{ $img[0]->userImage }}" class="FC_TtrImg" />
+                        <div class="col-xl-4 col-lg-6 col-md-6" id="{{ $i }}">
+                            <span class="li">
+                                <div class="row CourseBorder">
+                                    <div class="row">
+                                        <img src="Images/{{ $findCourse[$i]->coverpic }}"
+                                            class="mx-auto d-block courseImg1" />
                                     </div>
-                                    <div class="col my-auto">
-                                        <h5 class="TutorNames">{{ $fullName[0]->fullname }} </h5>
+
+                                    <div class="row" style="margin-top: 2rem">
+                                        <div class="col-5 my-auto">
+                                            <img src="Images/users/{{ $img[0]->userImage }}" class="FC_TtrImg" />
+                                        </div>
+                                        <div class="col my-auto">
+                                            <h5 class="TutorNames">{{ $fullName[0]->fullname }} </h5>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <h4 style="margin-top: 2rem">
-                                        {{ $findCourse[$i]->coursename }}
-                                    </h4>
-                                </div>
-
-                                <div class="row" style="margin-top: 2rem">
-                                    <div class="col-6">
-                                        <button class="btn btnSecond btn-sm btnFont">
-                                            <span>See Details</span>
-                                        </button>
+                                    <div class="row">
+                                        <a href="/singleCourse/{{ $findCourse[$i]->course_ID }}"
+                                            class="click">
+                                            <h4 style="margin-top: 2rem" class="SingleCard">
+                                                {{ $findCourse[$i]->coursename }}
+                                            </h4>
+                                        </a>
                                     </div>
-                                    <div class="col-6">
-                                        <span>{{ $St_count }} Enrolled</span>
+
+                                    <div class="row" style="margin-top: 2rem">
+                                        <div class="col-6">
+                                            <button class="btn btnSecond btn-sm btnFont">
+                                                <span>See Details</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-6">
+                                            <span>{{ $St_count }} Enrolled</span>
+                                        </div>
                                     </div>
+
+
                                 </div>
-
-
-                            </div>
+                            </span>
                         </div>
                     @endfor
                 </div>
@@ -199,6 +207,7 @@
     </script>
 
     <script src="Js/main.js"></script>
+    <script src="Js/search.js"></script>
     <!-- Link JS Here-->
 </body>
 

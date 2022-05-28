@@ -169,7 +169,7 @@ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+
 
                                 <div class="input-group input-grp">
                                     <input id="comment" name="comment" class="input" required=""
-                                        autocomplete="off" style="line-height: 7em"></input>
+                                        autocomplete="off" style="padding-bottom:5em"></input>
                                     <label class="user-label">Message</label>
                                 </div>
                             </div>

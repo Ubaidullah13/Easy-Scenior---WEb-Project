@@ -171,6 +171,18 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            <div class="mb-4 mt-4">
+                                <div class="input-group input-grp">
+                                    <input type="number" class="input" required="" autocomplete="off" id="balance"
+                                        name="balance" value="{{ old('balance') }}" />
+                                    <label class="user-label">Balance</label>
+                                </div>
+                                @error('balance')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="mb-4">
                                 <div class="input-group input-grp">
                                     <input type="file" class="input" autocomplete="off" id="image"
@@ -178,6 +190,8 @@
                                     <label class="user-label">Upload Image</label>
                                 </div>
                             </div>
+
+                            
 
                             <button type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup">
                                 Create Account

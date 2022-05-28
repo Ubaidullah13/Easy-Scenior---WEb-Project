@@ -25,6 +25,15 @@
     width: 1vw;
     height: 2vh;
 }
+.click {
+    transition: 500ms;
+    text-decoration: none;
+}
+.click:hover h4 {
+    color: #1c4a4a;
+    transition: 500ms;
+    text-decoration: none;
+}
 
 @media only screen and (max-width: 768px) {
     #RSmall {

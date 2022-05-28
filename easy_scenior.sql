@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 28, 2022 at 04:00 PM
+-- Generation Time: May 28, 2022 at 07:37 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -467,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `userImage` varchar(255) DEFAULT NULL,
   `status` varchar(20) NOT NULL,
-  `wallet` int(10) NOT NULL,
+  `wallet` int(10) NOT NULL DEFAULT '0',
   `updated_at` timestamp NOT NULL,
   `created_at` timestamp NOT NULL,
   PRIMARY KEY (`username`),

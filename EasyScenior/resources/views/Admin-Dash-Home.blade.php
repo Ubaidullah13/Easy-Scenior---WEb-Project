@@ -42,18 +42,28 @@
             </div>
         </header>
 
+
+        @php
+            use App\Models\Users;
+            $fullname = Users::SELECT('fullname')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+            $status = Users::SELECT('status')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+        @endphp
+
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
                         <img src="Images/users/st (3).png" class="profile_image" alt="">
                         <h4>
-                        {{Session::get('user')['fullname']}}
-
+                        {{ $fullname[0]->fullname }}
                         </h4>
 
                         <p>
-                        {{ Str::upper(Session::get('user')['status']) }}
+                            {{ Str::upper($status[0]->status) }}
                         </p>
                         <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
 
@@ -73,8 +83,8 @@
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
-                     
-                <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Mails</h3>
+
+                    <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Mails</h3>
 
                     <div class="row">
                         <div class="col">
@@ -90,20 +100,20 @@
 
                     <!-- Session -->
                     <div style="margin: 2em 0em"></div>
-                      @for ($i = 0; $i < count($contact); $i++)
-                    <div class="row">
+                    @for ($i = 0; $i < count($contact); $i++)
+                        <div class="row">
 
-                        <div class="col">
-                            <p>{{ $contact[$i]->name }}</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ $contact[$i]->subject }}</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ $contact[$i]->message }}</p>
-                        </div>
+                            <div class="col">
+                                <p>{{ $contact[$i]->name }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ $contact[$i]->subject }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ $contact[$i]->message }}</p>
+                            </div>
 
-                    </div>
+                        </div>
                     @endfor
 
                 </div>

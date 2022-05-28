@@ -15,7 +15,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\FindATutor;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\BecomeTutor;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,12 +112,14 @@ Route::get('/logout',function(){
 
 Route::get('/DashTutors', [FindTutorController::class,'DashView']);
 Route::get('/DashTutorsDetails/{name}', [FindTutorController::class,'TutorDetails']);
+Route::get('/singleTutor/{name}', [FindTutorController::class,'singleTutor']);
 // Route::get('/DashTutorsDetails/{name}',function($name){
 //     return view('IndividualTutorD');
 //     });
 
 Route::get('/DashCourses', [CoursesController::class,'DashView']);
 Route::get('/DashCourseDetails/{id}', [CoursesController::class,'CourseDetails']);
+Route::get('/singleCourse/{id}', [CoursesController::class,'singleCourse']);
 
 Route::get('/DashSessions',function(){
     return view('UpSession');
@@ -140,7 +142,15 @@ Route::get('/FindATutor', [FindATutor::class, 'index']);
 Route::get('/FindATutor/action', [FindATutor::class, 'action']);
 
 Route::post('/getmsg/{name}',[AjaxController::class, 'view']);
+Route::post('/getPkg/{id}',[AjaxController::class, 'PKG']);
 
 Route::get('/AdminDashboard', [AdminController::class,'Mailview'])->middleware('customAuth');
 
+
 Route::get('/AdminDashboard/user', [AdminController::class,'Userview'])->middleware('customAuth');
+
+Route::get('/BecomeTutor', function () {
+    return view('BecomeATutor');
+});
+
+Route::post('/BecomeTutor/{name}', [BecomeTutor::class,'update']);

@@ -7,6 +7,7 @@
 .CourseBorder {
     border: 3px solid rgba(96, 81, 81, 0.105);
     padding-top: 2rem;
+    padding-bottom: 2rem;
     margin-right: 1rem;
     margin-top: 2rem;
     border-radius: 15px;
@@ -31,6 +32,15 @@ h4 {
     /* margin-top: 1.5rem; */
     margin-left: -2.5rem;
     margin-bottom: 0rem;
+}
+.click {
+    transition: 500ms;
+    text-decoration: none;
+}
+.click:hover h4 {
+    color: #1c4a4a;
+    transition: 500ms;
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 768px) {

@@ -41,22 +41,31 @@
                 </div>
             </div>
         </header>
-
+        @php
+            use App\Models\Users;
+            $fullname = Users::SELECT('fullname')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+            $status = Users::SELECT('status')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+        @endphp
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
                         <img src="Images/users/st (3).png" class="profile_image" alt="">
                         <h4>
-                           {{Session::get('user')['fullname']}}
+                            {{ $fullname[0]->fullname }}
                         </h4>
 
-                        <p>   {{ Str::upper(Session::get('user')['status']) }} <p>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <p> {{ Str::upper($status[0]->status) }}
+                        <p>
+                            <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
 
-                            <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
-                            </i>
-                        </a>
+                                <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
+                                </i>
+                            </a>
                     </div>
                     <div id="menus">
                         <a class="active" href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>

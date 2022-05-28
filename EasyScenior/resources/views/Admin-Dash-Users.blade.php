@@ -18,24 +18,45 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link href='css/DashboardGlobal.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link href="{{ asset('css/DashboardGlobal.css') }}" rel='stylesheet'>
+
+
+    <style>
+        .Image {
+            border-radius: 50%;
+            height: auto;
+            width: 60px;
+        }
+
+    </style>
 </head>
 
 <body class='snippet-body'>
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
+        @php
+            use App\Models\Users;
+            $fullname = Users::SELECT('fullname')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+            $status = Users::SELECT('status')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
+        @endphp
+
         <header>
             <div class="row">
                 <div class="col my-auto">
                     {{-- <label for="check">
                     <i class="fas fa-bars" id="sidebar_btn"></i>
                 </label> --}}
-                    <img src=" Images/logo.png" id="logo" />
+                    <img src=" {{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="{{ asset('logout') }}" id="logout"><button type="button"
+                            class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
@@ -46,14 +67,14 @@
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/st (3).png') }}" class="profile_image" alt="">
                         <h4>
-                        {{Session::get('user')['fullname']}}
+                            {{ $fullname[0]->fullname }}
 
                         </h4>
 
                         <p>
-                        {{ Str::upper(Session::get('user')['status']) }}
+                            {{ Str::upper($status[0]->status) }}
                         </p>
                         <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
 
@@ -62,23 +83,23 @@
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-envelope"></i><span>Mails</span></a>
+                        <a href="#"><i class="fas fa-envelope"></i><span>Mails</span></a>
                         <a href="#"><i class="fas fa-question"></i><span>Add FAQs</span></a>
                         <a href="#"><i class="fas fa-eject"></i><span>Edit Home</span></a>
                         <a href="#"><i class="fas fa-info"></i><span>Edit About</span></a>
-                        <a href="#"><i class="fas fa-user"></i><span>Edit Users</span></a>
+                        <a class="active" href="#"><i class="fas fa-user"></i><span>View Users</span></a>
                     </div>
                 </div>
             </div>
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
-                     
-                <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Mails</h3>
+
+                    <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">User Data</h3>
 
                     <div class="row">
-                    <div class="col">
-                            <h5>Email</h5>
+                        <div class="col">
+                            <h5>Profile Picture</h5>
                         </div>
                         <div class="col">
                             <h5>Username</h5>
@@ -89,24 +110,43 @@
                         <div class="col">
                             <h5>Email</h5>
                         </div>
+                        <div class="col">
+                            <h5>Status</h5>
+                        </div>
+                        <div class="col">
+                            <h5>Balance</h5>
+                        </div>
+
                     </div>
 
                     <!-- Session -->
                     <div style="margin: 2em 0em"></div>
-                      @for ($i = 0; $i < count($contact); $i++)
-                    <div class="row">
+                    @for ($i = 0; $i < count($user); $i++)
+                        @if ($user[$i]->status != 'admin')
+                            <div class="row" style="margin:2em 0em;">
 
-                        <div class="col">
-                            <p>{{ $contact[$i]->name }}</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ $contact[$i]->subject }}</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ $contact[$i]->message }}</p>
-                        </div>
+                                <div class="col my-auto">
+                                    <img src="{{ asset('Images/Users/' . $user[$i]->userImage) }} "
+                                        class="Image">
+                                </div>
+                                <div class="col">
+                                    <p>{{ $user[$i]->username }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ $user[$i]->fullname }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ $user[$i]->email }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ $user[$i]->status }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ $user[$i]->wallet }}</p>
+                                </div>
 
-                    </div>
+                            </div>
+                        @endif
                     @endfor
 
                 </div>
