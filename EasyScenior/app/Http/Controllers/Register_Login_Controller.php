@@ -25,6 +25,8 @@ class Register_Login_Controller extends Controller
         ->ORwhere('username',$req->input('username'))
         ->get();
 
+        
+
         $res = json_decode($result,true);
         print_r($res);
         
@@ -59,6 +61,11 @@ class Register_Login_Controller extends Controller
 
         // Login
         function login(Request $req){
+          
+            // $userData=Users::all();
+            // $dashboardData = compact('userData');
+
+
             $validatedData = $req->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -67,9 +74,12 @@ class Register_Login_Controller extends Controller
             $result = DB::table('user')
             ->where('email',$req->input('email'))
             ->get();
+
+            $dashboardData = compact('result');
+
             
             $res = json_decode($result,true);
-            print_r($res);
+            //print_r($res);
             
             if(sizeof($res)==0){
             $req->session()->flash('error','Email does not exist. Please register yourself first');
@@ -77,14 +87,23 @@ class Register_Login_Controller extends Controller
             return redirect('login');
             }
             else{
-            echo "Hello";
+            //echo "Hello";
             $encrypted_password = $result[0]->password;
             $decrypted_password = crypt::decrypt($encrypted_password);
             if($decrypted_password==$req->input('password')){
-            echo "You are logged in Successfully";
-            // $req->session()->put('Users',$result[0]->name);
-            return redirect('/');
-            echo "You are logged in Successfully";
+            //echo "You are logged in Successfully";
+
+            //storing data in session
+            $req->session()->put('username',$result[0]->username);
+
+
+            //checking student status
+            if($result[0]->status=="student"){ 
+                return view('starter Dashboard');
+            }
+            else{ 
+                return redirect('/');
+            }
             }
             else{
             $req->session()->flash('error','Password Incorrect!!!');

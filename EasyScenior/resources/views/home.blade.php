@@ -29,7 +29,7 @@
     <title>Easy Scenior - Home</title>
 </head>
 
-<body onload="animateValue(0, {{ count($home) + 1 }}, 1000)">
+<body onload="animateValue(0, {{ count($home) + 1 }}, 500)">
     <!-- Navigation -->
     <nav class="navigation">
         <div class="logo"><a href="Home"><img src="Images/logo.png" /></a></div>

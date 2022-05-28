@@ -2,12 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Users;
+use App\Models\Contact;
+use App\Models\ContactDetails;
 use App\Http\Controllers\Register_Login_Controller;
 use App\Http\Controllers\User;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FindTutorController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +26,8 @@ Route::get('/starter', function () {
     return view('starter');
 });
 
+
+
 Route::get('/', [HomeController::class,'view']);
 Route::get('/Home', [HomeController::class,'view']);
 
@@ -33,9 +39,9 @@ Route::get('/Find Tutor', [FindTutorController::class,'view']);
 
 Route::get('/faqs', [FaqController::class,'view']);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/contact', [ContactController::class,'view']);
+Route::post('/contact', [ContactController::class,'ContactInfo']);
+
 Route::get('/contactThanks', function () {
     return view('contactThanks');
 });
@@ -51,7 +57,8 @@ Route::get('/FindCourse', function () {
 // Register and Login
 Route::get('/login', function () {
     return view('login');
-});
+})->middleware('customAuth');
+
 Route::get('/register', function () {
     return view('register');
 });
@@ -66,6 +73,57 @@ Route::get('/user',function(){
     print_r($users->toArray());
 });
 
+
+
+//protected -- user can't access it without login
 Route::get('/st',function(){
     return view('stDashboard');
 });
+
+
+Route::get('/no-access', function()
+{
+     echo "You are not allowed to access the page";
+     echo "<br>";
+     echo "<a href='\'> Go to Home Page </a>";
+     die;
+});
+
+Route::get('/Goback-Dashboard', function()
+{
+     echo "You are already logged in";
+     echo "<br>";
+     echo "<a href='\sDash'> Go back to your DashBoard </a>";
+     die;
+});
+
+
+Route::get('/sDash', function()
+{
+    return view('starter Dashboard');
+})->middleware('customAuth');
+
+Route::get('/logout',function(){
+    session()->forget('username');
+    return redirect('/');
+});
+
+
+Route::get('/DashTutors', [FindTutorController::class,'DashView']);
+
+Route::get('/DashCourses',function(){
+return view('Dash-courses');
+});
+Route::get('/DashSessions',function(){
+    return view('UpSession');
+    });
+
+Route::get('/TutorDashboard',function(){
+        return view('Tutor-Dash-Home');
+        });
+Route::get('/StudentDashboard',function(){
+            return view('St-Dash-Home');
+            });
+Route::get('/AdminDashboard',function(){
+                return view('Admin-Dash-Home');
+                });

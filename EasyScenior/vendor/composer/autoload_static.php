@@ -55,6 +55,7 @@ class ComposerStaticInitf4060377ca26bcec1b4b6584c0bc816f
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
+            'Thiagoprz\\CompositeKey\\' => 23,
             'Tests\\' => 6,
         ),
         'S' => 
@@ -200,6 +201,10 @@ class ComposerStaticInitf4060377ca26bcec1b4b6584c0bc816f
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
+        ),
+        'Thiagoprz\\CompositeKey\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/thiagoprz/eloquent-composite-key/src',
         ),
         'Tests\\' => 
         array (
@@ -518,7 +523,13 @@ class ComposerStaticInitf4060377ca26bcec1b4b6584c0bc816f
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AboutController' => __DIR__ . '/../..' . '/app/Http/Controllers/AboutController.php',
+        'App\\Http\\Controllers\\ContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\FaqController' => __DIR__ . '/../..' . '/app/Http/Controllers/FaqController.php',
+        'App\\Http\\Controllers\\FindTutorController' => __DIR__ . '/../..' . '/app/Http/Controllers/FindTutorController.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\Register_Login_Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Register_Login_Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -528,6 +539,16 @@ class ComposerStaticInitf4060377ca26bcec1b4b6584c0bc816f
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Middleware\\customAuth' => __DIR__ . '/../..' . '/app/Http/Middleware/customAuth.php',
+        'App\\Models\\About' => __DIR__ . '/../..' . '/app/Models/About.php',
+        'App\\Models\\Blog' => __DIR__ . '/../..' . '/app/Models/Blog.php',
+        'App\\Models\\Categories' => __DIR__ . '/../..' . '/app/Models/Categories.php',
+        'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
+        'App\\Models\\ContactDetails' => __DIR__ . '/../..' . '/app/Models/ContactDetails.php',
+        'App\\Models\\Faq' => __DIR__ . '/../..' . '/app/Models/Faq.php',
+        'App\\Models\\FindTutor' => __DIR__ . '/../..' . '/app/Models/FindTutor.php',
+        'App\\Models\\Home' => __DIR__ . '/../..' . '/app/Models/Home.php',
+        'App\\Models\\Testimonials' => __DIR__ . '/../..' . '/app/Models/Testimonials.php',
         'App\\Models\\Users' => __DIR__ . '/../..' . '/app/Models/Users.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -5488,6 +5509,7 @@ class ComposerStaticInitf4060377ca26bcec1b4b6584c0bc816f
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
+        'Thiagoprz\\CompositeKey\\HasCompositeKey' => __DIR__ . '/..' . '/thiagoprz/eloquent-composite-key/src/HasCompositeKey.php',
         'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Processor.php',

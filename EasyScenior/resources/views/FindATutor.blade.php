@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col-12 col-sm-7 cen">
                                     <br />
-                                    <h4>{{ $fullName[0]->fullname }}</h4>
+                                    <a href="" class="click"><h4>{{ $fullName[0]->fullname }}</h4></a>
                                     <h5>{{ $major[0]->cat_name }}</h5>
                                     <p>{{ $findTutor[$i]->institute }}</p>
                                     <span class="label" style="color: #f6a2bc">Rating: 5 stars</span>

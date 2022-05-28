@@ -95,7 +95,7 @@
                 <h4 class="contactHeading"> We will get in touch with you very soon! </h4>
 
                 <button name="home" type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup"> <a
-                        href="home" class="HomeLink">Home </a></button>
+                        href="Home" class="HomeLink"> Home </a></button>
                 <br />
             </div>
         </div>

@@ -1,3 +1,12 @@
+.click {
+    transition: 500ms;
+    text-decoration: none;
+}
+.click:hover h4 {
+    color: #1c4a4a;
+    transition: 500ms;
+    text-decoration: none;
+}
 .TutorBorder {
     border: 3px solid rgba(96, 81, 81, 0.105);
     padding-top: 2rem;

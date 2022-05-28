@@ -102,7 +102,7 @@ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+
                                     </div>
                                     <div class=" col-md col-xl col-lg ">
                                         <h4>Phone No.</h4>
-                                        516754329
+                                        {{ $contactDet[0]->phone_no }}
                                     </div>
                                 </div>
 
@@ -114,7 +114,7 @@ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+
                                     </div>
                                     <div class="col-md col-xl col-lg">
                                         <h4>Email</h4>
-                                        Info@gmail.com
+                                        {{ $contactDet[0]->email }}
                                     </div>
                                 </div>
 
@@ -125,18 +125,18 @@ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+
                                         <img src="Images/ContactAddr.png" />
                                     </div>
                                     <div class="col-md col-xl col-lg">
-                                        <h4>AddImagess</h4>
-                                        Office # 02, Block I, NUST
+                                        <h4>Address</h4>
+                                        {{ $contactDet[0]->address }}
                                     </div>
                                 </div>
-
                                 <hr />
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-lg-6">
-                        <form class="contactright" action="contactAdd.php" method="post">
+                        <form class="contactright" action="contact" method="post">
+                            @csrf
                             <h3>Get in Touch With Us</h3>
                             <div class="mb-4 mt-4">
 

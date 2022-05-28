@@ -12,4 +12,11 @@ class FindTutorController extends Controller
         $FT = compact('findTutor');
         return view('FindATutor')->with($FT);
     }
+
+    public function DashView(){
+        $findTutor = FindTutor::inRandomOrder()->get();
+
+        $FT = compact('findTutor');
+        return view('Dash-Tutors')->with($FT);
+    }
 }
