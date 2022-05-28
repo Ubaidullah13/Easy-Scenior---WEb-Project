@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 28, 2022 at 06:43 AM
+-- Generation Time: May 28, 2022 at 04:00 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -131,15 +131,28 @@ INSERT INTO `contact_details` (`phone_no`, `email`, `address`) VALUES
 
 DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
-  `course_ID` int(11) NOT NULL,
+  `course_ID` int(11) NOT NULL AUTO_INCREMENT,
   `coursename` varchar(100) NOT NULL,
   `desc` text NOT NULL,
   `price` int(11) NOT NULL,
   `tutorname` varchar(20) NOT NULL,
   `coverpic` varchar(255) NOT NULL,
-  PRIMARY KEY (`course_ID`),
+  `duration` varchar(50) NOT NULL,
+  `lectures` int(10) NOT NULL,
+  PRIMARY KEY (`course_ID`) USING BTREE,
   KEY `fk_Course_TutorName` (`tutorname`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`course_ID`, `coursename`, `desc`, `price`, `tutorname`, `coverpic`, `duration`, `lectures`) VALUES
+(1, 'Web Development Full Course', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1000, 'Emma_Olivia', 'FC_Course1.png', '2 Hr 30min', 5),
+(2, 'Web Development for Beginners', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 500, 'Emma_Olivia', 'FC_Course2.png', '8 Hr', 8),
+(3, 'Flutter Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1200, 'Noah', 'FC_Course3.png', '12 Hr 45 min', 10),
+(4, 'Learn Next Js and land your dream job', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1500, 'Elijah13', 'FC_Course4.png', '5 hr 10 min', 7),
+(5, 'How to do business Analytics', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2000, 'Ava', 'FC_Course5.png', '1 Hr', 2);
 
 -- --------------------------------------------------------
 
@@ -149,10 +162,21 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 DROP TABLE IF EXISTS `course_ratings`;
 CREATE TABLE IF NOT EXISTS `course_ratings` (
-  `course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
   `ratings` int(11) NOT NULL,
   PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course_ratings`
+--
+
+INSERT INTO `course_ratings` (`course_id`, `ratings`) VALUES
+(1, 4),
+(2, 3),
+(3, 4),
+(4, 4),
+(5, 5);
 
 -- --------------------------------------------------------
 
@@ -170,7 +194,17 @@ CREATE TABLE IF NOT EXISTS `cust_review_to_tutor` (
   PRIMARY KEY (`rvw_id`),
   KEY `fk_rev_Username` (`student`),
   KEY `fk_rev_tutor` (`tutor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cust_review_to_tutor`
+--
+
+INSERT INTO `cust_review_to_tutor` (`rvw_id`, `student`, `tutor`, `content`, `rating`) VALUES
+(1, 'Smiith', 'Ava', 'Wonderfull! Answeres all my queries, I have no doubts left. Recommended.', 4),
+(2, 'Mariia', 'Ava', 'Wow! what an excellent service, I love it! This is simply unbelievable! It fits my needs perfectly', 5),
+(3, 'Emilia', 'Ava', 'I score the highest marks in the exams because of you ma\'am, Thank you so much!', 5),
+(4, 'Smiith', 'Elijah13', 'Thank Your sir, you help a lot.', 4);
 
 -- --------------------------------------------------------
 
@@ -351,7 +385,17 @@ CREATE TABLE IF NOT EXISTS `student_enrolled_in_course` (
   PRIMARY KEY (`enrolledID`),
   KEY `fk_enroll_st` (`st_username`),
   KEY `fk_enroll_Course` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_enrolled_in_course`
+--
+
+INSERT INTO `student_enrolled_in_course` (`enrolledID`, `st_username`, `course_id`) VALUES
+(1, 'Smiith', 4),
+(2, 'Emilia', 3),
+(3, 'Mariia', 3),
+(4, 'Lucas', 1);
 
 -- --------------------------------------------------------
 
@@ -403,11 +447,11 @@ CREATE TABLE IF NOT EXISTS `tutor` (
 --
 
 INSERT INTO `tutor` (`tutorusername`, `introduction`, `expertise`, `major`, `institute`, `video`) VALUES
-('Ava', '', '', 4, 'National University of Science & Technology', 'MOON KNIGHT.mp4'),
-('Elijah13', '', '', 2, 'Nescom', ''),
-('Emma_Olivia', '', '', 1, 'National University of Science & Technology', ''),
-('Noah', '', '', 3, 'National University of Science & Technology', ''),
-('Sara_Ali', '', '', 2, 'National University of Science & Technology', '');
+('Ava', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 4, 'National University of Science & Technology', ''),
+('Elijah13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 'Nescom', ''),
+('Emma_Olivia', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 'National University of Science & Technology', ''),
+('Noah', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 3, 'National University of Science & Technology', ''),
+('Sara_Ali', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 'National University of Science & Technology', '');
 
 -- --------------------------------------------------------
 
@@ -423,6 +467,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `userImage` varchar(255) DEFAULT NULL,
   `status` varchar(20) NOT NULL,
+  `wallet` int(10) NOT NULL,
   `updated_at` timestamp NOT NULL,
   `created_at` timestamp NOT NULL,
   PRIMARY KEY (`username`),
@@ -433,17 +478,17 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `fullname`, `email`, `password`, `userImage`, `status`, `updated_at`, `created_at`) VALUES
-('Admin', 'Admin', 'admin@gmail.com', 'eyJpdiI6IlJnN3Q3MlFMMS9pUERrT3p5T01rdnc9PSIsInZhbHVlIjoicVRIYjZTZ3pQS2Y3YUtUL1JJeHBpZz09IiwibWFjIjoiNTQyYjNjNWMzYmU5MDNkN2RiYmY0OGQ5MDI2Y2I1YzBmMzUxMjQzOWExMDYxZTg3ODliODhiYmU4NzUwMWE4NCIsInRhZyI6IiJ9', 'admin.jpg', 'admin', '2022-05-26 03:11:16', '2022-05-26 03:11:16'),
-('Ava', 'Charlotte Ava', 'ava@gmail.com', 'eyJpdiI6Ii9kSFljbi9aMmdkSmZBTHEzYjBkNVE9PSIsInZhbHVlIjoielo3bHQreDU5Um5Dcy9oNGhRenp0UT09IiwibWFjIjoiMTdmMjRjMDI4YTJkNzJiZmM4NTk1ODY4MDg4ODUyYmQ1Nzc4MDQ3MWI2YTI0YjgwNzkzOGFhMzE4YWFjMDIyNCIsInRhZyI6IiJ9', 'Ava.png', 'tutor', '2022-05-26 07:27:41', '2022-05-26 07:27:41'),
-('Elijah13', 'Elijah Liam', 'elijah@gmail.com', 'eyJpdiI6ImYvWmtCc1R4RTNtb01LYnRrV2pCSkE9PSIsInZhbHVlIjoiSVpwNGEvRlIrV1dER0srUnhWVTE3VkdXdUhVTkRwOW5TUmlaYWhXdzliST0iLCJtYWMiOiI0ODg1MDIzYTc4NDE1OWUzMDkzMjVhNjYyYTdiZjM0NWMzNmI4NTY0Mjg5ZjRiOTEwNmQ1ODBlM2ZlZDk3NmFiIiwidGFnIjoiIn0=', 'Elijah13.png', 'tutor', '2022-05-26 07:26:37', '2022-05-26 07:26:37'),
-('Emilia', 'Emilia', 'emilia@gmail.com', 'eyJpdiI6IkJucHJsZWZKQWVvenRZZ0g1Zm53Ync9PSIsInZhbHVlIjoicklEdVYxR3FqS2pxWk83djg1MjV4dz09IiwibWFjIjoiNjlmZjMwZWU5YmU2ZTc2NWZkN2NjZjA4NzgzNGI1Y2YxYjExZWY5MWQ4ZDBiNTY4NzA1ZjM3ZTA5YzkzNTE0NCIsInRhZyI6IiJ9', 'st (2).png', 'student', '2022-05-25 09:53:41', '2022-05-25 09:53:41'),
-('Emma_Olivia', 'Emma Olivia', 'emma@gmail.com', 'eyJpdiI6IjBNcWhlVnA3SWMxL3NlNkpaSmltWUE9PSIsInZhbHVlIjoiM05GYnVSSGxzTExDMXRDNXdkcWp0UT09IiwibWFjIjoiYTJiYWJkMWY2ZDQwMTJjNjllOTUxNjM5YTUzOTkxODBmOTNmOGE2YmM2NDU1NDg5ZTM1OTY1OGJkOWFmZjNmOCIsInRhZyI6IiJ9', 'Emma_Olivia.png', 'tutor', '2022-05-26 07:38:26', '2022-05-26 07:38:26'),
-('Lucas', 'Lucas Mare', 'lucas@gmail.com', 'eyJpdiI6Ijlzb29JYmtkUXZFZTlma0pVZ1ZnSlE9PSIsInZhbHVlIjoiUmw0cFpxYzdjMTdIQUJ5U1ZjQm1LUT09IiwibWFjIjoiN2UyY2I1ZWI2ZTQ1ZmRjN2JkOTE3NmZmMTM4MjVjYzk4NDk5ZGU0Mjk0M2QwMmQzNzA3NGI3NGM3MTIwYzlmNyIsInRhZyI6IiJ9', 'Lucas.png', 'student', '2022-05-26 07:28:13', '2022-05-26 07:28:13'),
-('Mariia', 'Maria David', 'maria1@gmail.com', 'eyJpdiI6IkhjaEswVTZuaUpMNHZOV1JWTlpGMFE9PSIsInZhbHVlIjoiMnZ1R3lybWpDaHRxMzAwLzB6YkROZz09IiwibWFjIjoiYzhjYzZmYTU5ODMxM2Y1MmNlZjM1M2UzNWMxNjk5MjUxN2I1NjhkMmFkMjk0NTJmNTcxMmM4OTBmNTNiODc3MCIsInRhZyI6IiJ9', 'st (3).png', 'student', '2022-05-25 12:46:44', '2022-05-25 12:46:44'),
-('Noah', 'Noah James', 'naoh@gmail.com', 'eyJpdiI6InNLRFlWLzhzbFRrWUsyK2xhUUV4OEE9PSIsInZhbHVlIjoiT3ZwMmVEVTF3WWYxa3hhTVNvUmw2UT09IiwibWFjIjoiZmJmMGQyNWU1MjU0ZGE3MTUxZWY3NmRkMjg0YmI5NzUyMGRlNTMzZDUyODg1NjhkY2M3ZDMyYWQyOGI5YTZiMyIsInRhZyI6IiJ9', 'Noah.png', 'tutor', '2022-05-26 07:25:11', '2022-05-26 07:25:11'),
-('Sara_Ali', 'Sara Ali', 'sara@gmail.com', 'eyJpdiI6IkVKUFNlVDl4QkIwMFloWEVDdEJXa1E9PSIsInZhbHVlIjoiVVJaaTJCSTRzQVkvOHJtRGRiU2xtUT09IiwibWFjIjoiYThkYjg3YzMxM2E4NzE4NGU4MGFhYjBlNTc4NmYyMDVhZTBmYWJhNzJkMzc5NGJkNmRkYjI0YWFlYThjZTdhNCIsInRhZyI6IiJ9', 'Default.png', 'tutor', '2022-05-26 08:11:04', '2022-05-26 08:11:04'),
-('Smiith', 'Smith Jones', 'smith@gmail.com', 'eyJpdiI6IjFoK0hRakFpSjdNV1EvUTlReWJvUmc9PSIsInZhbHVlIjoiS2N2ZEMvbExZczlDNUd4MHBWclBVQT09IiwibWFjIjoiOTk2OGZjYjc0MGZmY2VkMDU3Y2MxNDU1YzAyMzJmZTQ3MGJlNGJhODMzMmIzYWRlNzhlYjliZmM1MTk0N2Y4MSIsInRhZyI6IiJ9', 'st (1).png', 'student', '2022-05-25 09:51:51', '2022-05-25 09:51:51');
+INSERT INTO `user` (`username`, `fullname`, `email`, `password`, `userImage`, `status`, `wallet`, `updated_at`, `created_at`) VALUES
+('Admin', 'Admin', 'admin@gmail.com', 'eyJpdiI6IlJnN3Q3MlFMMS9pUERrT3p5T01rdnc9PSIsInZhbHVlIjoicVRIYjZTZ3pQS2Y3YUtUL1JJeHBpZz09IiwibWFjIjoiNTQyYjNjNWMzYmU5MDNkN2RiYmY0OGQ5MDI2Y2I1YzBmMzUxMjQzOWExMDYxZTg3ODliODhiYmU4NzUwMWE4NCIsInRhZyI6IiJ9', 'admin.jpg', 'admin', 5000, '2022-05-26 03:11:16', '2022-05-26 03:11:16'),
+('Ava', 'Charlotte Ava', 'ava@gmail.com', 'eyJpdiI6Ii9kSFljbi9aMmdkSmZBTHEzYjBkNVE9PSIsInZhbHVlIjoielo3bHQreDU5Um5Dcy9oNGhRenp0UT09IiwibWFjIjoiMTdmMjRjMDI4YTJkNzJiZmM4NTk1ODY4MDg4ODUyYmQ1Nzc4MDQ3MWI2YTI0YjgwNzkzOGFhMzE4YWFjMDIyNCIsInRhZyI6IiJ9', 'Ava.png', 'tutor', 7000, '2022-05-26 07:27:41', '2022-05-26 07:27:41'),
+('Elijah13', 'Elijah Liam', 'elijah@gmail.com', 'eyJpdiI6ImYvWmtCc1R4RTNtb01LYnRrV2pCSkE9PSIsInZhbHVlIjoiSVpwNGEvRlIrV1dER0srUnhWVTE3VkdXdUhVTkRwOW5TUmlaYWhXdzliST0iLCJtYWMiOiI0ODg1MDIzYTc4NDE1OWUzMDkzMjVhNjYyYTdiZjM0NWMzNmI4NTY0Mjg5ZjRiOTEwNmQ1ODBlM2ZlZDk3NmFiIiwidGFnIjoiIn0=', 'Elijah13.png', 'tutor', 2000, '2022-05-26 07:26:37', '2022-05-26 07:26:37'),
+('Emilia', 'Emilia', 'emilia@gmail.com', 'eyJpdiI6IkJucHJsZWZKQWVvenRZZ0g1Zm53Ync9PSIsInZhbHVlIjoicklEdVYxR3FqS2pxWk83djg1MjV4dz09IiwibWFjIjoiNjlmZjMwZWU5YmU2ZTc2NWZkN2NjZjA4NzgzNGI1Y2YxYjExZWY5MWQ4ZDBiNTY4NzA1ZjM3ZTA5YzkzNTE0NCIsInRhZyI6IiJ9', 'st (2).png', 'student', 8000, '2022-05-25 09:53:41', '2022-05-25 09:53:41'),
+('Emma_Olivia', 'Emma Olivia', 'emma@gmail.com', 'eyJpdiI6IjBNcWhlVnA3SWMxL3NlNkpaSmltWUE9PSIsInZhbHVlIjoiM05GYnVSSGxzTExDMXRDNXdkcWp0UT09IiwibWFjIjoiYTJiYWJkMWY2ZDQwMTJjNjllOTUxNjM5YTUzOTkxODBmOTNmOGE2YmM2NDU1NDg5ZTM1OTY1OGJkOWFmZjNmOCIsInRhZyI6IiJ9', 'Emma_Olivia.png', 'tutor', 11000, '2022-05-26 07:38:26', '2022-05-26 07:38:26'),
+('Lucas', 'Lucas Mare', 'lucas@gmail.com', 'eyJpdiI6Ijlzb29JYmtkUXZFZTlma0pVZ1ZnSlE9PSIsInZhbHVlIjoiUmw0cFpxYzdjMTdIQUJ5U1ZjQm1LUT09IiwibWFjIjoiN2UyY2I1ZWI2ZTQ1ZmRjN2JkOTE3NmZmMTM4MjVjYzk4NDk5ZGU0Mjk0M2QwMmQzNzA3NGI3NGM3MTIwYzlmNyIsInRhZyI6IiJ9', 'Lucas.png', 'student', 800, '2022-05-26 07:28:13', '2022-05-26 07:28:13'),
+('Mariia', 'Maria David', 'maria@gmail.com', 'eyJpdiI6IkhjaEswVTZuaUpMNHZOV1JWTlpGMFE9PSIsInZhbHVlIjoiMnZ1R3lybWpDaHRxMzAwLzB6YkROZz09IiwibWFjIjoiYzhjYzZmYTU5ODMxM2Y1MmNlZjM1M2UzNWMxNjk5MjUxN2I1NjhkMmFkMjk0NTJmNTcxMmM4OTBmNTNiODc3MCIsInRhZyI6IiJ9', 'st (3).png', 'student', 300, '2022-05-25 12:46:44', '2022-05-25 12:46:44'),
+('Noah', 'Noah James', 'naoh@gmail.com', 'eyJpdiI6InNLRFlWLzhzbFRrWUsyK2xhUUV4OEE9PSIsInZhbHVlIjoiT3ZwMmVEVTF3WWYxa3hhTVNvUmw2UT09IiwibWFjIjoiZmJmMGQyNWU1MjU0ZGE3MTUxZWY3NmRkMjg0YmI5NzUyMGRlNTMzZDUyODg1NjhkY2M3ZDMyYWQyOGI5YTZiMyIsInRhZyI6IiJ9', 'Noah.png', 'tutor', 0, '2022-05-26 07:25:11', '2022-05-26 07:25:11'),
+('Sara_Ali', 'Sara Ali', 'sara@gmail.com', 'eyJpdiI6IkVKUFNlVDl4QkIwMFloWEVDdEJXa1E9PSIsInZhbHVlIjoiVVJaaTJCSTRzQVkvOHJtRGRiU2xtUT09IiwibWFjIjoiYThkYjg3YzMxM2E4NzE4NGU4MGFhYjBlNTc4NmYyMDVhZTBmYWJhNzJkMzc5NGJkNmRkYjI0YWFlYThjZTdhNCIsInRhZyI6IiJ9', 'Default.png', 'tutor', 0, '2022-05-26 08:11:04', '2022-05-26 08:11:04'),
+('Smiith', 'Smith Jones', 'smith@gmail.com', 'eyJpdiI6IjFoK0hRakFpSjdNV1EvUTlReWJvUmc9PSIsInZhbHVlIjoiS2N2ZEMvbExZczlDNUd4MHBWclBVQT09IiwibWFjIjoiOTk2OGZjYjc0MGZmY2VkMDU3Y2MxNDU1YzAyMzJmZTQ3MGJlNGJhODMzMmIzYWRlNzhlYjliZmM1MTk0N2Y4MSIsInRhZyI6IiJ9', 'st (1).png', 'student', 600, '2022-05-25 09:51:51', '2022-05-25 09:51:51');
 
 -- --------------------------------------------------------
 
@@ -492,7 +537,7 @@ ALTER TABLE `courses`
 -- Constraints for table `course_ratings`
 --
 ALTER TABLE `course_ratings`
-  ADD CONSTRAINT `fk_courseID` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_rating_Course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cust_review_to_tutor`
