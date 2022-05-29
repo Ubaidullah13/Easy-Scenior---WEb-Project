@@ -18,8 +18,10 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link href='css/DashboardGlobal.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
+    <link rel="stylesheet" href='{{asset ('css/ContactsLoginSignup.css') }}' />
+
 </head>
 
 <body class='snippet-body'>
@@ -32,7 +34,7 @@
                     {{-- <label for="check">
                     <i class="fas fa-bars" id="sidebar_btn"></i>
                 </label> --}}
-                    <img src=" Images/logo.png" id="logo" />
+                    <img src=" {{asset('Images/logo.png')}}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
                     <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
@@ -40,10 +42,7 @@
                         </button></a>
                 </div>
             </div>
-            <!--  Balance Amount  -->
-            <h5 class="text-center" style="color:#1c4a4a"><b>Earnings</b>: Rs <span>50000</span></h5>
         </header>
-
 
         @php
             use App\Models\Users;
@@ -59,9 +58,9 @@
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="{{asset('Images/users/st (3).png')}}" class="profile_image" alt="">
                         <h4>
-                            {{ $fullname[0]->fullname }}
+                        {{ $fullname[0]->fullname }}
                         </h4>
 
                         <p>
@@ -84,40 +83,78 @@
             </div>
             <!--sidebar end-->
             <div class="col">
-                <div class="DashContainer">
+                <div class="DashContainer">   
+              <div class="row">
+                <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Add FAQ's</h3>
 
-                    <h3 style="color: #1c4a4a; margin: 1em 0em;">Messages</h3>
+                <form action="/AdminDashboard/faqs/insert" method="post" return="false"
+                enctype="multipart/form-data">
+
+                <div class="mb-4 mt-4">
+                    <div class="input-group input-grp">
+                        <input type="text" class="input" id="question" required="" autocomplete="off"
+                            name="question" value="{{ old('question') }}" style="padding-bottom:4em" />
+                        <label class="user-label">Question</label>
+                    </div>
+                    @error('question')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    @csrf
+                </div>
+
+
+                <div class="mb-4 mt-4">
+                    <div class="input-group input-grp">
+                        <input type="text" class="input" id="answer" required="" autocomplete="off"
+                            name="answer" value="{{ old('answer') }}" style="padding-bottom:4em" />
+                        <label class="user-label">Answer</label>
+                    </div>
+                    @error('answer')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    @csrf
+                </div>
+
+                <button type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup">
+                    Submit FAQ
+                </button>
+            </form>
+        </div>
+           <div class="row">
+                <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">FAQ's</h3>
 
                     <div class="row">
                         <div class="col">
-                            <h5>Name</h5>
+                            <h5>Question</h5>
                         </div>
                         <div class="col">
-                            <h5>Subject</h5>
+                            <h5>Answer</h5>
                         </div>
                         <div class="col">
-                            <h5>Message</h5>
+                            <h5></h5>
                         </div>
                     </div>
 
                     <!-- Session -->
-                    <div style="margin: 2em 0em"></div>
-                    @for ($i = 0; $i < count($contact); $i++)
+                    <div style="margin: 1em 0em"></div>
+                      @for ($i = 0; $i < count ($FAQ); $i++)
                         <div class="row">
 
                             <div class="col">
-                                <p>{{ $contact[$i]->name }}</p>
+                                <p>{{ $FAQ[$i]->question }}</p>
                             </div>
                             <div class="col">
-                                <p>{{ $contact[$i]->subject }}</p>
+                                <p>{{ $FAQ[$i]->answer }}</p>
                             </div>
                             <div class="col">
-                                <p>{{ $contact[$i]->message }}</p>
+                                <a href="{{url('/AdminDashboard/faqs/delete/')}}/{{$FAQ[$i]->id}}" >
+                                    <button class="btnSecond btn btnFont btn-lg">Delete</button>
+                                </a>
                             </div>
 
                         </div>
                     @endfor
-
+                    </div>
                 </div>
             </div>
         </div>

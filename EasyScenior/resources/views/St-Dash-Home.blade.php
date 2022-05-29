@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="css/Global (Typography).css" />
     <link href='css/DashboardGlobal.css' rel='stylesheet'>
+    <link href='css/calender.css' rel='stylesheet'>
 </head>
 
 <body class='snippet-body'>
@@ -84,15 +85,109 @@
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row my-3">
+                                <div class="col align-self-end">
+                                    <h1>Hello</h1>
+                                    <p>It's Good to See You</p>
+                                </div>
+                                <div class="col">
+                                    <img src="Images/Hi.svg" />
+                                </div>
+                            </div>
+                            <div class="row my-5">
+                                <div class="col">
+                                    <h5>Image</h5>
+                                </div>
+                                <div class="col">
+                                    <h5>Name</h5>
+                                </div>
+                                {{-- <div class="col">
+                                    <h5>Time</h5>
+                                </div> --}}
+                            </div>
 
+                            <!-- Session -->
+                            <div style="margin: 2em 0em"></div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <img src="Images/FC_Course1.png" width="50%" />
+                                </div>
+                                <div class="col">
+                                    <p>Web DEvelopement Full Course</p>
+                                    <button class="btn btnSecond btn-sm btnFont">continue</button>
+                                </div>
+                                {{-- <div class="col">2 Hours</div> --}}
+                            </div>
+                        </div>
+
+                        <div class="col my-auto">
+                            <div class="signboard outer" style="margin-top:5em">
+                                <div class="signboard front inner anim04c">
+                                    <li class="year anim04c">
+                                        <span></span>
+                                    </li>
+                                    <ul class="calendarMain anim04c">
+                                        <li class="month anim04c">
+                                            <span></span>
+                                        </li>
+                                        <li class="date anim04c">
+                                            <span></span>
+                                        </li>
+                                        <li class="day anim04c">
+                                            <span></span>
+                                        </li>
+                                    </ul>
+                                    <li class="clock minute anim04c">
+                                        <span></span>
+                                    </li>
+                                    <li class="calendarNormal date2 anim04c">
+                                        <span></span>
+                                    </li>
+                                </div>
+                                <div class="signboard left inner anim04c">
+                                    <li class="clock hour anim04c">
+                                        <span></span>
+                                    </li>
+                                    <li class="calendarNormal day2 anim04c">
+                                        <span></span>
+                                    </li>
+                                </div>
+                                <div class="signboard right inner anim04c">
+                                    <li class="clock second anim04c">
+                                        <span></span>
+                                    </li>
+                                    <li class="calendarNormal month2 anim04c">
+                                        <span></span>
+                                    </li>
+                                </div>
+                            </div>
+                            <div class="card" style="margin:0em 5em; padding-bottom:1em;">
+                                <h3 class="text-center">11</h3>
+                                <p class="text-center">Total Courses Enrolled</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <script type='text/javascript' src="Js/sidebar.js"></script>
+    <script type='text/javascript' src="Js/calender.js"></script>
 </body>
 
 </html>

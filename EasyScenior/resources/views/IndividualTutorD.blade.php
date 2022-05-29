@@ -42,6 +42,8 @@
                         </button></a>
                 </div>
             </div>
+            <!--  Balance Amount  -->
+            <p class="text-end"><b>Balance</b>: Rs <span>123</span></p>
         </header>
         <div class="row">
             <div class="col-xl-2 col-md-3">
@@ -167,9 +169,10 @@
                                 <div><b>Language</b>
                                     <span style="float: right;">English/Urdu</span>
                                 </div>
-                                <a href="" class="mx-auto d-block"><button class="btn btnPrimary btn-lg btnFont"
-                                        style="margin-top:3em;">Book a
-                                        Session</button></a>
+                                <span class="text-center"><button type="button" class="btn btnPrimary btn-lg btnFont"
+                                        style="margin-top:3em;" data-toggle="modal" data-target="#exampleModalCenter"
+                                        onclick="mod()">Book a
+                                        Session</button></span>
                             </div>
                         </div>
                     </div>
@@ -177,12 +180,51 @@
             </div>
         </div>
     </div>
+
+    <!--  Model  -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle" style="color:#1c4a4a;">
+                        Confirm Order
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div><b>Instructor</b>
+                        <span style="float: right;">{{ $fullname[0]->fullname }}</span>
+                    </div>
+                    <hr>
+                    <div><b>Package</b>
+                        <span style="float: right;" id="selectedPackage"></span>
+                    </div>
+                    <hr>
+                    <div><b>Price</b>
+                        <span style="float: right;" id="selectedPrice"></span>
+                    </div>
+                    <hr>
+                    <div><b>Language</b>
+                        <span style="float: right;">English/Urdu</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnSecond" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btnPrimary">Book</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js') }}"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
+    </script>
+
     <script type='text/javascript' src="{{ asset('Js/sidebar.js') }}"></script>
     <script type='text/javascript' src="{{ asset('Js/package.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('Js/model.js') }}"></script>
     <script>
         function toggleField(hideObj, showObj) {
             hideObj.disabled = true;

@@ -121,16 +121,19 @@
                         </div>
 
                         <div class="col-xl col-lg-12 py-4">
-                            <img src="{{ asset('Images/FC_Course1.png') }}" class="Cimg mx-auto d-block" />
+                            <img src="{{ asset('Images/' . $CourseDetails[0]->coverpic) }}"
+                                class="Cimg mx-auto d-block" />
                             <div class="card">
-                                <h4 class="text-center">Rs {{ $CourseDetails[0]->price }}</h4>
+                                <h4 class="text-center">Rs <span id="price">{{ $CourseDetails[0]->price }}</span>
+                                </h4>
                                 <hr>
                                 <div><b>Instructor</b>
                                     <span style="float: right;">{{ $fullname[0]->fullname }}</span>
                                 </div>
                                 <hr>
                                 <div><b>Duration</b>
-                                    <span style="float: right;">{{ $CourseDetails[0]->duration }}</span>
+                                    <span style="float: right;"
+                                        id="duration">{{ $CourseDetails[0]->duration }}</span>
                                 </div>
                                 <hr>
                                 <div><b>Lectures</b>
@@ -140,9 +143,9 @@
                                 <div><b>Language</b>
                                     <span style="float: right;">English</span>
                                 </div>
-                                <a href="" class="mx-auto d-block"><button class="btn btnPrimary btn-lg btnFont"
-                                        style="margin-top:3em;">Book a
-                                        Session</button></a>
+                                <span class="text-center"><button type="button" class="btn btnPrimary btn-lg btnFont"
+                                        style="margin-top:3em;" data-toggle="modal" data-target="#exampleModalCenter"
+                                        onclick="course()">Enroll Course</button></span>
                             </div>
                         </div>
                     </div>
@@ -150,11 +153,51 @@
             </div>
         </div>
     </div>
+    <!--  Model  -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle" style="color:#1c4a4a;">
+                        Confirm Order
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div><b>Instructor</b>
+                        <span style="float: right;">{{ $CourseDetails[0]->coursename }}</span>
+                    </div>
+                    <hr>
+                    <div><b>Duration</b>
+                        <span style="float: right;" id="selectedDuration"></span>
+                    </div>
+                    <hr>
+                    <div><b>Price</b>
+                        <span style="float: right;" id="selectedPrice"></span>
+                    </div>
+                    <hr>
+                    <div><b>Language</b>
+                        <span style="float: right;">English</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnSecond" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btnPrimary">Enroll</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js') }}"
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+
     <script type='text/javascript' src="{{ asset('Js/sidebar.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('Js/model.js') }}"></script>
 </body>
 
 </html>

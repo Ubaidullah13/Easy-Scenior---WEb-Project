@@ -9,5 +9,5 @@ class Home extends Model
 {
     use HasFactory;
     protected $table = 'home';
-    protected $primarykey = 'Heading';
+    protected $primarykey = 'id';
 }

@@ -16,6 +16,8 @@ use App\Http\Controllers\FindATutor;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BecomeTutor;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,7 +65,9 @@ Route::get('/login', function () {
 })->middleware('customAuth');
 
 Route::get('/register', function () {
-    return view('register');
+    $title = "";
+    $data = compact('title');
+    return view('register')->with($data);
 });
 Route::post('registerUser',[Register_Login_Controller::class,'registerUser']);
 Route::post('loginUser',[Register_Login_Controller::class,'login']);
@@ -146,11 +150,35 @@ Route::post('/getPkg/{id}',[AjaxController::class, 'PKG']);
 
 Route::get('/AdminDashboard', [AdminController::class,'Mailview'])->middleware('customAuth');
 
-
 Route::get('/AdminDashboard/user', [AdminController::class,'Userview'])->middleware('customAuth');
+Route::get('/AdminDashboard/faqs', [AdminController::class,'faqview']);
+Route::post('/AdminDashboard/faqs/insert', [AdminController::class,'faqInsert']);
+
+Route::get('/AdminDashboard/faqs/delete/{id}', [AdminController::class,'faqDelete']);
+
+Route::get('/AdminDashboard/about', [AdminController::class,'AboutView']);
+
+Route::post('/AdminDashboard/about/update/{id}', [AdminController::class,'AboutUpdate']);
+
 
 Route::get('/BecomeTutor', function () {
-    return view('BecomeATutor');
+    $title = "You need to register first as a student";
+    $data = compact('title');
+    return view('register')->with($data);
 });
 
 Route::post('/BecomeTutor/{name}', [BecomeTutor::class,'update']);
+
+Route::get('/profile/{name}', function()
+{
+    return view('Profile-Dash');
+});
+
+Route::get('/course', function(){
+    return view('pdf');
+});
+
+Route::post('/profile/update/{name}', [ProfileController::class,'ProfileUpdate']);
+
+Route::get('/status/{name}/{st}',[AdminController::class,'Cstatus']);
+Route::post('/status/{name}', [AdminController::class,'st']);

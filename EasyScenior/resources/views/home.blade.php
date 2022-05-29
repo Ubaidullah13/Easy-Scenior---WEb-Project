@@ -42,7 +42,7 @@
             <li><a class="active label" href="Home">Home</a></li>
             <li><a href="About" class="label">About</a></li>
             <li><a href="Find Tutor" class="label">Find Tutor</a></li>
-            <li><a href="#" class="label">Become Tutor</a></li>
+            <li><a href="/BecomeTutor" class="label">Become Tutor</a></li>
             <li>
                 <div class="dropdown">
                     <a style="cursor: pointer;">Support
@@ -122,13 +122,13 @@
     <section class="OurContainer Category-Section">
         <div class="text-center">
             <h2>
-                {{ $home[2]->Heading }}
+                {{ $home[1]->Heading }}
             </h2>
             <!--  Text and Search  -->
             {{-- <div class="row"> --}}
             {{-- <div class="col-xxl-5 col-xl-5 col-md col-sm-12"> --}}
             <p>
-                {{ $home[2]->Paragraph }}
+                {{ $home[1]->Paragraph }}
             </p>
             {{-- </div> --}}
             {{-- <div class="col-xxl col-xl col-lg-4 col-md-4 offset-lg-2 offset-md-1 col-sm-4 offset-sm-8 cat_search"> --}}
@@ -140,9 +140,9 @@
                     </button>
                 </div> --}}
             <div class="SC">
-                <button type="button" class="btn btnSecond btn-lg btnFont">
-                    View All
-                </button>
+                <a href="/FindCourse"><button type="button" class="btn btnSecond btn-lg btnFont">
+                        View All
+                    </button></a>
             </div>
         </div>
         {{-- </div> --}}
@@ -157,10 +157,10 @@
                     <img src="Images/{{ $categories[0]->Image }}" class="card-img-top"
                         alt="{{ $categories[0]->cat_name }}" />
                     <div class="card-body">
-                        <h4 class="card-title">
+                        <h4 class="card-title text-center">
                             {{ $categories[0]->cat_name }}
                         </h4>
-                        <p class="label">4 Courses</p>
+                        {{-- <p class="label">4 Courses</p> --}}
                     </div>
                 </div>
             </div>
@@ -171,10 +171,10 @@
                     <img src="Images/{{ $categories[1]->Image }}" class="card-img-top"
                         alt="{{ $categories[1]->cat_name }}" />
                     <div class="card-body">
-                        <h4 class="card-title">
+                        <h4 class="card-title text-center">
                             {{ $categories[1]->cat_name }}
                         </h4>
-                        <p class="label">4 Courses</p>
+                        {{-- <p class="label">4 Courses</p> --}}
                     </div>
                 </div>
             </div>
@@ -185,10 +185,10 @@
                     <img src="Images/{{ $categories[2]->Image }}" class="card-img-top"
                         alt="{{ $categories[2]->cat_name }}" />
                     <div class="card-body">
-                        <h4 class="card-title">
+                        <h4 class="card-title text-center">
                             {{ $categories[2]->cat_name }}
                         </h4>
-                        <p class="label">4 Courses</p>
+                        {{-- <p class="label">4 Courses</p> --}}
                     </div>
                 </div>
             </div>
@@ -199,10 +199,10 @@
                     <img src="Images/{{ $categories[3]->Image }}" class="card-img-top"
                         alt="{{ $categories[3]->cat_name }}" />
                     <div class="card-body">
-                        <h4 class="card-title">
+                        <h4 class="card-title text-center">
                             {{ $categories[3]->cat_name }}
                         </h4>
-                        <p class="label">4 Courses</p>
+                        {{-- <p class="label">4 Courses</p> --}}
                     </div>
                 </div>
             </div>
@@ -214,17 +214,17 @@
     <section class="OurContainer Tutor-Section">
         <div class="row">
             <div class="col-xxl-6 col-xl-7 col-md">
-                <h5># {{ $home[1]->SubHeading }}
+                <h5># {{ $home[2]->SubHeading }}
                 </h5>
                 <h2>
-                    {{ $home[1]->Heading }}
+                    {{ $home[2]->Heading }}
                 </h2>
                 <p>
-                    {{ $home[1]->Paragraph }}
+                    {{ $home[2]->Paragraph }}
                 </p>
-                <button type="button" class="btn btnPrimary btn-lg btnFont BT">
-                    Become Tutor
-                </button>
+                <a href="/BecomeTutor"><button type="button" class="btn btnPrimary btn-lg btnFont BT">
+                        Become Tutor
+                    </button></a>
             </div>
             <div class="col-xxl-3 my-auto" id="Tutor-arrow">
                 <img src="Images/Home become Tutor.svg" />
@@ -289,7 +289,7 @@
     <section class="OurContainer Testimonials-Section">
         <h5 class="TextCenter">TESTIMONIALS</h5>
         <h2 class="TextCenter">Customer Know The Best</h2>
-        <p class="TextCenter"><a href="">View All</a></p>
+        <p class="TextCenter"><a href="/testimonials">View All</a></p>
         <div class="row Testimonial-cards">
             <div class="col-xxl col-xl col-md col-12 reviewCard FirstRC">
                 <img class="dp" src="Images/users/{{ $img0[0]->userImage }}" />
@@ -352,7 +352,7 @@
     <section class="OurContainer Blog-Section">
         <h5 class="TextCenter">LATEST NEWS</h5>
         <h2 class="TextCenter">Educational Tips</h2>
-        <p class="TextCenter"><a href="">View All</a></p>
+        {{-- <p class="TextCenter"><a href="">View All</a></p> --}}
         <div class="row">
             <!--  1  -->
             <div class="col-xxl col-xl col-md reviewCard FirstRC blog">

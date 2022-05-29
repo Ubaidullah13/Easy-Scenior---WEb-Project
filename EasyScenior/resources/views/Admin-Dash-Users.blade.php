@@ -44,6 +44,7 @@
             $status = Users::SELECT('status')
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
+            $users = Users::all();
         @endphp
 
         <header>
@@ -91,10 +92,20 @@
                     </div>
                 </div>
             </div>
+            @php
+                $len = count($users);
+            @endphp
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
-
+                    <div class="input-group">
+                        <input type="text" name="searchForm" class="form-control label" id="searchForm"
+                            placeholder="Search " aria-label="Search Tutor" aria-describedby="search_category"
+                            onkeyup="search('{{ $len }}')" />
+                        <button class="btn" type="button" id="search_category">
+                            <img src="{{ asset('Images/search.svg') }}" alt="search" id="SearchImgSmall" />
+                        </button>
+                    </div>
                     <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">User Data</h3>
 
                     <div class="row">
@@ -116,47 +127,82 @@
                         <div class="col">
                             <h5>Balance</h5>
                         </div>
+                        <div class="col">
+
+                        </div>
 
                     </div>
 
                     <!-- Session -->
-                    <div style="margin: 2em 0em"></div>
-                    @for ($i = 0; $i < count($user); $i++)
-                        @if ($user[$i]->status != 'admin')
-                            <div class="row" style="margin:2em 0em;">
+                    <div style="margin: 2em 0em" id="myUL">
+                        @for ($i = 0; $i < count($user); $i++)
+                            @if ($user[$i]->status != 'admin')
+                                <span class="li">
+                                    <div class="row" style="margin:2em 0em;" id="{{ $i }}">
+                                        <div class=" col my-auto">
+                                            <img src="{{ asset('Images/Users/' . $user[$i]->userImage) }} "
+                                                class="Image">
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ $user[$i]->username }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="SingleCard">{{ $user[$i]->fullname }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ $user[$i]->email }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ $user[$i]->status }}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ $user[$i]->wallet }}</p>
+                                        </div>
+                                        <div class="col">
 
-                                <div class="col my-auto">
-                                    <img src="{{ asset('Images/Users/' . $user[$i]->userImage) }} "
-                                        class="Image">
-                                </div>
-                                <div class="col">
-                                    <p>{{ $user[$i]->username }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ $user[$i]->fullname }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ $user[$i]->email }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ $user[$i]->status }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ $user[$i]->wallet }}</p>
-                                </div>
+                                            <div>
+                                                <a
+                                                    href="{{ url('/status/') }}/{{ $user[$i]->username }}/{{ $user[$i]->status }}"><button
+                                                        class="btn btnSecond btnFont btn-sm">Change Status</button></a>
+                                            </div>
 
-                            </div>
-                        @endif
-                    @endfor
-
+                                        </div>
+                                    </div>
+                                </span>
+                            @endif
+                        @endfor
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-    <script type='text/javascript' src="Js/sidebar.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+            </script>
+            <script type='text/javascript' src="{{ asset('Js/sidebar.js') }}"></script>
+            <script>
+                function search(len) {
+                    var input, filter, ul, li, a, i, txtValue, x;
+                    input = document.getElementById("searchForm");
+                    filter = input.value.toUpperCase();
+                    ul = document.getElementById("myUL");
+                    //console.log(ul);
+                    li = ul.getElementsByClassName("li");
+                    //console.log(li);
+                    for (i = 0; i < len; i++) {
+                        a = li[i].getElementsByClassName("SingleCard")[0];
+                        txtValue = a.textContent || a.innerText;
+                        console.log(txtValue);
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            li[i].style.display = "";
+                            // x = document.getElementById(i);
+                            // x.style.display = "";
+                        } else {
+                            li[i].style.display = "none";
+                            // x = document.getElementById(i);
+                            // x.style.display = "none";
+                        }
+                    }
+                }
+            </script>
 </body>
 
 </html>

@@ -16,15 +16,19 @@ function pkg(id) {
         }
     })
 }
+
 $( document ).ready(function(){
     var box = document.getElementById('package');
         var pack = box.options[box.selectedIndex].text;
-    if(pack == "1 Hour")
+    if(pack == "1 Hour"){
         id = 1;
-    else if(pack == "5 Hours")
+    }
+    else if(pack == "5 Hours"){
         id = 2;
-    else if(pack == "20 Hours")
+    }
+    else if(pack == "20 Hours"){
         id = 3;
+    }
 
     $.ajax({
         type: 'POST',

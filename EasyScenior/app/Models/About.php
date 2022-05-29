@@ -9,5 +9,5 @@ class About extends Model
 {
     use HasFactory;
     protected $table = 'about';
-    protected $primarykey = 'Heading';
+    protected $primarykey = 'ID';
 }

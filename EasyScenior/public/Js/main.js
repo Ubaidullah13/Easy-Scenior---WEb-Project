@@ -13,9 +13,7 @@ class MyFooter extends HTMLElement {
                       Easy Scenior
                     </h5>
                     <p style="color: white">
-                      Here you can use rows and columns to organize your footer
-                      content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                      elit.
+                    Easy Senior is a platform for online coaching, where students come together not only to find someone who can tutor them and help with the concepts they're stuck on but also to sign up as a tutor themselves! 
                     </p>
                   </div>
   

@@ -78,7 +78,6 @@
                     </li>
                 </ol>
             </nav>
-
             <h1>Register Form</h1>
         </div>
 
@@ -93,9 +92,11 @@
                     </div>
                 @endif
                 <!-- Register -->
-
+                <div>
+                    <h4 class="text-center">{{ $title }}</h4>
+                </div>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-lg-6 RImgSm my-auto">
+                    <div class="col-md-12 col-sm-12 col-lg-6 RImgSm ">
                         <div class="row RimgL RimgXL Rpadding">
                             <div class="col-md-6 col-xl-6 col-lg-12 col-sm-6">
                                 <img src="Images/RegisterImg2.png" class="RegImg2 RImgMed RImgShow" />
@@ -174,8 +175,8 @@
 
                             <div class="mb-4 mt-4">
                                 <div class="input-group input-grp">
-                                    <input type="number" class="input" required="" autocomplete="off" id="balance"
-                                        name="balance" value="{{ old('balance') }}" />
+                                    <input type="number" class="input" required="" autocomplete="off"
+                                        id="balance" name="balance" value="{{ old('balance') }}" />
                                     <label class="user-label">Balance</label>
                                 </div>
                                 @error('balance')
@@ -191,7 +192,7 @@
                                 </div>
                             </div>
 
-                            
+
 
                             <button type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup">
                                 Create Account

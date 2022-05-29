@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Admin Dashboard</title>
+    <title>Student Dashboard</title>
 
     <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
@@ -18,33 +18,15 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link href='css/DashboardGlobal.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
+    <link rel="stylesheet" href='{{ asset('css/ContactsLoginSignup.css') }}' />
 </head>
 
 <body class='snippet-body'>
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
-        <header>
-            <div class="row">
-                <div class="col my-auto">
-                    {{-- <label for="check">
-                    <i class="fas fa-bars" id="sidebar_btn"></i>
-                </label> --}}
-                    <img src=" Images/logo.png" id="logo" />
-                </div>
-                <div class="col my-auto text-end">
-                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
-                            Logout
-                        </button></a>
-                </div>
-            </div>
-            <!--  Balance Amount  -->
-            <h5 class="text-center" style="color:#1c4a4a"><b>Earnings</b>: Rs <span>50000</span></h5>
-        </header>
-
-
         @php
             use App\Models\Users;
             $fullname = Users::SELECT('fullname')
@@ -55,13 +37,30 @@
                 ->get();
         @endphp
 
+        <header>
+            <div class="row">
+                <div class="col my-auto">
+                    {{-- <label for="check">
+                    <i class="fas fa-bars" id="sidebar_btn"></i>
+                </label> --}}
+                    <img src=" {{ asset('Images/logo.png') }}" id="logo" />
+                </div>
+                <div class="col my-auto text-end">
+                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                            Logout
+                        </button></a>
+                </div>
+            </div>
+        </header>
+
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/st (3).png') }}" class="profile_image" alt="">
                         <h4>
                             {{ $fullname[0]->fullname }}
+
                         </h4>
 
                         <p>
@@ -74,50 +73,47 @@
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-envelope"></i><span>Mails</span></a>
-                        <a href="#"><i class="fas fa-question"></i><span>Add FAQs</span></a>
-                        <a href="#"><i class="fas fa-eject"></i><span>Edit Home</span></a>
-                        <a href="#"><i class="fas fa-info"></i><span>Edit About</span></a>
-                        <a href="#"><i class="fas fa-user"></i><span>Edit Users</span></a>
+                        <a class="active" href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
+                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
+                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
+                    
+                    <form class="contactright" style="padding-top:1rem; margin-top:1rem"
+                        action="/status/{{ $name }}" method="post" return="false" enctype="multipart/form-data">
 
-                    <h3 style="color: #1c4a4a; margin: 1em 0em;">Messages</h3>
-
-                    <div class="row">
-                        <div class="col">
-                            <h5>Name</h5>
-                        </div>
-                        <div class="col">
-                            <h5>Subject</h5>
-                        </div>
-                        <div class="col">
-                            <h5>Message</h5>
-                        </div>
-                    </div>
-
-                    <!-- Session -->
-                    <div style="margin: 2em 0em"></div>
-                    @for ($i = 0; $i < count($contact); $i++)
-                        <div class="row">
-
-                            <div class="col">
-                                <p>{{ $contact[$i]->name }}</p>
+                        <div class="mb-4 mt-4">
+                            <div class="input-group input-grp">
+                                <input type="text" class="input" id="username" required="" autocomplete="off"
+                                    name="username" value="{{ $name }}" />
+                                <label class="user-label">User Name</label>
                             </div>
-                            <div class="col">
-                                <p>{{ $contact[$i]->subject }}</p>
-                            </div>
-                            <div class="col">
-                                <p>{{ $contact[$i]->message }}</p>
-                            </div>
-
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            @csrf
                         </div>
-                    @endfor
 
+                        <div class="mb-4 mt-4">
+                            <div class="input-group input-grp">
+                                <input type="text" class="input" required="" autocomplete="off" id="status"
+                                    name="status" value="{{ $st }}" />
+                                <label class="user-label">Status -> student / tutor / admin</label>
+                            </div>
+                            @error('username')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <button class="btn btnPrimary btnFont btn-sm">Change Status</button>
+                    </form>
                 </div>
             </div>
         </div>
