@@ -49,7 +49,7 @@
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <div class="dropdown-content">
-                        <a href="#" class="dropDownA">Blog</a>
+                        {{-- <a href="#" class="dropDownA">Blog</a> --}}
                         <a href="faqs" class="dropDownA">FAQs</a>
                         <a href="testimonials" class="dropDownA">Testimonials</a>
                         <hr>

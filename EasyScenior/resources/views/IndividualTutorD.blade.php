@@ -21,10 +21,28 @@
 
     <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link rel="stylesheet" href='{{ asset('css/ContactsLoginSignup.css') }}' />
     <script src=" {{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js') }}"></script>
 </head>
 
 <body class='snippet-body'>
+    @php
+        use App\Models\Users;
+        $fullname = Users::SELECT('fullname')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $status = Users::SELECT('status')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+        $img = Users::SELECT('userImage')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $amount = Users::SELECT('wallet')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+    @endphp
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
@@ -37,20 +55,21 @@
                     <img src="{{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="#" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
             </div>
             <!--  Balance Amount  -->
-            <p class="text-end"><b>Balance</b>: Rs <span>123</span></p>
+            <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
         </header>
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="{{ asset('Images/users/st (3).png') }}" class="profile_image" alt="">
-                        <h4>Username</h4>
+                        <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
+                        <h4>{{ $fullname[0]->fullname }}</h4>
+                        <p> {{ Str::upper($status[0]->status) }}
                         <p>
                             <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
@@ -59,20 +78,32 @@
                             </a>
                     </div>
                     <div id="menus">
-                        <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a class="active" href="DashTutors"><i class="fas fa-male"></i><span>Find a
-                                Tutor</span></a>
-                        <a href="DashCourses"><i class="fas fa-th"></i><span>Find
+                        <a href="{{ url('StudentDashboard') }}"><i
+                                class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a href="{{ url('DashSessions/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a class="active" href="{{ url('DashTutors') }}"><i
+                                class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="{{ url('DashCourses') }}"><i class="fas fa-th"></i><span>Find
                                 Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+
+                        @if (Session::get('user')['status'] == 'student')
+                            <a href="{{ url('BecomeTutor/' . Session::get('user')['username']) }}"><i
+                                    class="fas fa-chalkboard-teacher"></i><span>Become
+                                    Tutor</span></a>
+                        @endif
+
+                        @if (Session::get('user')['status'] == 'tutor')
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Upload Course</span></a>
+                        @endif
+
+                        <a href="{{ url('profile/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>
             <!--sidebar end-->
             @php
-                use App\Models\Users;
                 use App\Models\Categories;
                 use App\Models\TutorRatings;
                 use App\Models\Packages;
@@ -93,13 +124,17 @@
             @endphp
             <div class="col">
                 <div class="DashContainer">
+                    @php
+                        $title = '';
+                    @endphp
+                    <h2>{{ $title }}</h2>
                     <div class="row">
                         <div class="col-xl col-lg-12">
                             <a class="d-block" href="{{ url('DashTutors') }}"><img
                                     src="{{ asset('Images/Goback.svg') }}" /></a>
 
                             <h3 style="padding-top:2em">{{ $maj[0]->cat_name }}</h3>
-                            <div style="flaot:left; margin:1em 0em;">
+                            <div style="float:left; margin:1em 0em;">
                                 <h5>Rating</h5>
                                 @if (!$rating->isEmpty())
                                     @php
@@ -180,7 +215,15 @@
             </div>
         </div>
     </div>
-
+    <script>
+        var res = "success";
+    </script>
+    @php
+        $BS = '<script>
+            document.writeln(res);
+        </script>';
+        echo $BS;
+    @endphp
     <!--  Model  -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -191,27 +234,41 @@
                         Confirm Order
                     </h4>
                 </div>
-                <div class="modal-body">
-                    <div><b>Instructor</b>
-                        <span style="float: right;">{{ $fullname[0]->fullname }}</span>
+                <form class="contactright" style="padding-top:1rem; margin-top:1rem"
+                    action="{{ asset('BookSession/' . $TutorDetails[0]->tutorusername . '/' . Session::get('user')['username']) }}"
+                    method="post" return="false" enctype="multipart/form-data">
+                    @csrf
+
+                    <input type="hidden" class="input" id="SPusingForm" name="SPusingForm" value=""
+                        style="padding-top:1rem; margin-bottom:1rem" />
+
+
+                    <div class="modal-body">
+                        <div><b>Instructor</b>
+                            <span style="float: right;">{{ $fullname[0]->fullname }}</span>
+                        </div>
+                        <hr>
+                        <div><b>Package</b>
+                            <span style="float: right;" id="selectedPackage"></span>
+                        </div>
+
+                        <hr>
+                        <div><b>Price</b>
+                            <span style="float: right;" id="selectedPrice"></span>
+                        </div>
+
+                        <hr>
+                        <div><b>Language</b>
+                            <span style="float: right;">English/Urdu</span>
+                        </div>
+
                     </div>
-                    <hr>
-                    <div><b>Package</b>
-                        <span style="float: right;" id="selectedPackage"></span>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnSecond" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btnPrimary">Book</button>
                     </div>
-                    <hr>
-                    <div><b>Price</b>
-                        <span style="float: right;" id="selectedPrice"></span>
-                    </div>
-                    <hr>
-                    <div><b>Language</b>
-                        <span style="float: right;">English/Urdu</span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btnSecond" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btnPrimary">Book</button>
-                </div>
+                </form>
+
             </div>
         </div>
     </div>

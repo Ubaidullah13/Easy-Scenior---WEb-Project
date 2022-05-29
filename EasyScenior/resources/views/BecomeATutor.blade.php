@@ -18,9 +18,9 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link href="css/DashboardGlobal.css" rel='stylesheet'>
-    <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link rel="stylesheet" href="css/ContactsLoginSignup.css" />
+    <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
+    <link rel="stylesheet" href='{{ asset('css/ContactsLoginSignup.css') }}' />
 
 </head>
 
@@ -40,6 +40,12 @@
         $status = Users::SELECT('status')
             ->WHERE('username', Session::get('user')['username'])
             ->get();
+        $img = Users::SELECT('userImage')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $amount = Users::SELECT('wallet')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
     @endphp
 
 
@@ -52,7 +58,7 @@
                     {{-- <label for="check">
                     <i class="fas fa-bars" id="sidebar_btn"></i>
                 </label> --}}
-                    <img src=" Images/logo.png" id="logo" />
+                    <img src="  {{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
                     <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
@@ -60,13 +66,15 @@
                         </button></a>
                 </div>
             </div>
+            <!--  Balance Amount  -->
+            <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
         </header>
 
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
                         <h4>
                             {{ $fullname[0]->fullname }}
                         </h4>
@@ -78,12 +86,27 @@
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
-                        <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+                        <a href="{{ url('StudentDashboard') }}"><i
+                                class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a href="{{ url('DashSessions/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a href="{{ url('DashTutors') }}"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="{{ url('DashCourses') }}"><i class="fas fa-th"></i><span>Find
+                                Courses</span></a>
+
+                        @if (Session::get('user')['status'] == 'student')
+                            <a class="active"
+                                href="{{ url('BecomeTutor/' . Session::get('user')['username']) }}"><i
+                                    class="fas fa-chalkboard-teacher"></i><span>Become
+                                    Tutor</span></a>
+                        @endif
+
+                        @if (Session::get('user')['status'] == 'tutor')
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Upload Course</span></a>
+                        @endif
+
+                        <a href="{{ url('profile/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>

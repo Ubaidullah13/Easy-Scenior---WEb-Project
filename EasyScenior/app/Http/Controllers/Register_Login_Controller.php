@@ -95,7 +95,7 @@ class Register_Login_Controller extends Controller
             //echo "You are logged in Successfully";
 
             //storing data in session
-            $req->session()->put('user',['username' => $result[0]->username]);
+            $req->session()->put('user',['username' => $result[0]->username, 'status' => $result[0]->status]);
 
             $path = $req->path();
             //echo $path;

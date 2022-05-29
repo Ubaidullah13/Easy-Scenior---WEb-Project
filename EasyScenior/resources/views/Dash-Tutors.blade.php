@@ -23,6 +23,24 @@
 </head>
 
 <body class='snippet-body'>
+    @php
+        use App\Models\Users;
+        use App\Models\St_Enrolled_Courses;
+        $fullname = Users::SELECT('fullname')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $status = Users::SELECT('status')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+        $img = Users::SELECT('userImage')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $amount = Users::SELECT('wallet')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+    @endphp
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
@@ -35,33 +53,49 @@
                     <img src=" Images/logo.png" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="/logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
             </div>
+            <!--  Balance Amount  -->
+            <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
         </header>
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
-                        <h4>Maria David</h4>
-                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
+                        <img src="Images/users/{{ $img[0]->userImage }}" class="profile_image" alt="">
+                        <h4>{{ $fullname[0]->fullname }}</h4>
+                        <p> {{ Str::upper($status[0]->status) }}
+                            <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
-                            <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
-                            </i>
-                        </a>
+                                <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
+                                </i>
+                            </a>
                     </div>
                     <div id="menus">
-                        <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a class="active" href="DashTutors"><i class="fas fa-male"></i><span>Find a
-                                Tutor</span></a>
-                        <a href="DashCourses"><i class="fas fa-th"></i><span>Find
+                        <a href="{{ url('StudentDashboard') }}"><i
+                                class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a href="{{ url('DashSessions/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a class="active" href="{{ url('DashTutors') }}"><i
+                                class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="{{ url('DashCourses') }}"><i class="fas fa-th"></i><span>Find
                                 Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+
+                        @if (Session::get('user')['status'] == 'student')
+                            <a href="{{ url('BecomeTutor/' . Session::get('user')['username']) }}"><i
+                                    class="fas fa-chalkboard-teacher"></i><span>Become
+                                    Tutor</span></a>
+                        @endif
+
+                        @if (Session::get('user')['status'] == 'tutor')
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Upload Course</span></a>
+                        @endif
+
+                        <a href="{{ url('profile/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>
@@ -71,7 +105,6 @@
 
                     <h3 style="text-align: center; color:#1C4A4A; padding-top:2em" id="RHeadSmall">Book a Session</h3>
                     @php
-                        use App\Models\Users;
                         use App\Models\Categories;
                     @endphp
                     <div class="row">

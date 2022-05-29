@@ -24,6 +24,29 @@
 </head>
 
 <body class='snippet-body'>
+    @php
+        use App\Models\Users;
+        use App\Models\St_Enrolled_Courses;
+        use App\Models\Courses;
+        $fullname = Users::SELECT('fullname')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $status = Users::SELECT('status')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+        $img = Users::SELECT('userImage')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $amount = Users::SELECT('wallet')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $courseID = St_Enrolled_Courses::SELECT('course_id')
+            ->WHERE('st_username', Session::get('user')['username'])
+            ->get();
+        $enrolled = count($courseID);
+        
+    @endphp
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
@@ -41,24 +64,18 @@
                         </button></a>
                 </div>
             </div>
+            <!--  Balance Amount  -->
+            <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
         </header>
 
 
-        @php
-            use App\Models\Users;
-            $fullname = Users::SELECT('fullname')
-                ->WHERE('username', Session::get('user')['username'])
-                ->get();
-            $status = Users::SELECT('status')
-                ->WHERE('username', Session::get('user')['username'])
-                ->get();
-        @endphp
+
 
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="Images/users/{{ $img[0]->userImage }}" class="profile_image" alt="">
                         <h4>
                             {{ $fullname[0]->fullname }}
                         </h4>
@@ -66,19 +83,33 @@
                             {{ Str::upper($status[0]->status) }}
                         </p>
 
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
-                        <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
-                        <a href="/BecomeTutor"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+                        <a class="active" href="{{ url('StudentDashboard') }}"><i
+                                class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a href="{{ url('DashSessions/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a href="{{ url('DashTutors') }}"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="{{ url('DashCourses') }}"><i class="fas fa-th"></i><span>Find
+                                Courses</span></a>
+
+                        @if (Session::get('user')['status'] == 'student')
+                            <a href="{{ url('BecomeTutor/' . Session::get('user')['username']) }}"><i
+                                    class="fas fa-chalkboard-teacher"></i><span>Become
+                                    Tutor</span></a>
+                        @endif
+
+                        @if (Session::get('user')['status'] == 'tutor')
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Upload Course</span></a>
+                        @endif
+
+                        <a href="{{ url('profile/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>
@@ -107,20 +138,30 @@
                                     <h5>Time</h5>
                                 </div> --}}
                             </div>
+                            @for ($i = 0; $i < $enrolled; $i++)
+                                @php
+                                    $Cimg = Courses::SELECT('coverpic')
+                                        ->WHERE('course_ID', $courseID[$i]->course_id)
+                                        ->get();
+                                    
+                                    $Cname = Courses::SELECT('coursename')
+                                        ->WHERE('course_ID', $courseID[$i]->course_id)
+                                        ->get();
+                                @endphp
+                                <!-- Session -->
+                                <div style="margin: 2em 0em"></div>
 
-                            <!-- Session -->
-                            <div style="margin: 2em 0em"></div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <img src="Images/FC_Course1.png" width="50%" />
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="Images/{{ $Cimg[0]->coverpic }}" width="50%" />
+                                    </div>
+                                    <div class="col">
+                                        <p>{{ $Cname[0]->coursename }}</p>
+                                        <button class="btn btnSecond btn-sm btnFont">continue</button>
+                                    </div>
+                                    {{-- <div class="col">2 Hours</div> --}}
                                 </div>
-                                <div class="col">
-                                    <p>Web DEvelopement Full Course</p>
-                                    <button class="btn btnSecond btn-sm btnFont">continue</button>
-                                </div>
-                                {{-- <div class="col">2 Hours</div> --}}
-                            </div>
+                            @endfor
                         </div>
 
                         <div class="col my-auto">
@@ -165,7 +206,7 @@
                                 </div>
                             </div>
                             <div class="card" style="margin:0em 5em; padding-bottom:1em;">
-                                <h3 class="text-center">11</h3>
+                                <h3 class="text-center">{{ $enrolled }}</h3>
                                 <p class="text-center">Total Courses Enrolled</p>
                             </div>
                         </div>

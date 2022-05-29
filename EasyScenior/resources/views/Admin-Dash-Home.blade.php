@@ -18,8 +18,9 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link href='css/DashboardGlobal.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
+    <link rel="stylesheet" href='{{ asset('css/ContactsLoginSignup.css') }}' />
 </head>
 
 <body class='snippet-body'>
@@ -53,13 +54,16 @@
             $status = Users::SELECT('status')
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
+            $img = Users::SELECT('userImage')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
         @endphp
 
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
                         <h4>
                             {{ $fullname[0]->fullname }}
                         </h4>
@@ -74,11 +78,11 @@
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-envelope"></i><span>Mails</span></a>
-                        <a href="#"><i class="fas fa-question"></i><span>Add FAQs</span></a>
-                        <a href="#"><i class="fas fa-eject"></i><span>Edit Home</span></a>
-                        <a href="#"><i class="fas fa-info"></i><span>Edit About</span></a>
-                        <a href="#"><i class="fas fa-user"></i><span>Edit Users</span></a>
+                        <a class="active" href="/AdminDashboard"><i class="fas fa-envelope"></i><span>Mails</span></a>
+                        <a href="/AdminDashboard/faqs"><i class="fas fa-question"></i><span>Add FAQs</span></a>
+                        {{-- <a href="/status"><i class="fas fa-eject"></i><span>Change Status</span></a> --}}
+                        <a href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit About</span></a>
+                        <a href="/AdminDashboard/user"><i class="fas fa-user"></i><span>Edit Users</span></a>
                     </div>
                 </div>
             </div>

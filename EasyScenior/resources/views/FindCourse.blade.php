@@ -45,7 +45,7 @@
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <div class="dropdown-content">
-                        <a href="#" class="dropDownA">Blog</a>
+                        {{-- <a href="#" class="dropDownA">Blog</a> --}}
                         <a href="faqs" class="dropDownA">FAQs</a>
                         <a href="testimonials" class="dropDownA">Testimonials</a>
                         <hr>
@@ -175,7 +175,7 @@
                                     </div>
 
                                     <div class="row" style="margin-top: 2rem">
-                                        <div class="col-9">
+                                        <div class="col-6 col-xl-8 col-lg-7">
                                             <button class="btn btnSecond btn-sm btnFont">
                                                 <span>See Details</span>
                                             </button>

@@ -35,6 +35,9 @@
             $status = Users::SELECT('status')
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
+            $img = Users::SELECT('userImage')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
         @endphp
 
         <header>
@@ -57,7 +60,7 @@
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="{{ asset('Images/users/st (3).png') }}" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
                         <h4>
                             {{ $fullname[0]->fullname }}
 
@@ -73,19 +76,19 @@
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
-                        <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+                        <a href="/AdminDashboard"><i class="fas fa-envelope"></i><span>Mails</span></a>
+                        <a href="/AdminDashboard/faqs"><i class="fas fa-question"></i><span>Add FAQs</span></a>
+                        <a href="/status"><i class="fas fa-eject"></i><span>Change Status</span></a>
+                        <a href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit About</span></a>
+                        <a class="active" href="/AdminDashboard/user"><i class="fas fa-user"></i><span>Edit
+                                Users</span></a>
                     </div>
                 </div>
             </div>
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
-                    
+
                     <form class="contactright" style="padding-top:1rem; margin-top:1rem"
                         action="/status/{{ $name }}" method="post" return="false" enctype="multipart/form-data">
 

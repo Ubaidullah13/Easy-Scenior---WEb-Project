@@ -104,10 +104,11 @@ class AdminController extends Controller
          return redirect ('/AdminDashboard/about');
     }
 
-    public function Cstatus($name, $st)
+    public function Cstatus()
     {
-        $data = compact('name','st');
-        return view('Admin-Dash-changeStatus')->with($data);
+        // $name, $st
+        // $data = compact('name','st');
+        return view('Admin-Dash-changeStatus');
     }
 
     public function st($name, Request $request)

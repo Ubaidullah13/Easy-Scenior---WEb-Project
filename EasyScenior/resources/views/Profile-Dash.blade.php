@@ -24,6 +24,23 @@
 </head>
 
 <body class='snippet-body'>
+    @php
+        use App\Models\Users;
+        $fullname = Users::SELECT('fullname')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $status = Users::SELECT('status')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+        $img = Users::SELECT('userImage')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $amount = Users::SELECT('wallet')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+    @endphp
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
@@ -36,16 +53,19 @@
                     <img src=" {{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="{{url('/logout')}}" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="{{ url('/logout') }}" id="logout"><button type="button"
+                            class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
             </div>
+            <!--  Balance Amount  -->
+            <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
         </header>
 
 
         @php
-            use App\Models\Users;
+            
             $fullname = Users::SELECT('fullname')
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
@@ -71,7 +91,7 @@
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="{{ asset('Images/users/st (3).png') }}" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
                         <h4>
                             {{ $fullname[0]->fullname }}
                         </h4>
@@ -87,20 +107,35 @@
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
-                        <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+                        <a href="{{ url('StudentDashboard') }}"><i
+                                class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a href="{{ url('DashSessions/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a href="{{ url('DashTutors') }}"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="{{ url('DashCourses') }}"><i class="fas fa-th"></i><span>Find
+                                Courses</span></a>
+
+                        @if (Session::get('user')['status'] == 'student')
+                            <a href="{{ url('BecomeTutor/' . Session::get('user')['username']) }}"><i
+                                    class="fas fa-chalkboard-teacher"></i><span>Become
+                                    Tutor</span></a>
+                        @endif
+
+                        @if (Session::get('user')['status'] == 'tutor')
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Upload Course</span></a>
+                        @endif
+
+                        <a class="active" href="{{ url('profile/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>
             <!--sidebar end-->
             <div class="col">
                 <div class="DashContainer">
-                    <form class="contactright" style="padding-top:1rem; margin-top:1rem" action="/profile/update/{{Session::get('user')['username']}}" method="post"
-                        return="false" enctype="multipart/form-data">
+                    <form class="contactright" style="padding-top:1rem; margin-top:1rem"
+                        action="/profile/update/{{ Session::get('user')['username'] }}" method="post" return="false"
+                        enctype="multipart/form-data">
 
                         <div class="mb-0 mt-0">
                             <h5 style="text-align:center; color:#1b1c1e; padding-top:1rem;"> Full Name </h5>
@@ -140,21 +175,22 @@
                             @enderror
                             @csrf
                         </div>
-                    <div classs="row">
-                        <div class="mb-0 mt-0">
-                            <h5 style="text-align:center; color:#1b1c1e; padding-top:1rem;"> Profile Picture </h5>
-                            <div class="col my-auto">
-                                <img src="{{ asset('Images/users/'.$image[0]->userImage) }}" class="mx-auto d-block" style=" padding-bottom:1rem">
-                                <input type="file" class="input" autocomplete="off" id="image"
-                                    name="image" />
-                            </div>
+                        <div classs="row">
+                            <div class="mb-0 mt-0">
+                                <h5 style="text-align:center; color:#1b1c1e; padding-top:1rem;"> Profile Picture </h5>
+                                <div class="col my-auto">
+                                    <img src="{{ asset('Images/users/' . $image[0]->userImage) }}"
+                                        class="mx-auto d-block" style=" padding-bottom:1rem">
+                                    <input type="file" class="input" autocomplete="off" id="image"
+                                        name="image" />
+                                </div>
 
-                            @error('image')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                            @csrf
+                                @error('image')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @csrf
+                            </div>
                         </div>
-                    </div>
 
                         <button type="submit" class="btnPrimary btn btnFont btn-lg mx-auto d-block">Update</button>
                     </form>

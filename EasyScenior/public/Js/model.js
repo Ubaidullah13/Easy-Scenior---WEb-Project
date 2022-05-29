@@ -21,5 +21,7 @@ function course() {
   var price = pr.innerHTML;
   MD.innerHTML = pack;
   PR.innerHTML = price;
-
+  document.getElementById('SPusingForm').value=price;
+  console.log(document.getElementById('SPusingForm').value);
 }
+

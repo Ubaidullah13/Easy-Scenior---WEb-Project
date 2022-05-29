@@ -17,6 +17,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BecomeTutor;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookSession;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,25 +29,25 @@ use App\Http\Controllers\ProfileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/starter', function () {
-    return view('starter');
-});
+// Route::get('/starter', function () {
+//     return view('starter');
+// });
 
 
 
-Route::get('/', [HomeController::class,'view']);
-Route::get('/Home', [HomeController::class,'view']);
+Route::get('/', [HomeController::class,'view'])->middleware('customAuth');
+Route::get('/Home', [HomeController::class,'view'])->middleware('customAuth');
 
-Route::get('/testimonials', [HomeController::class,'Testimonial']);
+Route::get('/testimonials', [HomeController::class,'Testimonial'])->middleware('customAuth');
 
-Route::get('/About', [AboutController::class,'view']);
+Route::get('/About', [AboutController::class,'view'])->middleware('customAuth');
 
-Route::get('/Find Tutor', [FindTutorController::class,'view']);
-Route::get('/FindCourse', [CoursesController::class,'view']);
+Route::get('/Find Tutor', [FindTutorController::class,'view'])->middleware('customAuth');
+Route::get('/FindCourse', [CoursesController::class,'view'])->middleware('customAuth');
 
-Route::get('/faqs', [FaqController::class,'view']);
+Route::get('/faqs', [FaqController::class,'view'])->middleware('customAuth');
 
-Route::get('/contact', [ContactController::class,'view']);
+Route::get('/contact', [ContactController::class,'view'])->middleware('customAuth');
 Route::post('/contact', [ContactController::class,'ContactInfo']);
 
 Route::get('/contactThanks', function () {
@@ -68,7 +69,8 @@ Route::get('/register', function () {
     $title = "";
     $data = compact('title');
     return view('register')->with($data);
-});
+})->middleware('customAuth');
+
 Route::post('registerUser',[Register_Login_Controller::class,'registerUser']);
 Route::post('loginUser',[Register_Login_Controller::class,'login']);
 
@@ -114,18 +116,18 @@ Route::get('/logout',function(){
 });
 
 
-Route::get('/DashTutors', [FindTutorController::class,'DashView']);
-Route::get('/DashTutorsDetails/{name}', [FindTutorController::class,'TutorDetails']);
-Route::get('/singleTutor/{name}', [FindTutorController::class,'singleTutor']);
+Route::get('/DashTutors', [FindTutorController::class,'DashView'])->middleware('customAuth');
+Route::get('/DashTutorsDetails/{name}', [FindTutorController::class,'TutorDetails'])->middleware('customAuth');
+Route::get('/singleTutor/{name}', [FindTutorController::class,'singleTutor'])->middleware('customAuth');
 // Route::get('/DashTutorsDetails/{name}',function($name){
 //     return view('IndividualTutorD');
 //     });
 
-Route::get('/DashCourses', [CoursesController::class,'DashView']);
-Route::get('/DashCourseDetails/{id}', [CoursesController::class,'CourseDetails']);
-Route::get('/singleCourse/{id}', [CoursesController::class,'singleCourse']);
+Route::get('/DashCourses', [CoursesController::class,'DashView'])->middleware('customAuth');
+Route::get('/DashCourseDetails/{id}', [CoursesController::class,'CourseDetails'])->middleware('customAuth');
+Route::get('/singleCourse/{id}', [CoursesController::class,'singleCourse'])->middleware('customAuth');
 
-Route::get('/DashSessions',function(){
+Route::get('/DashSessions/{name}',function(){
     return view('UpSession');
     });
 
@@ -142,8 +144,8 @@ Route::get('/StudentDashboard',function(){
 
 
 //Live search
-Route::get('/FindATutor', [FindATutor::class, 'index']);
-Route::get('/FindATutor/action', [FindATutor::class, 'action']);
+Route::get('/FindATutor', [FindATutor::class, 'index'])->middleware('customAuth');
+// Route::get('/FindATutor/action', [FindATutor::class, 'action']);
 
 Route::post('/getmsg/{name}',[AjaxController::class, 'view']);
 Route::post('/getPkg/{id}',[AjaxController::class, 'PKG']);
@@ -151,7 +153,7 @@ Route::post('/getPkg/{id}',[AjaxController::class, 'PKG']);
 Route::get('/AdminDashboard', [AdminController::class,'Mailview'])->middleware('customAuth');
 
 Route::get('/AdminDashboard/user', [AdminController::class,'Userview'])->middleware('customAuth');
-Route::get('/AdminDashboard/faqs', [AdminController::class,'faqview']);
+Route::get('/AdminDashboard/faqs', [AdminController::class,'faqview'])->middleware('customAuth');
 Route::post('/AdminDashboard/faqs/insert', [AdminController::class,'faqInsert']);
 
 Route::get('/AdminDashboard/faqs/delete/{id}', [AdminController::class,'faqDelete']);
@@ -168,6 +170,9 @@ Route::get('/BecomeTutor', function () {
 });
 
 Route::post('/BecomeTutor/{name}', [BecomeTutor::class,'update']);
+Route::get('/BecomeTutor/{name}', function(){
+    return view('BecomeATutor');
+});
 
 Route::get('/profile/{name}', function()
 {
@@ -182,3 +187,5 @@ Route::post('/profile/update/{name}', [ProfileController::class,'ProfileUpdate']
 
 Route::get('/status/{name}/{st}',[AdminController::class,'Cstatus']);
 Route::post('/status/{name}', [AdminController::class,'st']);
+
+Route::post('/BookSession/{Tname}/{Sname}',[BookSession::class,'session']);

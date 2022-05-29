@@ -25,23 +25,45 @@ class customAuth
         // return redirect('/login');
         // }
         //return $next($request);
-
-        if (session()->has('user') && $path!='login')  // session has username
+        
+// Session True 
+        if (session()->has('user') && ($path!='login' && $path!='Home' && $path!='/' && $path!='About' && $path!="Find Tutor" && $path!='BecomeTutor' && $path!='FindCourse' && $path!='testimonials' && $path!='singleTutor/{name}' && $path!='singleCourse/{id}' && $path!='faqs' && $path!='contact' && $path!='register'))  // session has username
             {
             //echo $next($request);
             //echo $path;
             return $next($request);   // only then serve next request
             }   
         else if($path=='login' && ( !session()->has('user')))
+        {
+          //echo $next($request);
+          //echo $path;
              return $next($request);
-        else if(($path=='login') && ( Session::get('user')['status']=="student"))
+          }
+
+        else if(( !session()->has('user'))){
+             return $next($request);
+          }
+
+        else if(($path=='login' || $path=='Home' || $path=='/' || $path=='About' || $path=="Find Tutor" || $path=='BecomeTutor' || $path=='FindCourse' || $path=='testimonials' || $path=='singleTutor/{name}' || $path=='singleCourse/{id}' || $path=='faqs' || $path=='contact' || $path=='register' || $path=='TutorDashboard' || $path=='AdminDashboard') && ( Session::get('user')['status']=="student"))
+        {
              return redirect('/StudentDashboard');
-        else if(($path=='login') && ( Session::get('user')['status']=="tutor"))
+          }
+
+        else if(($path=='login' || $path=='Home' || $path=='/' || $path=='About' || $path=="Find Tutor" || $path=='BecomeTutor' || $path=='FindCourse' || $path=='testimonials' || $path=='singleTutor/{name}' || $path=='singleCourse/{id}' || $path=='faqs' || $path=='contact' || $path=='register' || $path=='AdminDashboard' || $path=='StudentDashboard') && ( Session::get('user')['status']=="tutor"))
+        {
              return redirect('/TutorDashboard');
-        else if(($path=='login') && ( Session::get('user')['status']=="admin"))
+          }
+
+        else if(($path=='login' || $path=='Home' || $path=='/' || $path=='About' || $path=="Find Tutor" || $path=='BecomeTutor' || $path=='FindCourse' || $path=='testimonials' || $path=='singleTutor/{name}' || $path=='singleCourse/{id}' || $path=='faqs' || $path=='contact' || $path=='register' || $path=='TutorDashboard' || $path=='StudentDashboard') && ( Session::get('user')['status']=="admin"))
+        {
          return redirect('/AdminDashboard');
-        else 
-         return redirect('/');
+     }
+
+     //    else {
+     //      //echo $next($request);
+     //     // echo $path;
+     //     return redirect('/');
+     // }
 
 
 

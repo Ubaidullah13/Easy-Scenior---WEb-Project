@@ -18,11 +18,37 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="css/Global (Typography).css" />
-    <link href='css/DashboardGlobal.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
+    <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
 </head>
 
 <body class='snippet-body'>
+    @php
+        use App\Models\Users;
+        use App\Models\St_Enrolled_Courses;
+        use App\Models\Packages;
+        use App\Models\Sessions;
+        $fullname = Users::SELECT('fullname')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $status = Users::SELECT('status')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+        $img = Users::SELECT('userImage')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        $amount = Users::SELECT('wallet')
+            ->WHERE('username', Session::get('user')['username'])
+            ->get();
+        
+        if (Session::get('user')['status'] == 'student') {
+            $session = Sessions::WHERE('student', Session::get('user')['username'])->get();
+        } elseif (Session::get('user')['status'] == 'tutor') {
+            $session = Sessions::WHERE('tutor', Session::get('user')['username'])->get();
+        }
+        
+    @endphp
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
     <div class="main">
@@ -32,37 +58,54 @@
                     {{-- <label for="check">
                     <i class="fas fa-bars" id="sidebar_btn"></i>
                 </label> --}}
-                    <img src=" Images/logo.png" id="logo" />
+                    <img src=" {{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="#" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
             </div>
+            <!--  Balance Amount  -->
+            <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
         </header>
 
         <div class="row">
             <div class="col-xl-2 col-md-3">
                 <div class="sideBar">
                     <div class="profile_info text-center">
-                        <img src="Images/users/st (3).png" class="profile_image" alt="">
+                        <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
                         <h4>
-                            Name
+                            {{ $fullname[0]->fullname }}
                         </h4>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>
                         </a>
                     </div>
                     <div id="menus">
-                        <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-                        <a class="active" href="#"><i class="fas fa-calendar"></i><span>Sessions</span></a>
-                        <a href="#"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
-                        <a href="#"><i class="fas fa-th"></i><span>Find Courses</span></a>
-                        <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Become Tutor</span></a>
-                        <a href="#"><i class="fas fa-gear"></i><span>Profile</span></a>
+                        <a href="{{ url('StudentDashboard') }}"><i
+                                class="fas fa-desktop"></i><span>Dashboard</span></a>
+                        <a class="active"
+                            href="{{ url('DashSessions/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-calendar"></i><span>Sessions</span></a>
+                        <a href="{{ url('DashTutors') }}"><i class="fas fa-male"></i><span>Find a Tutor</span></a>
+                        <a href="{{ url('DashCourses') }}"><i class="fas fa-th"></i><span>Find
+                                Courses</span></a>
+
+                        @if (Session::get('user')['status'] == 'student')
+                            <a href="{{ url('BecomeTutor/' . Session::get('user')['username']) }}"><i
+                                    class="fas fa-chalkboard-teacher"></i><span>Become
+                                    Tutor</span></a>
+                        @endif
+
+                        @if (Session::get('user')['status'] == 'tutor')
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i><span>Upload Course</span></a>
+                        @endif
+
+                        <a href="{{ url('profile/' . Session::get('user')['username']) }}"><i
+                                class="fas fa-gear"></i><span>Profile</span></a>
                     </div>
                 </div>
             </div>
@@ -72,30 +115,39 @@
                     <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Upcoming Sessions</h3>
 
                     <div class="row">
-                        <div class="col">
-                            <h5>Date</h5>
+                        <div class="col-3">
+                            <h5>Package</h5>
                         </div>
                         <div class="col">
-                            <h5>Details</h5>
+                            <h5>Detail</h5>
                         </div>
-                        <div class="col">
+                        <div class="col-3">
                             <h5>Time</h5>
                         </div>
                     </div>
+                    @for ($i = 0; $i < count($session); $i++)
+                        @php
+                            
+                            $pkg = Packages::WHERE('pkg_ID', $session[$i]->pckg)->get();
+                            
+                        @endphp
+                        <!-- Session -->
+                        <div style="margin: 2em 0em"></div>
 
-                    <!-- Session -->
-                    <div style="margin: 2em 0em"></div>
-
-                    <div class="row">
-                        <div class="col">
-                            <p>29 May</p>
+                        <div class="row">
+                            <div class="col-3">
+                                <p>{{ $pkg[0]->status }}</p>
+                            </div>
+                            <div class="col">
+                                @if (Session::get('user')['status'] == 'tutor')
+                                    <p>You have an upcoming session with {{ $session[$i]->student }}</p>
+                                @elseif (Session::get('user')['status'] == 'student')
+                                    <p>You have an upcoming session with {{ $session[$i]->tutor }}</p>
+                                @endif
+                            </div>
+                            <div class="col-3">{{ $pkg[0]->duration }}</div>
                         </div>
-                        <div class="col">
-                            <p>Instructor Name</p>
-                            <p class="label">Duration</p>
-                        </div>
-                        <div class="col">2 Hours</div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </div>
@@ -103,7 +155,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-    <script type='text/javascript' src="Js/sidebar.js"></script>
+    <script type='text/javascript' src="{{ asset('Js/sidebar.js') }}"></script>
 </body>
 
 </html>
