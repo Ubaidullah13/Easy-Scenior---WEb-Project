@@ -23,5 +23,9 @@ function course() {
   PR.innerHTML = price;
   document.getElementById('SPusingForm').value=price;
   console.log(document.getElementById('SPusingForm').value);
+
+  $.ajax({
+    
+  })
 }
 

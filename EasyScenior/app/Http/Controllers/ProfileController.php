@@ -10,9 +10,11 @@ class ProfileController extends Controller
     
     public function ProfileUpdate($name, Request $request)
      {
+       $wallet = Users::SELECT('wallet')->where('username',$name)->get();
+
     Users::WHERE('username', $name)->update(['fullname'=>$request['name']]);
     Users::WHERE('username', $name)->update(['email'=>$request['email']]);
-    Users::WHERE('username', $name)->update(['wallet'=>$request['wallet']]);
+    Users::WHERE('username', $name)->update(['wallet'=>($request['wallet'] + $wallet[0]->wallet)]);
     
     if($request->image != null){
       

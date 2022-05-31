@@ -60,6 +60,11 @@
             </div>
             <!--  Balance Amount  -->
             <p class="text-end"><b>Balance</b>: Rs <span>{{ $amount[0]->wallet }}</span></p>
+            {{-- @php
+                $title = 'new';
+            @endphp --}}
+            <h4></h4>
+            <h5 class="text-center" style="color: #1b1c1e;">{!! Session::has('title') ? Session::get('title') : '' !!}</h5>
         </header>
         <div class="row">
             <div class="col-xl-2 col-md-3">
@@ -125,7 +130,6 @@
                         <div class="col-xl col-lg-12">
                             <a class="d-block" href="{{ url('DashCourses') }}"><img
                                     src="{{ asset('Images/Goback.svg') }}" /></a>
-
                             <h3 style="padding-top:2em">{{ $CourseDetails[0]->coursename }}</h3>
                             <div style="flaot:left; margin:1em 0em;">
                                 <h5>Rating</h5>
@@ -215,7 +219,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btnSecond" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btnPrimary">Enroll</button>
+                    <form
+                        action="{{ asset('BookCourse/' . $CourseDetails[0]->tutorname . '/' . Session::get('user')['username']) . '/' . $CourseDetails[0]->price . '/' . $CourseDetails[0]->course_ID }}"
+                        method="post">
+                        @CSRF
+                        <button type="submit" class="btn btnPrimary">Enroll</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -176,9 +176,10 @@
 
                                     <div class="row" style="margin-top: 2rem">
                                         <div class="col-6 col-xl-8 col-lg-7">
-                                            <button class="btn btnSecond btn-sm btnFont">
-                                                <span>See Details</span>
-                                            </button>
+                                            <a href="/singleCourse/{{ $findCourse[$i]->course_ID }}"><button
+                                                    class="btn btnSecond btn-sm btnFont" type="button">
+                                                    See Details
+                                                </button></a>
                                         </div>
                                         <div class="col">
                                             <span>{{ $St_count }} Enrolled</span>

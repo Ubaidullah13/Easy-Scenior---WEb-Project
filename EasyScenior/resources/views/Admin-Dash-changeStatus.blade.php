@@ -38,6 +38,7 @@
             $img = Users::SELECT('userImage')
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
+            echo $name;
         @endphp
 
         <header>
@@ -69,7 +70,7 @@
                         <p>
                             {{ Str::upper($status[0]->status) }}
                         </p>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>

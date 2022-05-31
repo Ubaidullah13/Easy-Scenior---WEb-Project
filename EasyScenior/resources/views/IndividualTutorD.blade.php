@@ -159,12 +159,12 @@
 
                             <div style="padding-top:2em">
                                 <button class="btn btnPrimary btn-sm btnFont D" onClick="details()">
-                                    <span id="RSmall">Detail </span>
+                                    <span>Detail </span>
                                 </button>
                                 <button class="btn btnSecond btn-sm btnFont R"
                                     onClick="getMessage('{{ $TutorDetails[0]->tutorusername }}')">
 
-                                    <span id="RSmall">Reviews</span>
+                                    <span>Reviews</span>
                                 </button>
                             </div>
                             <div id="R" style="margin-bottom: 3em">
@@ -265,7 +265,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btnSecond" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btnPrimary">Book</button>
+                        <button type="button" class="btn btnPrimary">Book</button>
                     </div>
                 </form>
 

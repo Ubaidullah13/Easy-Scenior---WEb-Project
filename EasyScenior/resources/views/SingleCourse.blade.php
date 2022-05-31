@@ -117,8 +117,8 @@
                                     <span style="float: right;">English</span>
                                 </div>
                                 <a href="{{ asset('login') }}" class="mx-auto d-block"><button
-                                        class="btn btnPrimary btn-lg btnFont" style="margin-top:3em;">Book a
-                                        Session</button></a>
+                                        class="btn btnPrimary btn-lg btnFont" style="margin-top:3em;">Enroll
+                                        Now</button></a>
                             </div>
                         </div>
                     </div>

@@ -36,7 +36,8 @@
                     <img src=" {{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href=" {{url('/logout')}}" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href=" {{ url('/logout') }}" id="logout"><button type="button"
+                            class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
@@ -53,8 +54,8 @@
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
             $img = Users::SELECT('userImage')
-            ->WHERE('username', Session::get('user')['username'])
-            ->get();
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
         @endphp
 
         <div class="row">
@@ -69,18 +70,19 @@
                         <p>
                             {{ Str::upper($status[0]->status) }}
                         </p>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>
                         </a>
                     </div>
                     <div id="menus">
-                        <a  href="/AdminDashboard"><i class="fas fa-envelope"></i><span>Mails</span></a>
+                        <a href="/AdminDashboard"><i class="fas fa-envelope"></i><span>Mails</span></a>
                         <a href="/AdminDashboard/faqs"><i class="fas fa-question"></i><span>Add FAQs</span></a>
                         <a href="/status"><i class="fas fa-eject"></i><span>Change Status</span></a>
-                        <a class="active" href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit About</span></a>
-                        <a  href="/AdminDashboard/user"><i class="fas fa-user"></i><span>Edit Users</span></a>
+                        <a class="active" href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit
+                                About</span></a>
+                        <a href="/AdminDashboard/user"><i class="fas fa-user"></i><span>Edit Users</span></a>
                     </div>
                 </div>
             </div>
@@ -138,7 +140,8 @@
                                 <div class="col my-auto">
                                     <div class="input-group input-grp">
                                         <input type="text" class="input" id="p3" required="" autocomplete="off"
-                                            name="p3" value="{{ $about[5]->Heading }}" style="padding-top:1rem; margin-bottom:1rem" />
+                                            name="p3" value="{{ $about[5]->Heading }}"
+                                            style="padding-top:1rem; margin-bottom:1rem" />
                                         <label class="user-label">Name</label>
                                         <input type="file" class="input" autocomplete="off" id="image1"
                                             name="image1" />
@@ -157,66 +160,68 @@
                     </form>
 
                     <form class="contactright" style="padding-top:1rem; margin-top:1rem"
-                    action="/AdminDashboard/about/update/{{ $about[6]->ID }}" method="post" return="false"
-                    enctype="multipart/form-data">
-                    <div class="mb-0 mt-0">
+                        action="/AdminDashboard/about/update/{{ $about[6]->ID }}" method="post" return="false"
+                        enctype="multipart/form-data">
+                        <div class="mb-0 mt-0">
 
-                        <div class="row">
-                            <div class="col-3 my-auto">
-                                <img src="{{ asset('Images/' . $about[6]->Image) }}">
-                            </div>
+                            <div class="row">
+                                <div class="col-3 my-auto">
+                                    <img src="{{ asset('Images/' . $about[6]->Image) }}">
+                                </div>
 
-                            <div class="col my-auto">
-                                <div class="input-group input-grp">
-                                    <input type="text" class="input" id="p4" required="" autocomplete="off"
-                                        name="p4" value="{{ $about[6]->Heading }}" style="padding-top:1rem; margin-bottom:1rem" />
-                                    <label class="user-label">Name</label>
-                                    <input type="file" class="input" autocomplete="off" id="image2"
-                                        name="image2" />
+                                <div class="col my-auto">
+                                    <div class="input-group input-grp">
+                                        <input type="text" class="input" id="p4" required="" autocomplete="off"
+                                            name="p4" value="{{ $about[6]->Heading }}"
+                                            style="padding-top:1rem; margin-bottom:1rem" />
+                                        <label class="user-label">Name</label>
+                                        <input type="file" class="input" autocomplete="off" id="image2"
+                                            name="image2" />
+                                    </div>
+                                </div>
+                                @error('p4')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @csrf
+                                <div class="col-2 my-auto">
+                                    <button type="submit"
+                                        class="btnPrimary btn btnFont btn-lg mx-auto d-block">Update</button>
                                 </div>
                             </div>
-                            @error('p4')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                            @csrf
-                            <div class="col-2 my-auto">
-                                <button type="submit"
-                                    class="btnPrimary btn btnFont btn-lg mx-auto d-block">Update</button>
+                        </div>
+                    </form>
+
+                    <form class="contactright" style="padding-top:1rem; margin-top:1rem"
+                        action="/AdminDashboard/about/update/{{ $about[7]->ID }}" method="post" return="false"
+                        enctype="multipart/form-data">
+                        <div class="mb-0 mt-0">
+
+                            <div class="row">
+                                <div class="col-3 my-auto">
+                                    <img src="{{ asset('Images/' . $about[7]->Image) }}">
+                                </div>
+
+                                <div class="col my-auto">
+                                    <div class="input-group input-grp">
+                                        <input type="text" class="input" id="p5" required="" autocomplete="off"
+                                            name="p5" value="{{ $about[7]->Heading }}"
+                                            style="padding-top:1rem; margin-bottom:1rem" />
+                                        <label class="user-label">Name</label>
+                                        <input type="file" class="input" autocomplete="off" id="image3"
+                                            name="image3" />
+                                    </div>
+                                </div>
+                                @error('p5')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @csrf
+                                <div class="col-2 my-auto">
+                                    <button type="submit"
+                                        class="btnPrimary btn btnFont btn-lg mx-auto d-block">Update</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-
-                <form class="contactright" style="padding-top:1rem; margin-top:1rem"
-                action="/AdminDashboard/about/update/{{ $about[7]->ID }}" method="post" return="false"
-                enctype="multipart/form-data">
-                <div class="mb-0 mt-0">
-
-                    <div class="row">
-                        <div class="col-3 my-auto">
-                            <img src="{{ asset('Images/' . $about[7]->Image) }}">
-                        </div>
-
-                        <div class="col my-auto">
-                            <div class="input-group input-grp">
-                                <input type="text" class="input" id="p5" required="" autocomplete="off"
-                                    name="p5" value="{{ $about[7]->Heading }}" style="padding-top:1rem; margin-bottom:1rem" />
-                                <label class="user-label">Name</label>
-                                <input type="file" class="input" autocomplete="off" id="image3"
-                                    name="image3" />
-                            </div>
-                        </div>
-                        @error('p5')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        @csrf
-                        <div class="col-2 my-auto">
-                            <button type="submit"
-                                class="btnPrimary btn btnFont btn-lg mx-auto d-block">Update</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                    </form>
 
                 </div>
             </div>

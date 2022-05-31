@@ -189,3 +189,4 @@ Route::get('/status/{name}/{st}',[AdminController::class,'Cstatus']);
 Route::post('/status/{name}', [AdminController::class,'st']);
 
 Route::post('/BookSession/{Tname}/{Sname}',[BookSession::class,'session']);
+Route::post('/BookCourse/{Tname}/{Sname}/{price}/{Cid}',[BookSession::class,'Course']);

@@ -46,6 +46,10 @@
             ->get();
         $enrolled = count($courseID);
         
+        $tutor = Courses::SELECT('coursename', 'coverpic')
+            ->WHERE('tutorname', Session::get('user')['username'])
+            ->get();
+        //$TcPic = Courses::SELECT('coverpic')->WHERE('tutorname', Session::get('user')['username']);
     @endphp
     {{-- <input type="checkbox" id="check"> --}}
     <!--header area start-->
@@ -131,9 +135,10 @@
                                     <img src="Images/Hi.svg" />
                                 </div>
                             </div>
-                            <div class="row my-5">
+                            <h4 style="margin-top:2rem;">Courses Uplaod</h4>
+                            <div class="row">
                                 <div class="col">
-                                    <h5>Image</h5>
+                                    <h5>Cover</h5>
                                 </div>
                                 <div class="col">
                                     <h5>Name</h5>
@@ -143,8 +148,8 @@
                                 </div> --}}
                             </div>
 
-                            @for ($i = 0; $i < $enrolled; $i++)
-                                @php
+                            @for ($i = 0; $i < count($tutor); $i++)
+                                {{-- @php
                                     $Cimg = Courses::SELECT('coverpic')
                                         ->WHERE('course_ID', $courseID[$i]->course_id)
                                         ->get();
@@ -152,21 +157,57 @@
                                     $Cname = Courses::SELECT('coursename')
                                         ->WHERE('course_ID', $courseID[$i]->course_id)
                                         ->get();
-                                @endphp
+                                @endphp --}}
                                 <!-- Session -->
                                 <div style="margin: 2em 0em"></div>
 
                                 <div class="row">
                                     <div class="col">
-                                        <img src="Images/{{ $Cimg[0]->coverpic }}" width="50%" />
+                                        <img src="Images/{{ $tutor[$i]->coverpic }}" width="50%" />
                                     </div>
                                     <div class="col">
-                                        <p>{{ $Cname[0]->coursename }}</p>
+                                        <p>{{ $tutor[$i]->coursename }}</p>
                                         <button class="btn btnSecond btn-sm btnFont">continue</button>
                                     </div>
                                     {{-- <div class="col">2 Hours</div> --}}
                                 </div>
                             @endfor
+                            <h4 style="margin-top:5em;">Courses Enrolled</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Cover</h5>
+                                </div>
+                                <div class="col">
+                                    <h5>Name</h5>
+                                </div>
+                                @for ($i = 0; $i < $enrolled; $i++)
+                                    @php
+                                        $Cimg = Courses::SELECT('coverpic')
+                                            ->WHERE('course_ID', $courseID[$i]->course_id)
+                                            ->get();
+                                        
+                                        $Cname = Courses::SELECT('coursename')
+                                            ->WHERE('course_ID', $courseID[$i]->course_id)
+                                            ->get();
+                                    @endphp
+                                    <!-- Session -->
+                                    <div style="margin: 2em 0em"></div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="Images/{{ $Cimg[0]->coverpic }}" width="50%" />
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ $Cname[0]->coursename }}</p>
+                                            <button class="btn btnSecond btn-sm btnFont">continue</button>
+                                        </div>
+                                        {{-- <div class="col">2 Hours</div> --}}
+                                    </div>
+                                @endfor
+                                {{-- <div class="col">
+                                    <h5>Time</h5>
+                                </div> --}}
+                            </div>
                         </div>
 
                         <div class="col my-auto">

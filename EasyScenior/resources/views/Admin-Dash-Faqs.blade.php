@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/Global (Typography).css') }}" />
     <link href='{{ asset('css/DashboardGlobal.css') }}' rel='stylesheet'>
-    <link rel="stylesheet" href='{{asset ('css/ContactsLoginSignup.css') }}' />
+    <link rel="stylesheet" href='{{ asset('css/ContactsLoginSignup.css') }}' />
 
 </head>
 
@@ -34,10 +34,11 @@
                     {{-- <label for="check">
                     <i class="fas fa-bars" id="sidebar_btn"></i>
                 </label> --}}
-                    <img src=" {{asset('Images/logo.png')}}" id="logo" />
+                    <img src=" {{ asset('Images/logo.png') }}" id="logo" />
                 </div>
                 <div class="col my-auto text-end">
-                    <a href="logout" id="logout"><button type="button" class="btn btnPrimary btn-lg btnFont">
+                    <a href="{{ asset('logout') }}" id="logout"><button type="button"
+                            class="btn btnPrimary btn-lg btnFont">
                             Logout
                         </button></a>
                 </div>
@@ -52,9 +53,9 @@
             $status = Users::SELECT('status')
                 ->WHERE('username', Session::get('user')['username'])
                 ->get();
-                $img = Users::SELECT('userImage')
-            ->WHERE('username', Session::get('user')['username'])
-            ->get();
+            $img = Users::SELECT('userImage')
+                ->WHERE('username', Session::get('user')['username'])
+                ->get();
         @endphp
 
         <div class="row">
@@ -63,100 +64,102 @@
                     <div class="profile_info text-center">
                         <img src="{{ asset('Images/users/' . $img[0]->userImage) }}" class="profile_image" alt="">
                         <h4>
-                        {{ $fullname[0]->fullname }}
+                            {{ $fullname[0]->fullname }}
                         </h4>
 
                         <p>
                             {{ Str::upper($status[0]->status) }}
                         </p>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>
                         </a>
                     </div>
                     <div id="menus">
-                        <a  href="#"><i class="fas fa-envelope"></i><span>Mails</span></a>
-                        <a class="active" href="/AdminDashboard/faqs"><i class="fas fa-question"></i><span>Add FAQs</span></a>
+                        <a href="{{ asset('AdminDashboard') }}"><i class="fas fa-envelope"></i><span>Mails</span></a>
+                        <a class="active" href="/AdminDashboard/faqs"><i class="fas fa-question"></i><span>Add
+                                FAQs</span></a>
                         {{-- <a href="/status"><i class="fas fa-eject"></i><span>Change Status</span></a> --}}
-                        <a  href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit About</span></a>
-                        <a  href="/AdminDashboard/user"><i class="fas fa-user"></i><span>Edit Users</span></a>
+                        <a href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit About</span></a>
+                        <a href="/AdminDashboard/user"><i class="fas fa-user"></i><span>Edit Users</span></a>
                     </div>
                 </div>
             </div>
             <!--sidebar end-->
             <div class="col">
-                <div class="DashContainer">   
-              <div class="row">
-                <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Add FAQ's</h3>
-
-                <form action="/AdminDashboard/faqs/insert" method="post" return="false"
-                enctype="multipart/form-data">
-
-                <div class="mb-4 mt-4">
-                    <div class="input-group input-grp">
-                        <input type="text" class="input" id="question" required="" autocomplete="off"
-                            name="question" value="{{ old('question') }}" style="padding-bottom:4em" />
-                        <label class="user-label">Question</label>
-                    </div>
-                    @error('question')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    @csrf
-                </div>
-
-
-                <div class="mb-4 mt-4">
-                    <div class="input-group input-grp">
-                        <input type="text" class="input" id="answer" required="" autocomplete="off"
-                            name="answer" value="{{ old('answer') }}" style="padding-bottom:4em" />
-                        <label class="user-label">Answer</label>
-                    </div>
-                    @error('answer')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    @csrf
-                </div>
-
-                <button type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup">
-                    Submit FAQ
-                </button>
-            </form>
-        </div>
-           <div class="row">
-                <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">FAQ's</h3>
-
+                <div class="DashContainer">
                     <div class="row">
-                        <div class="col">
-                            <h5>Question</h5>
-                        </div>
-                        <div class="col">
-                            <h5>Answer</h5>
-                        </div>
-                        <div class="col">
-                            <h5></h5>
-                        </div>
+                        <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">Add FAQ's</h3>
+
+                        <form action="/AdminDashboard/faqs/insert" method="post" return="false"
+                            enctype="multipart/form-data">
+
+                            <div class="mb-4 mt-4">
+                                <div class="input-group input-grp">
+                                    <input type="text" class="input" id="question" required=""
+                                        autocomplete="off" name="question" value="{{ old('question') }}"
+                                        style="padding-bottom:4em" />
+                                    <label class="user-label">Question</label>
+                                </div>
+                                @error('question')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @csrf
+                            </div>
+
+
+                            <div class="mb-4 mt-4">
+                                <div class="input-group input-grp">
+                                    <input type="text" class="input" id="answer" required="" autocomplete="off"
+                                        name="answer" value="{{ old('answer') }}" style="padding-bottom:4em" />
+                                    <label class="user-label">Answer</label>
+                                </div>
+                                @error('answer')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                @csrf
+                            </div>
+
+                            <button type="submit" class="btn btnPrimary btn-lg btnFont buttonLoginSignup">
+                                Submit FAQ
+                            </button>
+                        </form>
                     </div>
+                    <div class="row">
+                        <h3 style="color: #1c4a4a; text-align:center;margin: 1em 0em;">FAQ's</h3>
 
-                    <!-- Session -->
-                    <div style="margin: 1em 0em"></div>
-                      @for ($i = 0; $i < count ($FAQ); $i++)
                         <div class="row">
-
                             <div class="col">
-                                <p>{{ $FAQ[$i]->question }}</p>
+                                <h5>Question</h5>
                             </div>
                             <div class="col">
-                                <p>{{ $FAQ[$i]->answer }}</p>
+                                <h5>Answer</h5>
                             </div>
                             <div class="col">
-                                <a href="{{url('/AdminDashboard/faqs/delete/')}}/{{$FAQ[$i]->id}}" >
-                                    <button class="btnSecond btn btnFont btn-lg">Delete</button>
-                                </a>
+                                <h5></h5>
                             </div>
-
                         </div>
-                    @endfor
+
+                        <!-- Session -->
+                        <div style="margin: 1em 0em"></div>
+                        @for ($i = 0; $i < count($FAQ); $i++)
+                            <div class="row">
+
+                                <div class="col">
+                                    <p>{{ $FAQ[$i]->question }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ $FAQ[$i]->answer }}</p>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ url('/AdminDashboard/faqs/delete/') }}/{{ $FAQ[$i]->id }}">
+                                        <button class="btnSecond btn btnFont btn-lg">Delete</button>
+                                    </a>
+                                </div>
+
+                            </div>
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -165,7 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-    <script type='text/javascript' src="Js/sidebar.js"></script>
+    <script type='text/javascript' src="{{ asset('Js/sidebar.js') }}"></script>
 </body>
 
 </html>

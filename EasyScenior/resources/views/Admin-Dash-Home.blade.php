@@ -71,14 +71,15 @@
                         <p>
                             {{ Str::upper($status[0]->status) }}
                         </p>
-                        <a href="javascript:void(0);" class="icon hide" onclick="geeksforgeeks()">
+                        <a href="javascript:void(0);" class="icon hide" onclick="side()">
 
                             <i onclick="myFunction(this)" class="fa fa-plus-circle" id="hide"> Menu
                             </i>
                         </a>
                     </div>
                     <div id="menus">
-                        <a class="active" href="/AdminDashboard"><i class="fas fa-envelope"></i><span>Mails</span></a>
+                        <a class="active" href="/AdminDashboard"><i
+                                class="fas fa-envelope"></i><span>Mails</span></a>
                         <a href="/AdminDashboard/faqs"><i class="fas fa-question"></i><span>Add FAQs</span></a>
                         {{-- <a href="/status"><i class="fas fa-eject"></i><span>Change Status</span></a> --}}
                         <a href="/AdminDashboard/about"><i class="fas fa-info"></i><span>Edit About</span></a>
