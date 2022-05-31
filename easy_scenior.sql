@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 29, 2022 at 03:06 PM
+-- Generation Time: May 31, 2022 at 05:50 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -104,7 +104,7 @@ INSERT INTO `category` (`cat_ID`, `cat_name`, `Image`) VALUES
 (2, 'Electrical Engineering', 'Electrical Engineering - category.svg'),
 (3, 'Software Engineering', 'Software Engineering - category.svg'),
 (4, 'Business Analytics', 'business Analytics - category.svg'),
-(5, 'Architecture', 'Architecture.svg'),
+(5, 'Architecture Engineering', 'Architecture.svg'),
 (6, 'International Relations', 'international.svg');
 
 -- --------------------------------------------------------
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `faqs` (
   `updated_at` timestamp NOT NULL,
   `created_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `faqs`
@@ -314,6 +314,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `pkg_ID` int(11) NOT NULL AUTO_INCREMENT,
   `duration` varchar(50) NOT NULL,
   `price` int(50) NOT NULL,
+  `status` text NOT NULL,
   PRIMARY KEY (`pkg_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -321,10 +322,10 @@ CREATE TABLE IF NOT EXISTS `packages` (
 -- Dumping data for table `packages`
 --
 
-INSERT INTO `packages` (`pkg_ID`, `duration`, `price`) VALUES
-(1, '1 Hour', 500),
-(2, '5 Hours', 2000),
-(3, '20 Hours', 8000);
+INSERT INTO `packages` (`pkg_ID`, `duration`, `price`, `status`) VALUES
+(1, '1 Hour', 500, 'Basic'),
+(2, '5 Hours', 2000, 'Silver'),
+(3, '20 Hours', 8000, 'Gold');
 
 -- --------------------------------------------------------
 
@@ -372,13 +373,21 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `tutor` varchar(20) NOT NULL,
   `student` varchar(20) NOT NULL,
   `pckg` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL,
   PRIMARY KEY (`session_ID`),
   KEY `fk_session_tutor` (`tutor`),
   KEY `fk_session_student` (`student`),
   KEY `fk_session_pkg` (`pckg`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`session_ID`, `tutor`, `student`, `pckg`, `updated_at`, `created_at`) VALUES
+(1, 'Elijah13', 'Lucas', 2, '2022-05-29 15:55:38', '2022-05-29 15:55:38'),
+(2, 'Ava', 'Lucas', 1, '2022-05-29 15:55:38', '2022-05-29 15:55:38');
 
 -- --------------------------------------------------------
 
@@ -391,20 +400,25 @@ CREATE TABLE IF NOT EXISTS `student_enrolled_in_course` (
   `enrolledID` int(11) NOT NULL AUTO_INCREMENT,
   `st_username` varchar(20) NOT NULL,
   `course_id` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL,
   PRIMARY KEY (`enrolledID`),
   KEY `fk_enroll_st` (`st_username`),
   KEY `fk_enroll_Course` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student_enrolled_in_course`
 --
 
-INSERT INTO `student_enrolled_in_course` (`enrolledID`, `st_username`, `course_id`) VALUES
-(1, 'Smiith', 4),
-(2, 'Emilia', 3),
-(3, 'Mariia', 3),
-(4, 'Lucas', 1);
+INSERT INTO `student_enrolled_in_course` (`enrolledID`, `st_username`, `course_id`, `updated_at`, `created_at`) VALUES
+(1, 'Smiith', 4, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Emilia', 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Mariia', 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Lucas', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Lucas', 4, '2022-05-31 00:20:05', '2022-05-31 00:20:05'),
+(9, 'Lucas', 5, '2022-05-31 03:19:46', '2022-05-31 03:19:46'),
+(11, 'Lucas', 3, '2022-05-31 05:51:34', '2022-05-31 05:51:34');
 
 -- --------------------------------------------------------
 
@@ -461,6 +475,7 @@ INSERT INTO `tutor` (`tutorusername`, `introduction`, `expertise`, `major`, `ins
 ('Ava', 'Charlotte pursues BBA at NUST and will be starting her 5th semester. So if you’re starting new in this field, she has enough experience to guide you about this field, department in NUST, and other tips to ace your studies here, with special command on Business analytics.', '“I\'m a business administration student with a keen interest in management and marketing/entrepreneurship-related subjects and I believe that\'s my area of expertise. Students can choose me as their mentor if they need any sort of help in business-related subjects, I\'d be more than happy to help.”', 4, 'National University of Science & Technology', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('Elijah13', 'Elijah has maintained an outstanding profile throughout his academic career. Not only is he a position holder in FBISE HSSC Examinations, but also now maintains a remarkable CGPA of 3.97 at the No. 1 Engineering University of Pakistan, NUST. Here’s what he has to say.', '“I have a strong grip on maths and physics. Moreover, I scored 10th position in the ECAT examination conducted by UET. I particularly ace in electrical major subjects. I can guide the junior batches on how to manage studies at University. Moreover, I can also provide them with a strong background in Engineering drawing and Calculus.”', 2, 'Nescom', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('Emma_Olivia', 'With an outstanding academic record of having 97.5% in matric and 95%, Emma now pursues Computer Science at the Number 1 University of Pakistan, NUST at SEECS. Not only has she maintained a CGPA of 3.54 but she is also equally socially active in many student societies and clubs.', 'Most students face difficulty adjusting to university life, which is quite normal. So if you want any help with that, I can provide you with some guidelines and tips to help you adjust here, especially in the field of CS. Moreover, I can impart my experience and techniques that I followed during my NET (NUST entry test) preparation which was quite useful for me. Some courses of my freshmen year I can provide you guidance with: Fundamentals of Computer Programming (FoCP), Object-Oriented Programming (OOP), Calculus 1 & 2, Digital Logic Design, and Discrete Maths.', 1, 'National University of Science & Technology', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+('Lucas', 'testing', 'testing', 1, 'nust', '2022-05-31 05:53:42', '2022-05-31 05:53:42'),
 ('Noah', 'Some say you can either be a bookworm and score a good GPA, or spend your time learning practical skills. Well, Noah James proves that you can be both, a freelancer with multiple skills and still have an incredible CGPA of 3.69 at the same time.', 'I am good at teaching as I am doing an internship at AI teaching in NUST. I have good concepts of JAVA OOP and C, C++ and I think this is the major concern of every newbie in coding. All you need is perfect guidance and I will assure you the best support, and I am also doing freelancing in it and I will guide you in that too. The main skill involved is communication skills and as a senior, I will there for you in that aspect as well. You can just approach and I would love to answer your query because that is what our seniors did. If you take coaching from me, the guidance will be there for sure but you will get to learn about the latest updates happening in the field and some other morals that are important for our life. I can make a customized plan for your study because that is what I do for myself. And we can have an interactive session once a week to answer the query and enhance our performance.', 3, 'National University of Science & Technology', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 ('Sara_Ali', 'Hailing from SADA, NUST, Sophia is the person who\'ll guide you all you need to know about what to expect in NET for Architecture and how to ace it.', 'I\'m a first-year student of architecture, the subjects I had in Alevels were maths, physics, and economics. I believe I can guide students that are looking to give their NETS for bachelor\'s in architecture and bachelors in industrial design effectively. I will impart tips and tricks and guide them on how to study for it. I know firsthand how scary it is to give NETS without proper guidance with my friendly personality I hope to make the experience of giving NETs less frightening by preparing students on how to go about it.', 5, 'National University of Science & Technology', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
@@ -490,17 +505,18 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `fullname`, `email`, `password`, `userImage`, `status`, `wallet`, `updated_at`, `created_at`) VALUES
-('Admin', 'Admin', 'admin@gmail.com', 'eyJpdiI6IlJnN3Q3MlFMMS9pUERrT3p5T01rdnc9PSIsInZhbHVlIjoicVRIYjZTZ3pQS2Y3YUtUL1JJeHBpZz09IiwibWFjIjoiNTQyYjNjNWMzYmU5MDNkN2RiYmY0OGQ5MDI2Y2I1YzBmMzUxMjQzOWExMDYxZTg3ODliODhiYmU4NzUwMWE4NCIsInRhZyI6IiJ9', 'admin.jpg', 'admin', 5000, '2022-05-26 03:11:16', '2022-05-26 03:11:16'),
+('Admin', 'Admin', 'admin@gmail.com', 'eyJpdiI6IlJnN3Q3MlFMMS9pUERrT3p5T01rdnc9PSIsInZhbHVlIjoicVRIYjZTZ3pQS2Y3YUtUL1JJeHBpZz09IiwibWFjIjoiNTQyYjNjNWMzYmU5MDNkN2RiYmY0OGQ5MDI2Y2I1YzBmMzUxMjQzOWExMDYxZTg3ODliODhiYmU4NzUwMWE4NCIsInRhZyI6IiJ9', 'admin.jpg', 'admin', 31820, '2022-05-31 05:51:34', '2022-05-26 03:11:16'),
 ('aliya', 'Aliya Noor', 'aliya@gmail.com', 'eyJpdiI6Ik84OUx6N205VFlnMTFSL2lmdEI0akE9PSIsInZhbHVlIjoiR3VMQk1ZVE9sVVpaeXBHMGJCRGNVZz09IiwibWFjIjoiYmZlYjAwOGEzODQ2NTlmMWEzY2IzMDY3NGM5MDM2M2Q3ZmM3MDVhNjcwOWVmZjM3ZGU0N2I5MDk0NDBiZmM2ZSIsInRhZyI6IiJ9', 'aliya.jpg', 'student', 3000, '2022-05-29 07:32:49', '2022-05-28 14:38:06'),
-('Ava', 'Charlotte Ava', 'ava@gmail.com', 'eyJpdiI6Ii9kSFljbi9aMmdkSmZBTHEzYjBkNVE9PSIsInZhbHVlIjoielo3bHQreDU5Um5Dcy9oNGhRenp0UT09IiwibWFjIjoiMTdmMjRjMDI4YTJkNzJiZmM4NTk1ODY4MDg4ODUyYmQ1Nzc4MDQ3MWI2YTI0YjgwNzkzOGFhMzE4YWFjMDIyNCIsInRhZyI6IiJ9', 'Ava.png', 'tutor', 7000, '2022-05-26 07:27:41', '2022-05-26 07:27:41'),
-('Elijah13', 'Elijah Liam', 'elijah@gmail.com', 'eyJpdiI6ImYvWmtCc1R4RTNtb01LYnRrV2pCSkE9PSIsInZhbHVlIjoiSVpwNGEvRlIrV1dER0srUnhWVTE3VkdXdUhVTkRwOW5TUmlaYWhXdzliST0iLCJtYWMiOiI0ODg1MDIzYTc4NDE1OWUzMDkzMjVhNjYyYTdiZjM0NWMzNmI4NTY0Mjg5ZjRiOTEwNmQ1ODBlM2ZlZDk3NmFiIiwidGFnIjoiIn0=', 'Elijah13.png', 'tutor', 2000, '2022-05-26 07:26:37', '2022-05-26 07:26:37'),
+('Ava', 'Charlotte Ava', 'ava@gmail.com', 'eyJpdiI6Ii9kSFljbi9aMmdkSmZBTHEzYjBkNVE9PSIsInZhbHVlIjoielo3bHQreDU5Um5Dcy9oNGhRenp0UT09IiwibWFjIjoiMTdmMjRjMDI4YTJkNzJiZmM4NTk1ODY4MDg4ODUyYmQ1Nzc4MDQ3MWI2YTI0YjgwNzkzOGFhMzE4YWFjMDIyNCIsInRhZyI6IiJ9', 'Ava.png', 'tutor', 10200, '2022-05-31 03:19:46', '2022-05-26 07:27:41'),
+('Elijah13', 'Elijah Liam', 'elijah@gmail.com', 'eyJpdiI6ImYvWmtCc1R4RTNtb01LYnRrV2pCSkE9PSIsInZhbHVlIjoiSVpwNGEvRlIrV1dER0srUnhWVTE3VkdXdUhVTkRwOW5TUmlaYWhXdzliST0iLCJtYWMiOiI0ODg1MDIzYTc4NDE1OWUzMDkzMjVhNjYyYTdiZjM0NWMzNmI4NTY0Mjg5ZjRiOTEwNmQ1ODBlM2ZlZDk3NmFiIiwidGFnIjoiIn0=', 'Elijah13.png', 'tutor', 1200, '2022-05-31 00:20:05', '2022-05-26 07:26:37'),
 ('Emilia', 'Emilia', 'emilia@gmail.com', 'eyJpdiI6IkJucHJsZWZKQWVvenRZZ0g1Zm53Ync9PSIsInZhbHVlIjoicklEdVYxR3FqS2pxWk83djg1MjV4dz09IiwibWFjIjoiNjlmZjMwZWU5YmU2ZTc2NWZkN2NjZjA4NzgzNGI1Y2YxYjExZWY5MWQ4ZDBiNTY4NzA1ZjM3ZTA5YzkzNTE0NCIsInRhZyI6IiJ9', 'st (2).png', 'student', 8000, '2022-05-25 09:53:41', '2022-05-25 09:53:41'),
-('Emma_Olivia', 'Emma Olivia', 'emma@gmail.com', 'eyJpdiI6IjBNcWhlVnA3SWMxL3NlNkpaSmltWUE9PSIsInZhbHVlIjoiM05GYnVSSGxzTExDMXRDNXdkcWp0UT09IiwibWFjIjoiYTJiYWJkMWY2ZDQwMTJjNjllOTUxNjM5YTUzOTkxODBmOTNmOGE2YmM2NDU1NDg5ZTM1OTY1OGJkOWFmZjNmOCIsInRhZyI6IiJ9', 'Emma_Olivia.png', 'tutor', 11000, '2022-05-26 07:38:26', '2022-05-26 07:38:26'),
-('Lucas', 'Lucas Mare', 'lucas@gmail.com', 'eyJpdiI6Ijlzb29JYmtkUXZFZTlma0pVZ1ZnSlE9PSIsInZhbHVlIjoiUmw0cFpxYzdjMTdIQUJ5U1ZjQm1LUT09IiwibWFjIjoiN2UyY2I1ZWI2ZTQ1ZmRjN2JkOTE3NmZmMTM4MjVjYzk4NDk5ZGU0Mjk0M2QwMmQzNzA3NGI3NGM3MTIwYzlmNyIsInRhZyI6IiJ9', 'Lucas.png', 'student', 900, '2022-05-29 06:44:58', '2022-05-26 07:28:13'),
+('Emma_Olivia', 'Emma Olivia', 'emma@gmail.com', 'eyJpdiI6IjBNcWhlVnA3SWMxL3NlNkpaSmltWUE9PSIsInZhbHVlIjoiM05GYnVSSGxzTExDMXRDNXdkcWp0UT09IiwibWFjIjoiYTJiYWJkMWY2ZDQwMTJjNjllOTUxNjM5YTUzOTkxODBmOTNmOGE2YmM2NDU1NDg5ZTM1OTY1OGJkOWFmZjNmOCIsInRhZyI6IiJ9', 'Emma_Olivia.png', 'tutor', 0, '2022-05-29 13:21:31', '2022-05-26 07:38:26'),
+('Lucas', 'Lucas Mare', 'lucas@gmail.com', 'eyJpdiI6Ijlzb29JYmtkUXZFZTlma0pVZ1ZnSlE9PSIsInZhbHVlIjoiUmw0cFpxYzdjMTdIQUJ5U1ZjQm1LUT09IiwibWFjIjoiN2UyY2I1ZWI2ZTQ1ZmRjN2JkOTE3NmZmMTM4MjVjYzk4NDk5ZGU0Mjk0M2QwMmQzNzA3NGI3NGM3MTIwYzlmNyIsInRhZyI6IiJ9', 'Lucas.png', 'tutor', 3800, '2022-05-31 05:53:42', '2022-05-26 07:28:13'),
 ('Mariia', 'Maria David', 'maria@gmail.com', 'eyJpdiI6IkhjaEswVTZuaUpMNHZOV1JWTlpGMFE9PSIsInZhbHVlIjoiMnZ1R3lybWpDaHRxMzAwLzB6YkROZz09IiwibWFjIjoiYzhjYzZmYTU5ODMxM2Y1MmNlZjM1M2UzNWMxNjk5MjUxN2I1NjhkMmFkMjk0NTJmNTcxMmM4OTBmNTNiODc3MCIsInRhZyI6IiJ9', 'st (3).png', 'student', 300, '2022-05-25 12:46:44', '2022-05-25 12:46:44'),
-('Noah', 'Noah James', 'naoh@gmail.com', 'eyJpdiI6InNLRFlWLzhzbFRrWUsyK2xhUUV4OEE9PSIsInZhbHVlIjoiT3ZwMmVEVTF3WWYxa3hhTVNvUmw2UT09IiwibWFjIjoiZmJmMGQyNWU1MjU0ZGE3MTUxZWY3NmRkMjg0YmI5NzUyMGRlNTMzZDUyODg1NjhkY2M3ZDMyYWQyOGI5YTZiMyIsInRhZyI6IiJ9', 'Noah.png', 'tutor', 0, '2022-05-26 07:25:11', '2022-05-26 07:25:11'),
+('Noah', 'Noah James', 'naoh@gmail.com', 'eyJpdiI6InNLRFlWLzhzbFRrWUsyK2xhUUV4OEE9PSIsInZhbHVlIjoiT3ZwMmVEVTF3WWYxa3hhTVNvUmw2UT09IiwibWFjIjoiZmJmMGQyNWU1MjU0ZGE3MTUxZWY3NmRkMjg0YmI5NzUyMGRlNTMzZDUyODg1NjhkY2M3ZDMyYWQyOGI5YTZiMyIsInRhZyI6IiJ9', 'Noah.png', 'tutor', 2880, '2022-05-31 05:51:34', '2022-05-26 07:25:11'),
 ('Sara_Ali', 'Sara Ali', 'sara@gmail.com', 'eyJpdiI6IkVKUFNlVDl4QkIwMFloWEVDdEJXa1E9PSIsInZhbHVlIjoiVVJaaTJCSTRzQVkvOHJtRGRiU2xtUT09IiwibWFjIjoiYThkYjg3YzMxM2E4NzE4NGU4MGFhYjBlNTc4NmYyMDVhZTBmYWJhNzJkMzc5NGJkNmRkYjI0YWFlYThjZTdhNCIsInRhZyI6IiJ9', 'Default.png', 'tutor', 0, '2022-05-26 08:11:04', '2022-05-26 08:11:04'),
-('Smiith', 'Smith Jones', 'smith@gmail.com', 'eyJpdiI6IjFoK0hRakFpSjdNV1EvUTlReWJvUmc9PSIsInZhbHVlIjoiS2N2ZEMvbExZczlDNUd4MHBWclBVQT09IiwibWFjIjoiOTk2OGZjYjc0MGZmY2VkMDU3Y2MxNDU1YzAyMzJmZTQ3MGJlNGJhODMzMmIzYWRlNzhlYjliZmM1MTk0N2Y4MSIsInRhZyI6IiJ9', 'st (1).png', 'student', 600, '2022-05-25 09:51:51', '2022-05-25 09:51:51');
+('Smiith', 'Smith Jones', 'smith@gmail.com', 'eyJpdiI6IjFoK0hRakFpSjdNV1EvUTlReWJvUmc9PSIsInZhbHVlIjoiS2N2ZEMvbExZczlDNUd4MHBWclBVQT09IiwibWFjIjoiOTk2OGZjYjc0MGZmY2VkMDU3Y2MxNDU1YzAyMzJmZTQ3MGJlNGJhODMzMmIzYWRlNzhlYjliZmM1MTk0N2Y4MSIsInRhZyI6IiJ9', 'st (1).png', 'student', 600, '2022-05-25 09:51:51', '2022-05-25 09:51:51'),
+('ubaiid', 'Ubaid', 'ub@gmail.com', 'eyJpdiI6ImxtZWg0MVlKM1R1NVFDRWlwZU5Xemc9PSIsInZhbHVlIjoia3NBaVI0WG5QYy9yWlppTXZUeFY3dz09IiwibWFjIjoiMzNmNjYyY2QyZTUwYWNiOTc5Nzc5YmIzMjc4MmJmNmQxN2MyOWY4NTBjMzAzMmZmMTg5MjVjNDliYmVjYmM0NiIsInRhZyI6IiJ9', 'ubaiid.jpg', 'student', 109000, '2022-05-31 09:22:54', '2022-05-31 03:00:44');
 
 -- --------------------------------------------------------
 
@@ -518,22 +534,17 @@ CREATE TABLE IF NOT EXISTS `user_contactus` (
   `updated_at` timestamp NOT NULL,
   `created_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_contactus`
 --
 
 INSERT INTO `user_contactus` (`id`, `name`, `email`, `subject`, `message`, `updated_at`, `created_at`) VALUES
-(1, 'Shifa Imran', 'shifaimran309@gmail.com', 'jbfJK', 'kbgkjb', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Shifa Imran', 'shifaimran309@gmail.com', 'Time for session', 'bkbjbk', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Shifa Imran', 'shifaimran309@gmail.com', 'Time', 'bjwvfqhjfv', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Shifa Imran', 'shifaimran309@gmail.com', 'kwv ', 'kjv ', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'Shifa Imran', 'shifaimran309@gmail.com', 'efg', 'fwf3', '2022-05-27 07:02:16', '2022-05-27 07:02:16'),
-(6, 'Shifa Imran', 'shifaimran309@gmail.com', 'wejg', 'hbvjh', '2022-05-27 07:04:01', '2022-05-27 07:04:01'),
-(7, 'Shifa Imran', 'shifaimran309@gmail.com', 'wejg', 'hbvjh', '2022-05-27 07:04:29', '2022-05-27 07:04:29'),
-(8, 'a', 'a@gmail.com', 'time', 'hfqjg', '2022-05-27 07:06:08', '2022-05-27 07:06:08'),
-(9, 'ubaid', 'U@gmail.com', 'test', 'test', '2022-05-27 07:17:55', '2022-05-27 07:17:55');
+(13, 'Sara', 'sara@gmail.com', 'Timing selection', 'How can we select custom timings?', '2022-05-23 07:27:56', '2022-05-25 07:27:56'),
+(12, 'Mashal', 'mashal@gmail.com', 'Booking Cancellation', 'Can we cancel our boookings?', '2022-05-30 07:27:08', '2022-05-24 07:27:08'),
+(11, 'Shifa Imran', 'shifaimran@gmail.com', 'Tutor Finding', ' I can\'t find a tutor in my field. Can you recommend yourself?', '2022-05-30 07:23:51', '2022-05-30 07:23:51'),
+(10, 'Ali Azhar', 'ali@gmail.com', 'Time For Session', 'Where are the timings for specific session?', '2022-05-31 07:22:16', '2022-05-31 07:22:16');
 
 --
 -- Constraints for dumped tables
